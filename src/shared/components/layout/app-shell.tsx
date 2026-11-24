@@ -14,7 +14,7 @@ export function AppHeader() {
           >
             J
           </span>
-          <span className="text-lg font-bold tracking-tight">JungleNFT</span>
+          <span className="text-lg font-bold tracking-[0.1em]">KURIO</span>
         </Link>
         <span className="text-muted-foreground text-xs font-medium tracking-[0.18em] uppercase">
           Scaffold
@@ -27,7 +27,7 @@ export function AppHeader() {
 export function AppFooter() {
   return (
     <footer className="border-border text-muted-foreground border-t py-6 text-center text-sm">
-      Ambiente simulado · Nenhuma transação blockchain real
+      Ambiente simulado · Nenhuma transação blockchain real · © 2026 Kurio
     </footer>
   );
 }

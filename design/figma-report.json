@@ -1,0 +1,1700 @@
+{
+  "file": {
+    "key": "Ff0SksUi7UFtPWUO8kyNtw",
+    "name": "Frontend Challenge",
+    "version": "2397163412428844678",
+    "lastModified": "2026-09-09T09:31:48Z"
+  },
+  "frames": [
+    {
+      "id": "2:2",
+      "name": "Desktop / Início",
+      "width": 1440,
+      "height": 3668
+    },
+    {
+      "id": "10:244",
+      "name": "Desktop / Detalhes do NFT",
+      "width": 1440,
+      "height": 2246.000244140625
+    },
+    {
+      "id": "11:1278",
+      "name": "Desktop / Carrinho de NFTs",
+      "width": 1440,
+      "height": 1754.0001220703125
+    },
+    {
+      "id": "11:2862",
+      "name": "Desktop / Pagamento",
+      "width": 1440,
+      "height": 1657
+    },
+    {
+      "id": "11:4385",
+      "name": "Desktop / Confirmação de Pedido",
+      "width": 1440,
+      "height": 1657
+    },
+    {
+      "id": "9:115",
+      "name": "Desktop / Login",
+      "width": 1440,
+      "height": 1981
+    },
+    {
+      "id": "9:1022",
+      "name": "Desktop / Cadastro",
+      "width": 1440,
+      "height": 1981
+    },
+    {
+      "id": "9:1238",
+      "name": "Desktop / Perfil do Colecionador",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "id": "9:1670",
+      "name": "Desktop / Carteiras",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "id": "14:5226",
+      "name": "Mobile / Início",
+      "width": 414,
+      "height": 896
+    },
+    {
+      "id": "15:5536",
+      "name": "Mobile / Detalhes do NFT",
+      "width": 414,
+      "height": 896
+    },
+    {
+      "id": "16:360",
+      "name": "Mobile / Carrinho de NFTs",
+      "width": 414,
+      "height": 896
+    },
+    {
+      "id": "16:748",
+      "name": "Mobile / Pagamento",
+      "width": 414,
+      "height": 896
+    },
+    {
+      "id": "16:1022",
+      "name": "Mobile / Login",
+      "width": 414,
+      "height": 896
+    },
+    {
+      "id": "16:1228",
+      "name": "Mobile / Cadastro",
+      "width": 414,
+      "height": 896
+    }
+  ],
+  "colors": [
+    {
+      "value": "#f5f1eb",
+      "count": 438,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Logo / KURIO Wordmark",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav / Mercado",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav / Criadores",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav / Aprenda",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Search Icon",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Cart / Cart Icon"
+      ]
+    },
+    {
+      "value": "#d28a4c",
+      "count": 284,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav / Nav Item / Active Underline",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Cart / Badge",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login / Login Button",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Line 1",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 135 / Frame 134 / Frame 131",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 135 / Group 4 / Ellipse 2"
+      ]
+    },
+    {
+      "value": "#241612",
+      "count": 174,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Logo",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login / Login Button / Login Button Content / Iconly/Curved/Logout",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Toolbar / Sort / Iconly/Two-tone/Arrow - Down 2",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Toolbar / Sort / Iconly/Two-tone/Arrow - Down 2 / Iconly/Two-tone/Arrow - Down 2",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 141 / Rectangle 6"
+      ]
+    },
+    {
+      "value": "#cfb28c",
+      "count": 161,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 135 / Frame 134 / Frame 133 / Discover curated NFTs from emerging and established creators. Collect rare digit",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 383 / Frame 374 / Digital Art\nPhotography\nMusic\n3D Art\nCollectibles\nGenerative\nGaming\nMemberships\n",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 383 / (12)",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 384 / Frame 375 / Digital Art\nPhotography\nMusic\n3D Art\nCollectibles\nGenerative\nGaming\nMemberships\n",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 384 / (65)",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 385 / Frame 376 / Digital Art\nPhotography\nMusic\n3D Art\nCollectibles\nGenerative\nGaming\nMemberships\n"
+      ]
+    },
+    {
+      "value": "#140d0a",
+      "count": 152,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Cart / Badge",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Cart / Badge Count",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login / Login Button / Login Button Content / Iconly/Curved/Logout / Logout / Stroke 1",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login / Login Button / Login Button Content / Iconly/Curved/Logout / Logout / Stroke 3",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login / Login Button / Login Button Content / Iconly/Curved/Logout / Logout / Stroke 4"
+      ]
+    },
+    {
+      "value": "#e89b55",
+      "count": 140,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav / Nav Item / Início",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 382 / Frame 373 / Digital Art\nPhotography\nMusic\n3D Art\nCollectibles\nGenerative\nGaming\nMemberships",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 382 / (33)",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Featured NFT Banner / Frame 396 / Frame 395 / Frame 397 / NFT EM DESTAQUE",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Toolbar / Tabs / Todos os NFTs",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 141 / 1.19 ETH"
+      ]
+    },
+    {
+      "value": "#b39463",
+      "count": 125,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 144 / Frame 143 / 2.29 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / digite seu e-mail...",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 166 / Frame 164 / ID do token: #0042",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 166 / Frame 164 / Coleção: Kurio Apes",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 166 / Frame 164 / Atributos: Óculos, Esmeralda, Raro",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / digite seu e-mail..."
+      ]
+    },
+    {
+      "value": "#3f2319",
+      "count": 112,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 225",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 226",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 227",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 228",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Product Images / Frame 399 / Frame 238 / Ellipse 23",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 157 / Frame 156 / Frame 155 / Ellipse 24"
+      ]
+    },
+    {
+      "value": "#ffffff",
+      "count": 91,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login / Login Button / Login Button Content / Iconly/Curved/Logout / Logout",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Toolbar / Sort / Iconly/Two-tone/Arrow - Down 2 / Iconly/Two-tone/Arrow - Down 2 / Arrow - Down 2",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 228 / Iconly/Curved/Arrow - Right 2 / Arrow - Right 2",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Genesis Drops / Group 16 / Group 14 / Frame 15 / Iconly/Curved/Arrow - Right / Arrow - Right",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Curated Art / Group 17 / Group 15 / Frame 15 / Iconly/Curved/Arrow - Right / Arrow - Right",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Header Actions / Login / Login Button / Login Button Content / Iconly/Curved/Logout / Logout"
+      ]
+    },
+    {
+      "value": "#f0805f",
+      "count": 38,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 266 / Frame 239 / *",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 271 / Frame 240 / *",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 270 / Frame 241 / *",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 274 / Frame 242 / *",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 244 / Frame 243 / *",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 288 / Frame 284 / Frame 283 / *"
+      ]
+    },
+    {
+      "value": "#55321f",
+      "count": 27,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 314 / Frame 313 / Frame 312 / Frame 307 / Frame 306 / Frame 305",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 314 / Frame 313 / Frame 312 / Frame 307 / Frame 306 / Frame 305"
+      ]
+    },
+    {
+      "value": "#2f1d15",
+      "count": 27,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Product Images / Frame 399 / Frame 238 / Ellipse 23",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Products / Group 5 / Rectangle 11",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Products / Group 5 / Rectangle 12",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Products / Group 5 / Rectangle 13",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Marketplace Page / Page Content (behind overlay) / Products / Group 5 / Rectangle 11",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Marketplace Page / Page Content (behind overlay) / Products / Group 5 / Rectangle 12"
+      ]
+    },
+    {
+      "value": "#000000",
+      "count": 21,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 167 / 01 / Frame 160 / Frame 48 / Add Button / Frame / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 1 / Frame 348 / Frame 47 / Add Button / Frame / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 2 / Frame 347 / Frame 48 / Add Button / Frame / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 3 / Frame 336 / Frame 49 / Add Button / Frame / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Account Sidebar / Frame 460 / Iconly/Light-Outline/Location / Location / Group 5 / Clip 4",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Profile Form / Change Password / Current Password Field / Password Input / Iconly/Light-Outline/Hide / Hide / Group 7 / Clip 6"
+      ]
+    },
+    {
+      "value": "#38220f",
+      "count": 17,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 120",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 120",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106"
+      ]
+    },
+    {
+      "value": "#0a060473",
+      "count": 16,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Tab Bar / Vector"
+      ]
+    },
+    {
+      "value": "#e3a44e",
+      "count": 16,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Details Sheet / Title Row / Review / Iconly/Bold/Star / Star / Star",
+        "Marketplace de NFTs GreenMint / Mobile / Pagamento / Content / Frame 442 / Wallet Options / Option — WalletConnect / Frame / Group / Vector"
+      ]
+    },
+    {
+      "value": "#140d0a26",
+      "count": 10,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 167 / 01 / Frame 160 / Frame 48 / Add Button",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 1 / Frame 348 / Frame 47 / Add Button",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 2 / Frame 347 / Frame 48 / Add Button",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 3 / Frame 336 / Frame 49 / Add Button",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Buy Bar / Frame 438 / Frame 434 / Frame 67 / Frame 433 / Add Button"
+      ]
+    },
+    {
+      "value": "#59c36a",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Frame 369 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Social / Frame 370 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Cadastro / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Vector"
+      ]
+    },
+    {
+      "value": "#00a66c",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Frame 369 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Social / Frame 370 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Cadastro / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Vector"
+      ]
+    },
+    {
+      "value": "#ffda2d",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Frame 369 / Social Button / Content / google 1 / Group / Connected_Home_1_ / Group / Group / Group / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Social / Frame 370 / Social Button / Content / google 1 / Group / Connected_Home_1_ / Group / Group / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Connected_Home_1_ / Group / Group / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Cadastro / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Connected_Home_1_ / Group / Group / Group / Vector"
+      ]
+    },
+    {
+      "value": "#4086f4",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Frame 369 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Social / Frame 370 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Cadastro / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Vector"
+      ]
+    },
+    {
+      "value": "#4175df",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Frame 369 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Social / Frame 370 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Cadastro / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Vector"
+      ]
+    },
+    {
+      "value": "#ff641a",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Frame 369 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Social / Frame 370 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Cadastro / Mobile Social Block / Frame 370 / Social Button / Content / google 1 / Group / Vector"
+      ]
+    },
+    {
+      "value": "#3b5999",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Frame 369 / Social Button / Content / facebook 1 / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Social / Frame 370 / Social Button / Content / facebook 1 / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Mobile Social Block / Frame 370 / Social Button / Content / facebook 1 / Vector",
+        "Marketplace de NFTs GreenMint / Mobile / Cadastro / Mobile Social Block / Frame 370 / Social Button / Content / facebook 1 / Vector"
+      ]
+    },
+    {
+      "value": "#fbfbfb",
+      "count": 2,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Genesis Drops / Mask Group / Rectangle 22",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Curated Art / Mask Group / Rectangle 22"
+      ]
+    },
+    {
+      "value": "#ed1b2e",
+      "count": 2,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Pagamento / Content / Frame 442 / Wallet Options / Option — WalletConnect / Frame / Group / Vector"
+      ]
+    },
+    {
+      "value": "#ededed",
+      "count": 1,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Início / Hero Banner / Mask Group / Rectangle 94"
+      ]
+    },
+    {
+      "value": "#03a9f4",
+      "count": 1,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Pagamento / Content / Frame 442 / Wallet Options / Option — MetaMask / Group 86 / paypal 1 / Vector"
+      ]
+    },
+    {
+      "value": "#283593",
+      "count": 1,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Pagamento / Content / Frame 442 / Wallet Options / Option — MetaMask / Group 86 / paypal 1 / Vector"
+      ]
+    }
+  ],
+  "typography": [
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":18,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 94,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / Coleções",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Price Filter / Faixa de preço",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Network Filter / Rede",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 141 / 1.19 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 142 / 1.69 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 144 / Frame 143 / 1.99 ETH"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":15,\"lineHeightPx\":19.78271484375,\"letterSpacing\":0}",
+      "count": 64,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Price Filter / Controls / Frame 391 / Preço: 0,02 - 12,30 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Toolbar / Sort / Ordenar por:",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Toolbar / Sort / Listados recentemente",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 149 / Frame 148 / Frame 147 / Frame 40 / 19 avaliações de colecionadores",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 166 / Frame 164 / ID do token: #0042",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 166 / Frame 164 / Coleção: Kurio Apes"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":14,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 60,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / digite seu e-mail...",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 157 / Frame 156 / Frame 155 / 1/1",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 157 / Frame 156 / Frame 152 / 1/10",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 157 / Frame 156 / Frame 154 / ABERTA",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / digite seu e-mail...",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 1 / Frame 348 / Frame 345 / Frame 344 / ID do token: #0042"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":16,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 56,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203 / Frame 202 / Frame 188 / 1.29 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203 / Frame 201 / Frame 189 / 1.39 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203 / Frame 200 / Frame 190 / 1.79 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203 / Frame 199 / Frame 191 / 0.99 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203 / Group 45 / Frame 198 / Frame 192 / 0.39 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Table Header / Frame 350 / NFTs"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":15,\"lineHeightPx\":40,\"letterSpacing\":0}",
+      "count": 45,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 382 / Frame 373 / Digital Art\nPhotography\nMusic\n3D Art\nCollectibles\nGenerative\nGaming\nMemberships",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 383 / Frame 374 / Digital Art\nPhotography\nMusic\n3D Art\nCollectibles\nGenerative\nGaming\nMemberships\n",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 384 / Frame 375 / Digital Art\nPhotography\nMusic\n3D Art\nCollectibles\nGenerative\nGaming\nMemberships\n",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 385 / Frame 376 / Digital Art\nPhotography\nMusic\n3D Art\nCollectibles\nGenerative\nGaming\nMemberships\n",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 390 / Frame 377 / Digital Art\nPhotography\nMusic\n3D Art\nCollectibles\nGenerative\nGaming\nMemberships\n",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 389 / Frame 378 / Digital Art\nPhotography\nMusic\n3D Art\nCollectibles\nGenerative\nGaming\nMemberships\n"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":15,\"lineHeightPx\":15,\"letterSpacing\":0}",
+      "count": 42,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 266 / Frame 239 / Nome de exibição",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 271 / Frame 240 / Rede",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 270 / Frame 241 / Endereço da carteira",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 274 / Frame 242 / Tipo de carteira",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 244 / Frame 243 / E-mail",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 288 / Frame 284 / Frame 283 / Nome de usuário"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":14,\"lineHeightPx\":22,\"letterSpacing\":0}",
+      "count": 33,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 22 / Frame 92 / Proteja sua carteira e colecione arte digital verificada com confiança.",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 21 / Frame 94 / Conheça artistas, estúdios e comunidades que moldam a cultura digital na rede.",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 20 / Frame 96 / Receba calendários de cunhagem, novidades de listas de acesso e análises do mercado.",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 120 / Frame 119 / Frame 126 / Built for collectors,\r\ncreators, and culture",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 120 / Frame 119 / Frame 124 / contato@email.com",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 120 / Frame 119 / Frame 125 / +55 11 4002 8922"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":22,\"lineHeightPx\":29,\"letterSpacing\":0}",
+      "count": 32,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 266 / Frame 239 / *",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 271 / Frame 240 / *",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 270 / Frame 241 / *",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 274 / Frame 242 / *",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 244 / Frame 243 / *",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 288 / Frame 284 / Frame 283 / *"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":16,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 30,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 141 / Emerald Ape #042",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 142 / Sage Nomad #009",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 144 / Neon Vessel #552",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 230 / Frame 209 / Frame 208 / Cosmic Bloom #118",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 230 / Frame 212 / Frame 210 / Violet Nomad #314",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 230 / Frame 215 / Frame 213 / Ivory Baron #088"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":16,\"lineHeightPx\":21.1015625,\"letterSpacing\":0}",
+      "count": 27,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav / Mercado",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav / Criadores",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav / Aprenda",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Nav / Início",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Nav / Criadores",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Nav / Aprenda"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":15,\"lineHeightPx\":40,\"letterSpacing\":0}",
+      "count": 27,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 382 / (33)",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 383 / (12)",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 384 / (65)",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 385 / (39)",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 390 / (23)",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 389 / (17)"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":17,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 26,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 22 / Frame 92 / Segurança da carteira",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 21 / Frame 94 / Criadores em destaque",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 20 / Frame 96 / Alertas de lançamentos",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Description / Frame 184 / Frame 183 / Frame 182 / Frame 181 / Frame 180 / Frame 179 / Frame 178 / Frame 177 / Frame 176 / Detalhes do NFT",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Section Heading / Mais desta coleção",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 22 / Frame 92 / Segurança da carteira"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":15,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 21,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Início / Mercado",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 150 / Sobre este NFT:",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 157 / Edição:",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 166 / Frame 165 / Compartilhar este NFT:",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Frame 357 / Início / Mercado / Carrinho",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary / Promo Code / Promo Input / Frame 355 / Aplicar"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":14,\"lineHeightPx\":30,\"letterSpacing\":0}",
+      "count": 20,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 103 / My Profile\nMy Collection\r\nActivity\r\nCreator Studio\r\nWatchlist",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 104 / Help Center\r\nHow to Buy NFTs\r\nWallet & Security\r\nMarketplace Policy\r\nReport an I",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 105 / Digital Art\r\nPhotography\r\nMusic\r\n3D Art\r\nUtility",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / © 2026 Kurio. Propriedade digital para todos.",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 103 / My Profile\nMy Collection\r\nActivity\r\nCreator Studio\r\nWatchlist",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 104 / Help Center\r\nHow to Buy NFTs\r\nWallet & Security\r\nMarketplace Policy\r\nReport an I"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":24,\"lineHeightPx\":31.65234375,\"letterSpacing\":0}",
+      "count": 15,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 22 / Frame 92 / Frame 91 / Service mark W",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 21 / Frame 94 / Frame 93 / Service mark C",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 20 / Frame 96 / Frame 95 / Service mark D",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 22 / Frame 92 / Frame 91 / Service mark W",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 21 / Frame 94 / Frame 93 / Service mark C",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 20 / Frame 96 / Frame 95 / Service mark D"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":14,\"lineHeightPx\":18.4638671875,\"letterSpacing\":1.4000000000000001}",
+      "count": 14,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Logo / KURIO Wordmark",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 120 / Frame 119 / Logo / KURIO Wordmark",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Logo / KURIO Wordmark",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 120 / Frame 119 / Logo / KURIO Wordmark",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Header Row / Logo / KURIO Wordmark",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 120 / Frame 119 / Logo / KURIO Wordmark"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":14,\"lineHeightPx\":15,\"letterSpacing\":0}",
+      "count": 14,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 271 / Frame 268 / Frame 267 / Selecione uma rede",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 270 / Frame 269 / Endereço 0x da carteira",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 274 / Frame 273 / Frame 272 / Selecione uma carteira",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 288 / Frame 328 / Frame 280 / ENS ou carteira secundária (opcional)",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 271 / Frame 268 / Frame 267 / Selecione uma rede",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 270 / Frame 269 / Endereço 0x da carteira"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":15,\"lineHeightPx\":45,\"letterSpacing\":0}",
+      "count": 14,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Account Sidebar / Frame 459 / Frame 458 / Profile Details\nWallets\nActivity\nWatchlist\nOffers\nDownloads\nSupport",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Account Sidebar / Frame 460 / Profile Details\nWallets\nActivity\nWatchlist\nOffers\nDownloads\nSupport",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Account Sidebar / Frame 461 / Profile Details\nWallets\nActivity\nWatchlist\nOffers\nDownloads\nSupport",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Account Sidebar / Frame 462 / Profile Details\nWallets\nActivity\nWatchlist\nOffers\nDownloads\nSupport",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Account Sidebar / Frame 463 / Profile Details\nWallets\nActivity\nWatchlist\nOffers\nDownloads\nSupport",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Account Sidebar / Frame 464 / Profile Details\nWallets\nActivity\nWatchlist\nOffers\nDownloads\nSupport"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":16,\"lineHeightPx\":21.1015625,\"letterSpacing\":0}",
+      "count": 13,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav / Nav Item / Início",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 1 / Content / Como funciona a propriedade de NFTs",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 2 / Content / 10 artistas digitais para acompanhar",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 3 / Content / Raridade, atributos e procedência",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 4 / Content / Como proteger sua carteira",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Nav / Nav Item / Mercado"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":18,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 13,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 144 / Frame 143 / 2.29 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 225 / 2",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 226 / 3",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 227 / 4",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary / Fees / Subtotal / 26.83 ETH",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary / Fees / Network Fee / Frame 356 / 0.016 ETH"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":14,\"lineHeightPx\":24,\"letterSpacing\":0}",
+      "count": 11,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 135 / Frame 134 / Frame 133 / Discover curated NFTs from emerging and established creators. Collect rare digit",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Genesis Drops / Colecione edições escassas diretamente dos criadores antes da revelação pública.",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Curated Art / Explore novos artistas, coleções verificadas e obras digitais que definem a cultura.",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 150 / Um colecionável digital finalizado à mão da coleção Kurio Editions, verificado na Ethereum, com arte desbloqueável e acesso para colecionadores.",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Description / Frame 184 / Frame 183 / Frame 182 / Frame 181 / Frame 180 / Frame 179 / Emerald Ape #042 é uma obra digital 1/50 finalizada à mão da coleção Kurio Editions. Cada atributo fica armazenado nos metadados do token e verificado na Ethereum. A obra explora identidade, movimento e luz em um mundo digital sem fronteiras.  A propriedade inclui a arte em alta resolução, lançamentos exclusivos para colecionadores e um registro permanente de procedência registrada na rede. Nova Sato recebe 5% de direitos autorais nas vendas secundárias, apoiando novos trabalhos e lançamentos da comunidade.",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Description / Frame 184 / Frame 183 / Frame 182 / Frame 181 / Cunhado na Ethereum com procedência imutável e metadados armazenados no IPFS."
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":500,\"fontSize\":16,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 10,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Table Header / Frame 351 / Preço",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Table Header / Frame 353 / Total",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 294 / Frame 293 / Subtotal",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 294 / Frame 293 / Subtotal",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Frame 265 / Transaction Details / Frame 264 / Frame 260 / Frame 259 / Frame 258 / Table Header / Frame 247 / Subtotal",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Products / RARO"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":500,\"fontSize\":10,\"lineHeightPx\":13.1884765625,\"letterSpacing\":0}",
+      "count": 9,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Cart / Badge Count",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Header Actions / Cart / Badge Count",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Header Row / Header Actions / Cart / Badge Count",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Header Row / Header Actions / Cart / Badge Count",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Header Row / Header Actions / Cart / Badge Count",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Header With Divider / Header Row / Header Actions / Cart / Badge Count"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":500,\"fontSize\":16,\"lineHeightPx\":21.1015625,\"letterSpacing\":0}",
+      "count": 9,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login / Login Button / Login Button Content / Entrar",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Header Actions / Login / Login Button / Login Button Content / Entrar",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Header Row / Header Actions / Login / Login Button / Login Button Content / Entrar",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Header Row / Header Actions / Login / Login Button / Login Button Content / Entrar",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Header Row / Header Actions / Login / Login Button / Login Button Content / Entrar",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Header With Divider / Header Row / Header Actions / Login / Login Button / Login Button Content / Entrar"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":500,\"fontSize\":12,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 9,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 1 / Content / 12 de setembro | Leitura de 6 min",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 1 / Content / Aprenda a colecionar, negociar e verificar ativos digitais.",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 2 / Content / 13 de setembro | Leitura de 2 min",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 2 / Content / Conheça criadores que moldam a cultura digital.",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 3 / Content / 15 de setembro | Leitura de 3 min",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 3 / Content / Entenda raridade, procedência, direitos autorais e utilidade."
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":14,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 9,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary / Promo Code / Código promocional",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Transaction Meta / Frame 245 / Frame 53 / ID da transação",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Transaction Meta / Frame 245 / Frame 52 / Carteira",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Profile Form / Fields / Field Row 3 / Avatar Field / Avatar Controls / Frame 456 / Frame 33 / Alterar",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Profile Form / Save Button / Salvar",
+        "Marketplace de NFTs GreenMint / Desktop / Carteiras / Top / Body / Wallets Form / Save Wallet Button / Salvar carteira"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":500,\"fontSize\":13,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 9,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Frame 369 / Social Button / Content / Continuar com Google",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Frame 369 / Social Button / Content / Continuar com Facebook",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Social / Frame 370 / Social Button / Content / Continuar com Google",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Social / Frame 370 / Social Button / Content / Continuar com Facebook",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Product Grid / Column L / P-3 / Frame 421 / Group 61 / RARO",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Mobile Social Block / Frame 370 / Social Button / Content / Continuar com Google"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":16,\"lineHeightPx\":20,\"letterSpacing\":0}",
+      "count": 7,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 135 / Frame 134 / Frame 131 / EXPLORAR",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Price Filter / Controls / Apply Button / Aplicar",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Main Banner / EXPLORAR",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Filters / Frame 140 / Price Filter / Controls / Apply Button / Aplicar",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Marketplace Page / Page Content (behind overlay) / Main Banner / EXPLORAR",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Marketplace Page / Page Content (behind overlay) / Filters / Frame 140 / Price Filter / Controls / Apply Button / Aplicar"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":9,\"lineHeightPx\":11.86962890625,\"letterSpacing\":0.10000000149011612}",
+      "count": 7,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106 / Supported wallet brands",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106 / Supported wallet brands",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106 / Supported wallet brands",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 314 / Frame 313 / Frame 312 / Frame 307 / Frame 306 / Frame 305 / Supported wallet brands",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106 / Supported wallet brands",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 314 / Frame 313 / Frame 312 / Frame 307 / Frame 306 / Frame 305 / Supported wallet brands"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":13,\"lineHeightPx\":22,\"letterSpacing\":0}",
+      "count": 6,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99 / Get curated drops, creator stories, and collector rewards delivered to your inbo",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99 / Get curated drops, creator stories, and collector rewards delivered to your inbo",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 122 / Frame 100 / Frame 99 / Get curated drops, creator stories, and collector rewards delivered to your inbo",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 122 / Frame 100 / Frame 99 / Get curated drops, creator stories, and collector rewards delivered to your inbo",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 122 / Frame 100 / Frame 99 / Get curated drops, creator stories, and collector rewards delivered to your inbo",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Payment Summary / Frame 441 / Promo Input / Digite o código promocional..."
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":13,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 6,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Modal Header / Frame 368 / Frame 5 / Entre para gerenciar sua carteira, coleção e perfil de criador.",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Divider / Ou continue com",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Modal Header / Frame 367 / Crie seu perfil de colecionador e conecte uma carteira quando quiser.",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Social / Divider / Ou continue com",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Mobile Social Block / Frame 4 / Ou continue com",
+        "Marketplace de NFTs GreenMint / Mobile / Cadastro / Mobile Social Block / Frame 4 / Ou continue com"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":12,\"lineHeightPx\":14,\"letterSpacing\":0}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 1 / Content / CTA / Ler mais",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 2 / Content / CTA / Ler mais",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 3 / Content / CTA / Ler mais",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 4 / Content / CTA / Ler mais",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Hero Banner / Frame 407 / Frame 406 / Frame 405 / Frame 56 / EXPLORAR"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":12,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary / Promo Code / Promo Input / Digite o código promocional...",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary / Fees / Network Fee / Taxa estimada",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 315 / Taxa estimada",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 315 / Taxa estimada",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Payment Summary / Frame 441 / Network Fee / Taxa estimada"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":700,\"fontSize\":20,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Details Sheet / Title Row / Emerald Ape #042",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Buy Bar / Frame 438 / Frame 434 / 1.19 ETH",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Screen Header / Carrinho de NFTs",
+        "Marketplace de NFTs GreenMint / Mobile / Pagamento / Content / Frame 442 / Screen Header / Pagamento com carteira",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Title / Entrar"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":500,\"fontSize\":15,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Toolbar / Tabs / Todos os NFTs",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Toolbar / Tabs / Novos lançamentos",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Toolbar / Tabs / Em alta",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Buy Bar / Frame 438 / Frame 434 / Frame 67 / Qtd."
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":12,\"lineHeightPx\":15.826171875,\"letterSpacing\":0}",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 1 / Content / CTA / →",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 2 / Content / CTA / →",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 3 / Content / CTA / →",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 4 / Content / CTA / →"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":500,\"fontSize\":20,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Modal Header / Frame 368 / Frame 25 / Entrar",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Modal Header / Frame 368 / Frame 25 / Criar conta",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Modal Header / Frame 367 / Frame 25 / Entrar",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Modal Header / Frame 367 / Frame 25 / Criar conta"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":16,\"lineHeightPx\":22,\"letterSpacing\":0}",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 1 / Group 81 / 1",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 2 / Group 85 / 1",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 3 / Group 83 / 2",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 4 / Group 86 / 2"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":400,\"fontSize\":21,\"lineHeightPx\":16,\"letterSpacing\":0}",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 1 / Group 81 / Group 64 / +",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 2 / Group 85 / Group 64 / +",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 3 / Group 83 / Group 73 / +",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 4 / Group 86 / Group 73 / +"
+      ]
+    },
+    {
+      "value": "{\"fontFamily\":\"Roboto Mono\",\"fontWeight\":500,\"fontSize\":14,\"lineHeightPx\":16,\"letterSpacing\":1.4000000000000001}",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 135 / Frame 134 / Frame 133 / Frame 132 / Bem-vindo à Kurio",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Main Banner / Bem-vindo à Kurio",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Marketplace Page / Page Content (behind overlay) / Main Banner / Bem-vindo à Kurio"
+      ]
+    }
+  ],
+  "spacing": [
+    {
+      "value": "{\"itemSpacing\":12}",
+      "count": 127,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Price Filter",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Network Filter",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 141",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 142",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 144"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10}",
+      "count": 123,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login / Login Button",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 382 / Frame 373",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 383 / Frame 374",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 384 / Frame 375",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 385 / Frame 376",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List / Frame 390 / Frame 377"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":8}",
+      "count": 51,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 135 / Frame 134 / Frame 133 / Frame 132",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 103",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 104",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 105",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 167 / Frame 400"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":6}",
+      "count": 29,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 230 / Frame 209 / Frame 208",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 230 / Frame 212 / Frame 210",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 230 / Frame 215 / Frame 213",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 231 / Frame 218 / Frame 217",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 231 / Frame 223 / Frame 222",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":32}",
+      "count": 28,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 135 / Frame 134",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 230",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 231"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":4}",
+      "count": 27,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login / Login Button / Login Button Content",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 135 / Frame 134 / Frame 133",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 1 / Content / CTA",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 2 / Content / CTA",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 3 / Content / CTA",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 4 / Content / CTA"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":16}",
+      "count": 27,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Featured NFT Banner / Frame 396",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Featured NFT Banner / Frame 396 / Frame 395",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Product Images / Thumbnails",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 167",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":24}",
+      "count": 23,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav / Nav Item",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Nav / Nav Item",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Header Row / Nav / Nav Item",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingRight\":16,\"paddingLeft\":16}",
+      "count": 22,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 22",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 21",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 20",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 22",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 21",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 20"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":28}",
+      "count": 20,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Header Actions",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Product Images",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":8,\"paddingRight\":8,\"paddingBottom\":8,\"paddingLeft\":8}",
+      "count": 17,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 228",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 109",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 110",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 111",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 109",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 110"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":12,\"paddingRight\":16,\"paddingLeft\":16}",
+      "count": 17,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 122 / Frame 100 / Frame 99",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 122 / Frame 100 / Frame 99",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 122 / Frame 100 / Frame 99",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Account Sidebar / Frame 460"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":20}",
+      "count": 16,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Toolbar / Tabs",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 167 / 01 / Frame 160",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":40}",
+      "count": 13,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Nav",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Header Row / Nav",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Header Row / Nav",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Header Row / Nav"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":32,\"paddingRight\":32,\"paddingBottom\":32,\"paddingLeft\":32}",
+      "count": 10,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 120",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 120",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 120",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 118 / Frame 117"
+      ]
+    },
+    {
+      "value": "{\"paddingTop\":12,\"paddingRight\":16,\"paddingBottom\":12,\"paddingLeft\":16}",
+      "count": 8,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 314 / Frame 313 / Frame 324",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 314 / Frame 313 / Frame 324",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Form / Email Input",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Form / Password Input",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Form / Username Input",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Form / Email Input"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":96,\"paddingTop\":24,\"paddingRight\":120,\"paddingBottom\":24,\"paddingLeft\":120}",
+      "count": 7,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":8,\"paddingBottom\":8,\"paddingLeft\":8}",
+      "count": 7,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 314 / Frame 313 / Frame 312 / Frame 307 / Frame 306 / Frame 305",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 107 / Frame 106",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 314 / Frame 313 / Frame 312 / Frame 307 / Frame 306 / Frame 305"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":48}",
+      "count": 6,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Frame 265 / Transaction Details / Frame 264 / Frame 260 / Frame 259 / Frame 258 / Table Header / Frame 247",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Frame 265 / Transaction Details / Frame 264 / Frame 260 / Frame 259 / Items / Item 1 / Frame 250",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Frame 265 / Transaction Details / Frame 264 / Frame 260 / Frame 259 / Items / Item 2 / Frame 254",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Frame 265 / Transaction Details / Frame 264 / Frame 260 / Frame 259 / Items / Item 3 / Frame 255",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Frame 265 / Transaction Details / Footer Note"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":12,\"paddingTop\":32,\"paddingRight\":32,\"paddingBottom\":32,\"paddingLeft\":32}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 122",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 122",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 122"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":12,\"paddingBottom\":12,\"paddingLeft\":12}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":12,\"paddingRight\":4,\"paddingBottom\":12,\"paddingLeft\":16}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / Frame 97",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / Frame 97",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / Frame 97",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / Frame 97",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / Frame 97"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":92}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 120 / Frame 119",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 120 / Frame 119",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 120 / Frame 119",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 121 / Frame 120 / Frame 119",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 121 / Frame 120 / Frame 119"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":8,\"paddingBottom\":8}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 120 / Frame 119 / Logo",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 120 / Frame 119 / Logo",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 120 / Frame 119 / Logo",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 121 / Frame 120 / Frame 119 / Logo",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 121 / Frame 120 / Frame 119 / Logo"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":124}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":8,\"paddingRight\":12,\"paddingBottom\":8,\"paddingLeft\":12}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 108",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 108",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 108",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 108",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 108"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":8,\"paddingRight\":4,\"paddingBottom\":8,\"paddingLeft\":6}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 112",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 112",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 112",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 112",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 112"
+      ]
+    },
+    {
+      "value": "{\"paddingLeft\":8}",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary / Promo Code / Promo Input",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Product Grid / Column L / P-1 / Frame 414 / Frame 413",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Product Grid / Column L / P-3 / Frame 418",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Product Grid / Column R / P-2 / Frame 417 / Frame 415",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Product Grid / Column R / P-4 / Frame 423 / Frame 419"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":8,\"paddingTop\":12,\"paddingRight\":16,\"paddingBottom\":16,\"paddingLeft\":16}",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 1 / Content",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 2 / Content",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 3 / Content",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 4 / Content"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":12,\"paddingRight\":8,\"paddingBottom\":12,\"paddingLeft\":12}",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 271 / Frame 268",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 274 / Frame 273",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 271 / Frame 268",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 274 / Frame 273"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":10,\"paddingRight\":10,\"paddingBottom\":10,\"paddingLeft\":10}",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Modal Header / Frame 368 / Frame 25 / Frame 401",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Modal Header / Frame 367 / Frame 25 / Frame 401",
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Account Sidebar / Frame 457",
+        "Marketplace de NFTs GreenMint / Desktop / Carteiras / Top / Body / Account Sidebar / Frame 457"
+      ]
+    },
+    {
+      "value": "{\"paddingTop\":20,\"paddingRight\":20,\"paddingBottom\":20,\"paddingLeft\":20}",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Filters",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Marketplace Page / Page Content (behind overlay) / Filters"
+      ]
+    },
+    {
+      "value": "{\"paddingRight\":12,\"paddingLeft\":12}",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Collections Filter / List",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Filters / Frame 140 / Collections Filter / List",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Marketplace Page / Page Content (behind overlay) / Filters / Frame 140 / Collections Filter / List"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":12,\"paddingLeft\":12}",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Price Filter / Controls",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Filters / Frame 140 / Price Filter / Controls",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Marketplace Page / Page Content (behind overlay) / Filters / Frame 140 / Price Filter / Controls"
+      ]
+    },
+    {
+      "value": "{\"paddingTop\":8,\"paddingRight\":12,\"paddingBottom\":8,\"paddingLeft\":12}",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Price Filter / Controls / Apply Button",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Filters / Frame 140 / Price Filter / Controls / Apply Button",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Marketplace Page / Page Content (behind overlay) / Filters / Frame 140 / Price Filter / Controls / Apply Button"
+      ]
+    },
+    {
+      "value": "{\"paddingLeft\":12}",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Network Filter / List",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Filters / Frame 140 / Network Filter / List",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Marketplace Page / Page Content (behind overlay) / Filters / Frame 140 / Network Filter / List"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingTop\":8,\"paddingRight\":12,\"paddingBottom\":10,\"paddingLeft\":12}",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 225",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 226",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 227"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":10,\"paddingRight\":24}",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 1",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 2",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 3"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":114}",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 315 / Frame 303",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 315 / Frame 303",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Frame 265 / Transaction Details / Frame 264 / Frame 260 / Totals / Frame 263 / Frame 261"
+      ]
+    },
+    {
+      "value": "{\"itemSpacing\":163}",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 315 / Frame 304",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 325 / Frame 322 / Frame 315 / Frame 304",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Frame 265 / Transaction Details / Frame 264 / Frame 260 / Totals / Frame 263 / Frame 262"
+      ]
+    }
+  ],
+  "radii": [
+    {
+      "value": "3",
+      "count": 53,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary / Promo Code / Promo Input",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary / Checkout CTA / Button",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 266 / Rectangle 72",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 271 / Frame 268",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 270 / Frame 269",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Checkout Page / Page Content (behind overlay) / Frame 327 / Frame 292 / Frame 291 / Frame 290 / Frame 289 / Frame 274 / Frame 273"
+      ]
+    },
+    {
+      "value": "6",
+      "count": 48,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Header With Divider / Header Row / Header Actions / Login / Login Button",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 135 / Frame 134 / Frame 131",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Filters / Frame 140 / Price Filter / Controls / Apply Button",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Genesis Drops / Group 16 / Rectangle 23",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Curated Art / Group 17 / Rectangle 23"
+      ]
+    },
+    {
+      "value": "4",
+      "count": 38,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 224",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 225",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 226",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 227",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Pagination / Frame 228",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 108"
+      ]
+    },
+    {
+      "value": "16",
+      "count": 29,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Main Banner / NFT Auth Artwork 1",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Main Banner / NFT Auth Artwork 2",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Products / NFT Auth Artwork 3",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Products / NFT Auth Artwork 4",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Products / NFT Auth Artwork 5",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Marketplace Page / Page Content (behind overlay) / Products / NFT Auth Artwork 6"
+      ]
+    },
+    {
+      "value": "8",
+      "count": 22,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Genesis Drops",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Curated Art",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 1",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 2",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 3",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Blog / Cards / Card 4"
+      ]
+    },
+    {
+      "value": "5",
+      "count": 17,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Order Confirmation Modal / Frame 265 / Transaction Details / Footer Note / Etherscan Button",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Form / Email Input",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Form / Password Input",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / CTA / Sign In Button",
+        "Marketplace de NFTs GreenMint / Desktop / Login / Sign In Modal / Social / Frame 369 / Social Button",
+        "Marketplace de NFTs GreenMint / Desktop / Cadastro / Sign Up Modal / Form / Username Input"
+      ]
+    },
+    {
+      "value": "37",
+      "count": 15,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 22 / Frame 92 / Frame 91",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 21 / Frame 94 / Frame 93",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 20 / Frame 96 / Frame 95",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 22 / Frame 92 / Frame 91",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 21 / Frame 94 / Frame 93",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 20 / Frame 96 / Frame 95"
+      ]
+    },
+    {
+      "value": "10",
+      "count": 13,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Início / Search Bar / Frame 404",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Form / Frame 445",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Form / Frame 444",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Form / Frame 444 / Frame 443 / Iconly/Curved/Hide",
+        "Marketplace de NFTs GreenMint / Mobile / Login / Sign In Button",
+        "Marketplace de NFTs GreenMint / Mobile / Cadastro / Form / Container"
+      ]
+    },
+    {
+      "value": "15",
+      "count": 12,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 141 / NFT Artwork 03",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 142 / NFT Artwork 04",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 206 / Frame 144 / NFT Artwork 05",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 230 / Frame 212 / Frame 211 / NFT Artwork 07",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 230 / Frame 215 / Frame 214 / NFT Artwork 08",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 231 / Frame 218 / Frame 216 / NFT Artwork 09"
+      ]
+    },
+    {
+      "value": "20",
+      "count": 12,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 1 / Frame 348 / Frame 47 / Add Button",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 2 / Frame 347 / Frame 48 / Add Button",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 3 / Frame 336 / Frame 49 / Add Button",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Product Grid / Column L / P-1 / Frame 414 / Frame 412",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Product Grid / Column L / P-3 / Frame 421",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Product Grid / Column R / P-2 / Frame 417 / Frame 416"
+      ]
+    },
+    {
+      "value": "40",
+      "count": 12,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Início",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Buy Bar / Frame 438 / Frame 437 / Frame 435",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Buy Bar / Frame 438 / Frame 437 / Frame 436",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Payment Summary / Frame 441 / Promo Input"
+      ]
+    },
+    {
+      "value": "14",
+      "count": 12,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Início / Search Bar / Frame 402",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Product Grid / Column L / P-1 / Frame 414 / Frame 412 / Frame 411 / Frame 57 / Frame 410",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 1 / Rectangle 102",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 1 / Mobile Cart NFT 2",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 2 / Rectangle 107",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 2 / Mobile Cart NFT 3"
+      ]
+    },
+    {
+      "value": "29",
+      "count": 10,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Featured NFT Banner / Rectangle 31",
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Featured NFT Banner / Rectangle 32",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 1 / Group 81 / Group 65",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 1 / Group 81 / Group 65 / Rectangle 79",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 2 / Group 85 / Group 65",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 2 / Group 85 / Group 65 / Rectangle 79"
+      ]
+    },
+    {
+      "value": "31",
+      "count": 8,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 1 / Group 81 / Group 64",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 1 / Group 81 / Group 64 / Rectangle 80",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 2 / Group 85 / Group 64",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 2 / Group 85 / Group 64 / Rectangle 80",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 3 / Group 83 / Group 73",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 3 / Group 83 / Group 73 / Rectangle 80"
+      ]
+    },
+    {
+      "value": "13",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Product Grid / Frame 233 / Grid Rows / Frame 230 / Frame 209 / Frame 207 / NFT Artwork 06",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203 / Frame 201 / Group 42 / Frame 194 / NFT Collection Artwork 07",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203 / Frame 200 / Group 43 / Frame 195 / NFT Collection Artwork 08",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203 / Frame 199 / Group 44 / Frame 196 / NFT Collection Artwork 09",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203 / Group 45 / Frame 198 / Frame 197 / NFT Collection Artwork 10"
+      ]
+    },
+    {
+      "value": "17",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Curated Art / NFT Artwork 16",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Related Products / Cards / Product Card 2 / Artwork / NFT Cart Artwork 2",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Related Products / Cards / Product Card 3 / Artwork / Frame 359 / NFT Cart Artwork 3",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Related Products / Cards / Product Card 4 / Group 44 / Frame 360 / NFT Cart Artwork 4",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Related Products / Cards / Product Card 5 / Group 45 / Frame 361 / NFT Cart Artwork 5"
+      ]
+    },
+    {
+      "value": "[0,6,6,0]",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / Frame 97",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / Frame 97",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / Frame 97",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / Frame 97",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98 / Frame 97"
+      ]
+    },
+    {
+      "value": "2.1180124282836914",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 112 / Union / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 112 / Union / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 112 / Union / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 112 / Union / Vector",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 121 / Frame 118 / Frame 117 / Frame 116 / Frame 115 / Frame 114 / Frame 113 / Frame 112 / Union / Vector"
+      ]
+    },
+    {
+      "value": "[14,0,0,14]",
+      "count": 4,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 1 / Rectangle 106",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 2 / Rectangle 108",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 3 / Rectangle 110",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 4 / Rectangle 112"
+      ]
+    },
+    {
+      "value": "24",
+      "count": 3,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Top / Hero / Frame 137 / Frame 136",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Product Images / Main Image / NFT Collection Artwork 01",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Hero / Frame 427 / Mobile NFT Hero Artwork"
+      ]
+    },
+    {
+      "value": "33",
+      "count": 2,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 167 / 01 / Frame 160 / Frame 48 / Add Button"
+      ]
+    },
+    {
+      "value": "25",
+      "count": 2,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Perfil do Colecionador / Top / Body / Profile Form / Fields / Field Row 3 / Avatar Field / Avatar Controls / Frame 456 / Frame 32",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Hero / Group 62 / Rectangle 98"
+      ]
+    },
+    {
+      "value": "30",
+      "count": 2,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Início / Hero Banner / Mask Group / Rectangle 95",
+        "Marketplace de NFTs GreenMint / Mobile / Início / Hero Banner / Mask Group / Rectangle 94"
+      ]
+    },
+    {
+      "value": "17.5",
+      "count": 2,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Hero / Frame 427 / Frame 426 / Back / Frame 424",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Hero / Frame 427 / Frame 426 / Heart / Frame 57 / Frame 425"
+      ]
+    },
+    {
+      "value": "32",
+      "count": 2,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Details Sheet / Title Row / Review / Group 63",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Details Sheet / Title Row / Review / Group 63 / Rectangle 99"
+      ]
+    },
+    {
+      "value": "[40,40,0,0]",
+      "count": 2,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Buy Bar",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Payment Summary"
+      ]
+    },
+    {
+      "value": "22",
+      "count": 1,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Featured NFT Banner / Frame 396 / NFT Artwork 18"
+      ]
+    },
+    {
+      "value": "7",
+      "count": 1,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Products / Sidebar / Featured NFT Banner / Rectangle 30"
+      ]
+    },
+    {
+      "value": "18",
+      "count": 1,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Promos / Promo Card — Genesis Drops / NFT Artwork 17"
+      ]
+    },
+    {
+      "value": "11",
+      "count": 1,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Related Products / Frame 204 / Frame 203 / Frame 202 / Group 41 / Frame 193 / NFT Collection Artwork 06"
+      ]
+    },
+    {
+      "value": "[0,3,3,0]",
+      "count": 1,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Wallet Summary / Promo Code / Promo Input / Frame 355"
+      ]
+    },
+    {
+      "value": "12",
+      "count": 1,
+      "samples": ["Marketplace de NFTs GreenMint / Mobile / Início / Hero Banner"]
+    },
+    {
+      "value": "[31,31,0,0]",
+      "count": 1,
+      "samples": ["Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Details Sheet"]
+    }
+  ],
+  "effects": [
+    {
+      "value": "[{\"type\":\"DROP_SHADOW\",\"color\":\"#0a060473\",\"offset\":{\"x\":0,\"y\":0},\"radius\":20,\"visible\":true}]",
+      "count": 8,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Início / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Pagamento / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Desktop / Confirmação de Pedido / Footer / Frame 122 / Frame 100 / Frame 99 / Frame 102 / Frame 101 / Frame 98",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Buy Bar"
+      ]
+    },
+    {
+      "value": "[{\"type\":\"DROP_SHADOW\",\"color\":\"#140d0a26\",\"offset\":{\"x\":0,\"y\":4},\"radius\":12,\"spread\":-2,\"visible\":true}]",
+      "count": 8,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 1 / Frame 348 / Frame 47 / Add Button",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 2 / Frame 347 / Frame 48 / Add Button",
+        "Marketplace de NFTs GreenMint / Desktop / Carrinho de NFTs / Top / Cart / Cart Body / Cart Table / Cart Items / Cart Item 3 / Frame 336 / Frame 49 / Add Button",
+        "Marketplace de NFTs GreenMint / Mobile / Detalhes do NFT / Buy Bar / Frame 438 / Frame 434 / Frame 67 / Frame 433 / Add Button"
+      ]
+    },
+    {
+      "value": "[{\"type\":\"DROP_SHADOW\",\"color\":\"#0a060473\",\"offset\":{\"x\":0,\"y\":6},\"radius\":20,\"visible\":true}]",
+      "count": 5,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 1 / Rectangle 102",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 2 / Rectangle 107",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 3 / Rectangle 109",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Content / Cart Items / Item 4 / Rectangle 111",
+        "Marketplace de NFTs GreenMint / Mobile / Carrinho de NFTs / Payment Summary / Frame 441 / Promo Input"
+      ]
+    },
+    {
+      "value": "[{\"type\":\"DROP_SHADOW\",\"color\":\"#140d0a26\",\"offset\":{\"x\":0,\"y\":6.599999904632568},\"radius\":19.799999237060547,\"spread\":-3.299999952316284,\"visible\":true}]",
+      "count": 2,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Desktop / Detalhes do NFT / Top / Main / Product / Details / Frame 167 / 01 / Frame 160 / Frame 48 / Add Button"
+      ]
+    },
+    {
+      "value": "[{\"type\":\"DROP_SHADOW\",\"color\":\"#0a060473\",\"offset\":{\"x\":0,\"y\":-10},\"radius\":30,\"visible\":true}]",
+      "count": 1,
+      "samples": ["Marketplace de NFTs GreenMint / Mobile / Início / Tab Bar / Vector"]
+    },
+    {
+      "value": "[{\"type\":\"DROP_SHADOW\",\"color\":\"#0a060473\",\"offset\":{\"x\":0,\"y\":20},\"radius\":20,\"visible\":true}]",
+      "count": 1,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Pagamento / Content / Frame 442 / Wallet Cards / Wallet Card — Reserva / Rectangle 102"
+      ]
+    },
+    {
+      "value": "[{\"type\":\"DROP_SHADOW\",\"color\":\"#0a060473\",\"offset\":{\"x\":0,\"y\":0},\"radius\":40,\"visible\":true}]",
+      "count": 1,
+      "samples": [
+        "Marketplace de NFTs GreenMint / Mobile / Pagamento / Content / Frame 442 / Wallet Options / Option — Coinbase / Rectangle 88"
+      ]
+    }
+  ],
+  "images": []
+}

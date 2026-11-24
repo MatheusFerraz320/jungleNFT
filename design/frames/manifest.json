@@ -1,0 +1,137 @@
+[
+  {
+    "id": "2:2",
+    "name": "Desktop / Início",
+    "width": 1440,
+    "height": 3668,
+    "filename": "desktop-inicio.png",
+    "scale": 1,
+    "bytes": 2354350
+  },
+  {
+    "id": "10:244",
+    "name": "Desktop / Detalhes do NFT",
+    "width": 1440,
+    "height": 2246.000244140625,
+    "filename": "desktop-detalhes-do-nft.png",
+    "scale": 1,
+    "bytes": 942282
+  },
+  {
+    "id": "11:1278",
+    "name": "Desktop / Carrinho de NFTs",
+    "width": 1440,
+    "height": 1754.0001220703125,
+    "filename": "desktop-carrinho-de-nfts.png",
+    "scale": 1,
+    "bytes": 564275
+  },
+  {
+    "id": "11:2862",
+    "name": "Desktop / Pagamento",
+    "width": 1440,
+    "height": 1657,
+    "filename": "desktop-pagamento.png",
+    "scale": 1,
+    "bytes": 238827
+  },
+  {
+    "id": "11:4385",
+    "name": "Desktop / Confirmação de Pedido",
+    "width": 1440,
+    "height": 1657,
+    "filename": "desktop-confirmacao-de-pedido.png",
+    "scale": 1,
+    "bytes": 105922
+  },
+  {
+    "id": "9:115",
+    "name": "Desktop / Login",
+    "width": 1440,
+    "height": 1981,
+    "filename": "desktop-login.png",
+    "scale": 1,
+    "bytes": 1341930
+  },
+  {
+    "id": "9:1022",
+    "name": "Desktop / Cadastro",
+    "width": 1440,
+    "height": 1981,
+    "filename": "desktop-cadastro.png",
+    "scale": 1,
+    "bytes": 1300498
+  },
+  {
+    "id": "9:1238",
+    "name": "Desktop / Perfil do Colecionador",
+    "width": 1440,
+    "height": 1080,
+    "filename": "desktop-perfil-do-colecionador.png",
+    "scale": 1,
+    "bytes": 58047
+  },
+  {
+    "id": "9:1670",
+    "name": "Desktop / Carteiras",
+    "width": 1440,
+    "height": 1080,
+    "filename": "desktop-carteiras.png",
+    "scale": 1,
+    "bytes": 78462
+  },
+  {
+    "id": "14:5226",
+    "name": "Mobile / Início",
+    "width": 414,
+    "height": 896,
+    "filename": "mobile-inicio.png",
+    "scale": 2,
+    "bytes": 1179738
+  },
+  {
+    "id": "15:5536",
+    "name": "Mobile / Detalhes do NFT",
+    "width": 414,
+    "height": 896,
+    "filename": "mobile-detalhes-do-nft.png",
+    "scale": 2,
+    "bytes": 865782
+  },
+  {
+    "id": "16:360",
+    "name": "Mobile / Carrinho de NFTs",
+    "width": 414,
+    "height": 896,
+    "filename": "mobile-carrinho-de-nfts.png",
+    "scale": 2,
+    "bytes": 540421
+  },
+  {
+    "id": "16:748",
+    "name": "Mobile / Pagamento",
+    "width": 414,
+    "height": 896,
+    "filename": "mobile-pagamento.png",
+    "scale": 2,
+    "bytes": 199423
+  },
+  {
+    "id": "16:1022",
+    "name": "Mobile / Login",
+    "width": 414,
+    "height": 896,
+    "filename": "mobile-login.png",
+    "scale": 2,
+    "bytes": 52614
+  },
+  {
+    "id": "16:1228",
+    "name": "Mobile / Cadastro",
+    "width": 414,
+    "height": 896,
+    "filename": "mobile-cadastro.png",
+    "scale": 2,
+    "bytes": 60887
+  }
+]

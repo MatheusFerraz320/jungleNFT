@@ -23,6 +23,11 @@ lighthouse/reports/*
 *.log
 pnpm-debug.log*
 
-# Local design references are optional; keep the challenge source in the repo.
+# Local design references are optional; keep extracted tokens and assets.
 design/*
 !design/.gitkeep
+!design/tokens.json
+!design/figma-report.json
+!design/figma-tokens.md
+!design/frames/
+!design/assets/

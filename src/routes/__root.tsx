@@ -5,7 +5,7 @@ import { NotFoundPage } from '@/shared/components/layout/not-found-page';
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      { title: 'JungleNFT — Marketplace de NFTs' },
+      { title: 'Kurio — Marketplace de NFTs' },
       { name: 'description', content: 'Marketplace de NFTs com dados e pagamentos simulados.' },
     ],
   }),

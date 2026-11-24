@@ -16,6 +16,7 @@ Base do **Desafio Frontend — Marketplace de NFTs**. Este repositório contém 
 | Tempo real       | Socket.IO client + `@mswjs/socket.io-binding` |
 | Estilo           | Tailwind CSS v4                               |
 | Componentes      | shadcn/ui (New York)                          |
+| Tipografia       | Roboto Mono Variable, self-hosted             |
 | Contratos        | Zod                                           |
 | Mocking          | MSW 2                                         |
 | Testes           | Vitest + Testing Library + Playwright         |
@@ -46,12 +47,14 @@ O bootstrap inicia o MSW antes do primeiro render. Com `VITE_MOCKS=enabled`, o b
 
 ## Variáveis de ambiente
 
-| Variável                | Padrão    | Descrição                                     |
-| ----------------------- | --------- | --------------------------------------------- |
-| `VITE_API_BASE_URL`     | `/api`    | Base das chamadas Axios                       |
-| `VITE_SOCKET_URL`       | vazio     | Origem do Socket.IO; vazio usa a origem atual |
-| `VITE_MOCKS`            | `enabled` | `enabled` ou `disabled`                       |
-| `VITE_DEFAULT_SCENARIO` | `default` | Cenário inicial dos mocks                     |
+| Variável                | Padrão                   | Descrição                                     |
+| ----------------------- | ------------------------ | --------------------------------------------- |
+| `VITE_API_BASE_URL`     | `/api`                   | Base das chamadas Axios                       |
+| `VITE_SOCKET_URL`       | vazio                    | Origem do Socket.IO; vazio usa a origem atual |
+| `VITE_MOCKS`            | `enabled`                | `enabled` ou `disabled`                       |
+| `VITE_DEFAULT_SCENARIO` | `default`                | Cenário inicial dos mocks                     |
+| `FIGMA_ACCESS_TOKEN`    | vazio                    | Token read-only usado apenas pelos scripts    |
+| `FIGMA_FILE_KEY`        | `Ff0SksUi7UFtPWUO8kyNtw` | Arquivo do desafio                            |
 
 Nunca versione `.env.local`.
 
@@ -74,6 +77,10 @@ Nunca versione `.env.local`.
 | `pnpm test:e2e:ui`     | Playwright UI mode                             |
 | `pnpm test:e2e:update` | Atualiza baselines visuais                     |
 | `pnpm test:e2e:report` | Abre o relatório HTML                          |
+| `pnpm msw:init`        | Recria o service worker do MSW                 |
+| `pnpm figma:tokens`    | Extrai cores, tipografia, raios e espaçamentos |
+| `pnpm figma:frames`    | Exporta os frames desktop/mobile               |
+| `pnpm figma:artworks`  | Exporta os NFTs do catálogo                    |
 | `pnpm lighthouse`      | Executa 3 auditorias por perfil e gera mediana |
 
 ## Mocks e cenários
@@ -105,6 +112,27 @@ Cenários já exercitados pelo scaffold:
 - `offline`: erro de rede em `/api/health`.
 
 Os demais cenários exigidos pelo desafio estão catalogados em [`docs/scenarios.md`](docs/scenarios.md) e serão conectados aos handlers conforme cada feature for implementada.
+
+## Tokens e assets do Figma
+
+Os tokens foram extraídos diretamente do arquivo do desafio e aplicados em `src/app/styles/globals.css`.
+
+- Relatório bruto: `design/figma-report.json`
+- Resumo legível: `design/figma-tokens.md`
+- Tokens curados: `design/tokens.json`
+- Frames de referência: `design/frames/`
+- NFTs locais: `public/assets/nfts/`
+- Fonte: `@fontsource-variable/roboto-mono`
+
+Para atualizar depois de alterações no Figma:
+
+```bash
+pnpm figma:tokens
+pnpm figma:frames
+pnpm figma:artworks
+```
+
+O token fica somente no `.env.local` e não entra no bundle do Vite.
 
 ## Credenciais fictícias
 
@@ -155,8 +183,8 @@ Resultado inicial (3 execuções por perfil):
 
 | Perfil  | Performance | Accessibility | Best Practices | SEO |     LCP |   CLS |   TBT |
 | ------- | ----------: | ------------: | -------------: | --: | ------: | ----: | ----: |
-| Desktop |          93 |           100 |            100 |  91 | 2603 ms | 0,002 | 21 ms |
-| Mobile  |          93 |           100 |            100 |  91 | 2600 ms | 0,002 | 21 ms |
+| Desktop |          93 |           100 |            100 |  91 | 2600 ms | 0,001 | 21 ms |
+| Mobile  |          93 |           100 |            100 |  91 | 2598 ms | 0,000 | 19 ms |
 
 Resumo completo em [`lighthouse/reports/summary.json`](lighthouse/reports/summary.json).
 
@@ -195,7 +223,7 @@ Mantenha `VITE_MOCKS=enabled` na versão pública de demonstração.
 
 ## Limitações atuais
 
-- O Figma ainda não foi exportado; os tokens visuais são provisórios.
+- O Figma foi extraído e os tokens/assets principais já estão aplicados.
 - A tela inicial é um placeholder que prova a integração REST + Socket.IO.
 - Handlers de autenticação, catálogo, carrinho, cotação e pedidos ainda serão implementados.
 - O binding Socket.IO do MSW não oferece rooms/broadcast completos; a estratégia atual mantém uma conexão por cliente e emite eventos diretamente para cada conexão mockada.

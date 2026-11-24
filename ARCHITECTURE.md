@@ -146,7 +146,9 @@ O bootstrap de mocks é importado dinamicamente e gera um chunk separado. React/
 
 ## 12. Limitações e decisões
 
-- Tokens visuais provisórios até o export do Figma.
+- Tokens extraídos do Figma e centralizados em `design/tokens.json` e `globals.css`.
+- Roboto Mono Variable é servida localmente via Fontsource.
+- Os nove artworks únicos do catálogo foram exportados para `public/assets/nfts/`.
 - Apenas a rota inicial existe; as demais rotas serão criadas junto das features.
 - Playwright fixado em 1.56.1 para alinhar o container oficial usado no CI.
 - Lighthouse audita apenas a home neste scaffold.

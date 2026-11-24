@@ -5,9 +5,15 @@ const categories: NftCategory[] = ['art', 'gaming', 'music', 'collectible', 'pho
 const rarities: NftRarity[] = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
 const networks = ['ethereum', 'polygon', 'base', 'arbitrum', 'optimism'] as const;
 const images = [
-  '/assets/nft-placeholder-01.svg',
-  '/assets/nft-placeholder-02.svg',
-  '/assets/nft-placeholder-03.svg',
+  '/assets/nfts/artwork-03.png',
+  '/assets/nfts/artwork-04.png',
+  '/assets/nfts/artwork-05.png',
+  '/assets/nfts/artwork-06.png',
+  '/assets/nfts/artwork-07.png',
+  '/assets/nfts/artwork-08.png',
+  '/assets/nfts/artwork-09.png',
+  '/assets/nfts/artwork-10.png',
+  '/assets/nfts/artwork-11.png',
 ];
 const collectionNames = [
   'Jungle Genesis',
