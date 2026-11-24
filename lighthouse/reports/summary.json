@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-11-24T13:17:03.088Z",
+  "baseUrl": "http://127.0.0.1:4173",
+  "runsPerProfile": 3,
+  "lighthouseVersion": "13.6.0",
+  "environment": {
+    "node": "v22.20.0",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "measurements": [
+    {
+      "page": "/",
+      "pageName": "home",
+      "preset": "desktop",
+      "median": {
+        "performance": 93,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 91
+      },
+      "metrics": {
+        "lcpMs": 2602.5130000000004,
+        "cls": 0.0016435201851613403,
+        "tbtMs": 20.5
+      },
+      "rawScores": {
+        "performance": [
+          93,
+          93,
+          93
+        ],
+        "accessibility": [
+          100,
+          100,
+          100
+        ],
+        "best-practices": [
+          100,
+          100,
+          100
+        ],
+        "seo": [
+          91,
+          91,
+          91
+        ]
+      },
+      "rawMetrics": {
+        "lcp": [
+          2605.2167500000005,
+          2602.5130000000004,
+          2598.6127500000002
+        ],
+        "cls": [
+          0.0016435201851613403,
+          0.0016435201851613403,
+          0.0016435201851613403
+        ],
+        "tbt": [
+          20.5,
+          20.5,
+          20
+        ]
+      }
+    },
+    {
+      "page": "/",
+      "pageName": "home",
+      "preset": "mobile",
+      "median": {
+        "performance": 93,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 91
+      },
+      "metrics": {
+        "lcpMs": 2600.0700000000006,
+        "cls": 0.0016435201851613403,
+        "tbtMs": 20.5
+      },
+      "rawScores": {
+        "performance": [
+          93,
+          93,
+          93
+        ],
+        "accessibility": [
+          100,
+          100,
+          100
+        ],
+        "best-practices": [
+          100,
+          100,
+          100
+        ],
+        "seo": [
+          91,
+          91,
+          91
+        ]
+      },
+      "rawMetrics": {
+        "lcp": [
+          2596.6031249999996,
+          2600.0700000000006,
+          2601.78275
+        ],
+        "cls": [
+          0.0016435201851613403,
+          0.0016435201851613403,
+          0.0016435201851613403
+        ],
+        "tbt": [
+          20.5,
+          20.5,
+          19
+        ]
+      }
+    }
+  ]
+}

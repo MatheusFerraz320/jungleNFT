@@ -1,0 +1,9 @@
+packages: []
+
+# Dependencies are pinned in pnpm-lock.yaml. Disable the local machine's
+# release-age embargo so a clean checkout installs the audited lockfile.
+minimumReleaseAge: 0
+
+allowBuilds:
+  esbuild: true
+  msw: true
