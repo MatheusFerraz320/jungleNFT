@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -81,9 +82,10 @@ for (const artwork of artworks) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Falha ao baixar ${artwork.name}.`);
   const buffer = Buffer.from(await response.arrayBuffer());
-  const filename = `artwork-${String(artwork.number).padStart(2, '0')}.png`;
-  await writeFile(path.join(outputDir, filename), buffer);
-  manifest.push({ ...artwork, filename, bytes: buffer.length });
+  const webp = await sharp(buffer).webp({ quality: 82 }).toBuffer();
+  const filename = `artwork-${String(artwork.number).padStart(2, '0')}.webp`;
+  await writeFile(path.join(outputDir, filename), webp);
+  manifest.push({ ...artwork, filename, bytes: webp.length });
   console.log(`Exportado: ${filename}`);
 }
 

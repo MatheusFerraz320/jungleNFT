@@ -1,16 +1,11 @@
-import { delay, http, HttpResponse } from 'msw';
-import { scenarios } from '@/mocks/scenarios/presets';
+import { http, HttpResponse } from 'msw';
 import { mockDatabase } from '@/mocks/db/store';
 import { HealthResponseSchema } from '@/shared/contracts';
+import { isOfflineScenario, waitForScenario } from '../lib/scenario';
 
 export const healthHandler = http.get('*/api/health', async () => {
-  if (mockDatabase.scenario === 'offline') {
-    return HttpResponse.error();
-  }
-
-  const scenario = scenarios[mockDatabase.scenario];
-  const latency = scenario.latencyMs + Math.floor(Math.random() * scenario.latencyVarianceMs);
-  await delay(latency);
+  if (isOfflineScenario()) return HttpResponse.error();
+  await waitForScenario();
 
   return HttpResponse.json(
     HealthResponseSchema.parse({
