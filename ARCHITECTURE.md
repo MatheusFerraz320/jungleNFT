@@ -14,7 +14,7 @@ UI (features) ──► TanStack Query ──► Axios ──► MSW (Service Wo
 
 Estado das entregas: catálogo, detalhe, favoritos, carrinho, cotação, pagamento, pedidos, conta,
 perfil e carteiras **integrados à API simulada**; tempo real (`nft.updated`, `order.updated`);
-**140 testes E2E** (137 executados; 3 são específicos de um viewport e se pulam no outro) (desktop + mobile) e regressão visual; auditoria Lighthouse.
+**144 testes E2E** (139 executados; 5 são específicos de um viewport e se pulam no outro) (desktop + mobile) e regressão visual; auditoria Lighthouse.
 
 ## 2. Camadas e responsabilidades
 
@@ -164,7 +164,7 @@ Otimizações: render sem esperar o MSW, preload do LCP, code splitting por rota
 ## 13. Testes
 
 - **Unitários (Vitest)**: domínio simulado, handlers HTTP via MSW, versões/guarda de eventos, decimais.
-- **E2E (Playwright)**: 140 testes (137 executados) em Chromium desktop (1440) e mobile (390) cobrindo os fluxos do enunciado; contexto novo por teste;
+- **E2E (Playwright)**: 144 testes (139 executados) em Chromium desktop (1440) e mobile (390) cobrindo os fluxos do enunciado; contexto novo por teste;
   relógio controlado (`page.clock`), latência e eventos disparados pelos controles de mock; relatório HTML e traces de falha.
 - **Regressão visual**: início, detalhe, carrinho e pagamento, com baselines em `e2e/visual/visual.spec.ts-snapshots/`
   (geradas com Playwright 1.56.1 em Linux; atualize com `pnpm test:e2e:update`).
