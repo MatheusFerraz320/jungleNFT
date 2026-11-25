@@ -18,6 +18,8 @@ interface ReviewDialogProps {
   network: Network;
   wallet: Wallet;
   collector: { name: string; email: string };
+  /** Total que o usuário viu ao abrir a revisão; qualquer mudança posterior exige reconfirmação. */
+  reviewedTotal?: string;
 }
 
 const STALE_CODES = new Set(['PRICE_CHANGED', 'EDITION_SOLD_OUT', 'QUOTE_EXPIRED']);
@@ -39,6 +41,7 @@ export function ReviewDialog({
   network,
   wallet,
   collector,
+  reviewedTotal,
 }: ReviewDialogProps) {
   const view = useCartView(network);
   const navigate = useNavigate();
@@ -46,7 +49,6 @@ export function ReviewDialog({
   const keyRef = useRef<{ quoteId: string; key: string } | null>(null);
   const [changed, setChanged] = useState(false);
   const cartId = view.cart?.id ?? '';
-  const displayedTotal = view.quote?.totalEth;
 
   const quoteQuery = useQuery({
     queryKey: ['checkout-quote', cartId, view.cart?.version, network, view.couponCode],
@@ -58,7 +60,7 @@ export function ReviewDialog({
     retry: false,
   });
   const quote = quoteQuery.data;
-  const totalsChanged = Boolean(quote && displayedTotal && quote.totalEth !== displayedTotal);
+  const totalsChanged = Boolean(quote && reviewedTotal && quote.totalEth !== reviewedTotal);
 
   const send = useMutation({
     mutationFn: (variables: { body: CreateOrderRequest; key: string }) =>

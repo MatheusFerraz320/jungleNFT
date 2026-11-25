@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 import { setToken } from '@/shared/api/client-identity';
+import { replaceSession } from '../session-cache';
 
 /**
  * Trata a expiração de sessão (401) em qualquer ponto — navegação ou checkout: descarta o cache
@@ -16,7 +17,7 @@ export function SessionWatcher() {
   useEffect(() => {
     function handleExpired() {
       setToken(null);
-      queryClient.clear();
+      replaceSession(queryClient, null);
       toast.error('Sua sessão expirou. Entre novamente para continuar.');
 
       if (!href.startsWith('/login') && !href.startsWith('/cadastro')) {

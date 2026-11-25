@@ -1,23 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { getGuestId, setToken } from '@/shared/api/client-identity';
-import { queryKeys } from '@/shared/api/query-keys';
 import type { AuthResponse, LoginRequest, RegisterRequest } from '@/shared/contracts';
+import { replaceSession } from '../session-cache';
 import { login, logout, register } from '../api/auth-api';
 
 /**
- * Troca de usuário: limpa todo o cache (dados privados da sessão anterior) antes de gravar a
- * nova sessão, garantindo isolamento entre usuários.
+ * Troca de usuário: grava a nova sessão e descarta os dados privados da anterior (cache
+ * isolado por usuário).
  */
 function useStartSession() {
   const queryClient = useQueryClient();
 
   return (auth: AuthResponse) => {
-    queryClient.clear();
     setToken(auth.token);
-    queryClient.setQueryData(queryKeys.auth.session, {
-      user: auth.user,
-      expiresAt: auth.expiresAt,
-    });
+    replaceSession(queryClient, { user: auth.user, expiresAt: auth.expiresAt });
   };
 }
 
@@ -46,7 +42,7 @@ export function useLogout() {
     mutationFn: logout,
     onSettled: () => {
       setToken(null);
-      queryClient.clear();
+      replaceSession(queryClient, null);
     },
   });
 }

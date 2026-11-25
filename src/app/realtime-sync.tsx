@@ -35,6 +35,13 @@ function applyNftUpdate(queryClient: QueryClient, nft: NftSummary) {
     current && nft.version > current.version ? { ...current, ...nft } : current,
   );
 
+  // Consultas em andamento podem trazer uma resposta anterior ao evento (ou nem ter cache ainda
+  // para receber a atualização acima): refaz-as para nunca terminar com o dado mais antigo.
+  void queryClient.invalidateQueries({
+    queryKey: queryKeys.nfts.all,
+    predicate: (query) => query.state.fetchStatus === 'fetching',
+  });
+
   // Carrinho aberto: informa a mudança e atualiza o resumo (cotação) a partir da API.
   for (const [, cart] of queryClient.getQueriesData<Cart>({ queryKey: CART_KEY })) {
     const item = cart?.items.find((entry) => entry.nftId === nft.id);
