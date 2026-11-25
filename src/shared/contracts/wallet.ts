@@ -8,6 +8,17 @@ export const WalletAddressSchema = z
     'Informe um endereço EVM válido (0x + 40 caracteres hexadecimais).',
   );
 
+/** Dados complementares do colecionador exibidos no formulário de carteira (Figma). */
+const WalletMetaShape = {
+  displayName: z.string().max(80).optional(),
+  profileName: z.string().max(80).optional(),
+  walletType: z.string().max(40).optional(),
+  referralCode: z.string().max(40).optional(),
+  email: z.email().optional(),
+  ensName: z.string().max(60).optional(),
+  secondaryAddress: z.string().max(80).optional(),
+};
+
 export const WalletSchema = z.object({
   id: z.string().min(1),
   userId: z.string().min(1),
@@ -15,6 +26,7 @@ export const WalletSchema = z.object({
   address: WalletAddressSchema,
   network: NetworkSchema,
   isPrimary: z.boolean(),
+  ...WalletMetaShape,
   createdAt: z.iso.datetime(),
   updatedAt: z.iso.datetime(),
   version: z.number().int().min(1),
@@ -25,9 +37,13 @@ export const CreateWalletRequestSchema = z.object({
   address: WalletAddressSchema,
   network: NetworkSchema,
   isPrimary: z.boolean().default(false),
+  ...WalletMetaShape,
 });
 
-export const UpdateWalletRequestSchema = CreateWalletRequestSchema.partial();
+/** `isPrimary` não tem default na edição: omitir o campo preserva o valor atual. */
+export const UpdateWalletRequestSchema = CreateWalletRequestSchema.partial().extend({
+  isPrimary: z.boolean().optional(),
+});
 
 export type Wallet = z.infer<typeof WalletSchema>;
 export type CreateWalletRequest = z.infer<typeof CreateWalletRequestSchema>;

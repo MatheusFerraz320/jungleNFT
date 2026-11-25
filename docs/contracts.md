@@ -87,16 +87,16 @@ Valores ETH trafegam como strings decimais (cálculo com `decimal.js`).
 
 ### Perfil e carteiras 🔒
 
-| Método | Rota                    | Request                                   | Response                       |
-| ------ | ----------------------- | ----------------------------------------- | ------------------------------ |
-| GET    | `/api/profile`          | —                                         | `{ user }`                     |
-| PATCH  | `/api/profile`          | `{ name, email, avatarUrl? }`             | `{ user }` · `409 EMAIL_TAKEN` |
-| POST   | `/api/profile/password` | `{ currentPassword, newPassword }`        | `204` · `422 WRONG_PASSWORD`   |
-| GET    | `/api/wallets`          | —                                         | `{ wallets }`                  |
-| POST   | `/api/wallets`          | `{ label, address, network, isPrimary? }` | `201 Wallet`                   |
-| PATCH  | `/api/wallets/:id`      | parcial de `CreateWalletRequest`          | `Wallet`                       |
+| Método | Rota                    | Request                                                                                                                                | Response                       |
+| ------ | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| GET    | `/api/profile`          | —                                                                                                                                      | `{ user }`                     |
+| PATCH  | `/api/profile`          | `{ name, email, avatarUrl?, username?, ensName?, walletNickname? }`                                                                    | `{ user }` · `409 EMAIL_TAKEN` |
+| POST   | `/api/profile/password` | `{ currentPassword, newPassword }`                                                                                                     | `204` · `422 WRONG_PASSWORD`   |
+| GET    | `/api/wallets`          | —                                                                                                                                      | `{ wallets }`                  |
+| POST   | `/api/wallets`          | `{ label, address, network, isPrimary?, displayName?, profileName?, walletType?, referralCode?, email?, ensName?, secondaryAddress? }` | `201 Wallet`                   |
+| PATCH  | `/api/wallets/:id`      | parcial de `CreateWalletRequest`                                                                                                       | `Wallet`                       |
 
-No máximo duas carteiras (principal e secundária); apenas uma principal; endereços únicos por usuário (`409 ADDRESS_TAKEN`).
+O avatar trafega como data URL (JPEG 256×256, ≤ 200 KB). No máximo duas carteiras (principal e secundária); apenas uma principal; endereços únicos por usuário (`409 ADDRESS_TAKEN`).
 
 ## Eventos Socket.IO
 

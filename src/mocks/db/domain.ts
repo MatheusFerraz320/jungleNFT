@@ -351,6 +351,9 @@ export class MockDomain {
       name: data.name,
       email,
       avatarUrl: data.avatarUrl ?? user.avatarUrl,
+      username: data.username ?? user.username,
+      ensName: data.ensName ?? user.ensName,
+      walletNickname: data.walletNickname ?? user.walletNickname,
       updatedAt: this.iso(),
     };
     mockDatabase.upsertUser(updated);
@@ -410,6 +413,13 @@ export class MockDomain {
       address: data.address,
       network: data.network,
       isPrimary: makePrimary,
+      displayName: data.displayName,
+      profileName: data.profileName,
+      walletType: data.walletType,
+      referralCode: data.referralCode,
+      email: data.email,
+      ensName: data.ensName,
+      secondaryAddress: data.secondaryAddress,
       createdAt: stamp,
       updatedAt: stamp,
       version: 1,
