@@ -87,9 +87,15 @@ export function SearchDialog({ trigger }: { trigger?: ReactNode }) {
   );
 }
 
-export function AppHeader({ cartCount = 0 }: { cartCount?: number }) {
+export function AppHeader({
+  cartCount = 0,
+  sessionName,
+}: {
+  cartCount?: number;
+  sessionName?: string | null;
+}) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const showLine = pathname === '/';
+  const showLine = ['/', '/login', '/cadastro', '/perfil', '/carteiras'].includes(pathname);
 
   return (
     <header className="bg-background sticky top-0 z-40 hidden sm:block">
@@ -151,13 +157,19 @@ export function AppHeader({ cartCount = 0 }: { cartCount?: number }) {
                 {cartCount}
               </span>
             </Link>
-            <Button
-              className="ml-[5px] h-[35px] w-[100px] gap-1 rounded-md px-0 text-base leading-[21px] font-medium"
-              onClick={() => toast.info('O login será implementado na próxima etapa.')}
+            <Link
+              to={sessionName ? '/perfil' : '/login'}
+              className="bg-primary text-primary-foreground focus-visible:ring-ring ml-[5px] inline-flex h-[35px] w-[100px] items-center justify-center gap-1 rounded-md text-base leading-[21px] font-medium focus-visible:ring-2 focus-visible:outline-none"
             >
-              <FigmaLogoutIcon className="size-5" />
-              Entrar
-            </Button>
+              {sessionName ? (
+                <span className="truncate px-2">{sessionName}</span>
+              ) : (
+                <>
+                  <FigmaLogoutIcon className="size-5" />
+                  Entrar
+                </>
+              )}
+            </Link>
           </div>
         </div>
       </Container>
