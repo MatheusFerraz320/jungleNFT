@@ -1,24 +1,19 @@
-import { Card, CardContent, CardHeader } from '@/shared/components/ui/card';
 import { Skeleton } from '@/shared/components/ui/skeleton';
 
 export function CatalogSkeleton() {
   return (
     <div
+      role="status"
       aria-label="Carregando catálogo"
       aria-busy="true"
-      className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3"
     >
-      {Array.from({ length: 6 }, (_, index) => (
-        <Card key={index} className="overflow-hidden">
-          <Skeleton className="skeleton-shimmer aspect-square w-full rounded-none" />
-          <CardHeader className="gap-3">
-            <Skeleton className="skeleton-shimmer h-5 w-2/3" />
-            <Skeleton className="skeleton-shimmer h-4 w-1/3" />
-          </CardHeader>
-          <CardContent>
-            <Skeleton className="skeleton-shimmer h-6 w-24" />
-          </CardContent>
-        </Card>
+      {Array.from({ length: 9 }, (_, index) => (
+        <div key={index} className="bg-card rounded-xl p-2">
+          <Skeleton className="skeleton-shimmer aspect-square w-full rounded-lg" />
+          <Skeleton className="skeleton-shimmer mt-3 h-4 w-2/3" />
+          <Skeleton className="skeleton-shimmer mt-2 h-4 w-1/3" />
+        </div>
       ))}
       <span className="sr-only" role="status">
         Carregando dados do catálogo…

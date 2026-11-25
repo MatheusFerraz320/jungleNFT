@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 6px;
+  --radius: 4px;
 
   --background: #140d0a;
   --foreground: #f5f1eb;
@@ -30,6 +30,8 @@
   --chart-3: #e89b55;
   --chart-4: #f0805f;
   --chart-5: #b39463;
+  --line: #432c1a;
+  --band: #38220f;
 
   --font-sans:
     'Roboto Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
@@ -84,17 +86,19 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-line: var(--line);
+  --color-band: var(--band);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-xs: 3px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 16px;
-  --radius-2xl: 20px;
+  --radius-xs: 2px;
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 5px;
+  --radius-2xl: 6px;
   --radius-3xl: 40px;
   --font-sans: var(--font-sans);
   --shadow-card: var(--shadow-card);
@@ -118,6 +122,7 @@
     font-size: 15px;
     line-height: 1.5;
     font-synthesis: none;
+    text-rendering: geometricPrecision;
   }
 
   button,

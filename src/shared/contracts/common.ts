@@ -10,7 +10,7 @@ export const QuantitySchema = z
   .int()
   .positive('A quantidade deve ser um inteiro positivo.');
 
-export const NetworkSchema = z.enum(['ethereum', 'polygon', 'arbitrum', 'base', 'optimism']);
+export const NetworkSchema = z.enum(['ethereum', 'polygon', 'solana']);
 
 export const PaginationSchema = z.object({
   page: z.number().int().min(1),
