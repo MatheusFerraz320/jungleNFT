@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { X } from 'lucide-react';
 import { Dialog as DialogPrimitive } from 'radix-ui';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -9,7 +10,8 @@ import { HomePage } from '@/features/catalog';
 import { PasswordInput, TextInput } from '@/shared/components/form/form-fields';
 import { useMediaQuery } from '@/shared/hooks/use-media-query';
 import { cn } from '@/shared/lib/cn';
-import { startSession } from '../store/session-store';
+import { applyApiErrors } from '@/shared/api/form-errors';
+import { useLogin, useRegister } from '../hooks/use-auth-mutations';
 
 type AuthMode = 'login' | 'register';
 
@@ -99,17 +101,35 @@ function AuthForm({ mode, redirectTo }: { mode: AuthMode; redirectTo?: string })
   const register = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
   });
+  const loginMutation = useLogin();
+  const registerMutation = useRegister();
+  const [formError, setFormError] = useState<string | null>(null);
+  const pending = loginMutation.isPending || registerMutation.isPending;
 
-  function finish(name: string, email: string) {
-    startSession({ name, email });
+  function finish() {
     toast.success(isLogin ? 'Login realizado.' : 'Conta criada.');
-    void navigate({ to: redirectTo && redirectTo.startsWith('/') ? redirectTo : '/' });
+    // Retorna ao fluxo anterior (somente caminhos internos).
+    const target = redirectTo && redirectTo.startsWith('/') ? redirectTo : '/';
+    void navigate({ href: target });
   }
 
-  const submitLogin = login.handleSubmit((values) =>
-    finish(values.email.split('@')[0] ?? 'Colecionador', values.email),
-  );
-  const submitRegister = register.handleSubmit((values) => finish(values.name, values.email));
+  const submitLogin = login.handleSubmit((values) => {
+    setFormError(null);
+    loginMutation.mutate(values, {
+      onSuccess: finish,
+      onError: (error) =>
+        setFormError(applyApiErrors(error, login.setError, ['email', 'password'])),
+    });
+  });
+  const submitRegister = register.handleSubmit(({ confirmPassword: _confirm, ...values }) => {
+    void _confirm;
+    setFormError(null);
+    registerMutation.mutate(values, {
+      onSuccess: finish,
+      onError: (error) =>
+        setFormError(applyApiErrors(error, register.setError, ['name', 'email', 'password'])),
+    });
+  });
 
   const mobile = 'max-sm:h-[50px] max-sm:rounded-[12px] max-sm:px-4';
 
@@ -227,15 +247,22 @@ function AuthForm({ mode, redirectTo }: { mode: AuthMode; redirectTo?: string })
         </>
       )}
 
+      {formError ? (
+        <p role="alert" className="text-destructive text-sm">
+          {formError}
+        </p>
+      ) : null}
+
       <button
         type="submit"
+        disabled={pending}
         className={cn(
           'bg-primary text-primary-foreground focus-visible:ring-ring h-11 w-full rounded text-base font-bold focus-visible:ring-2 focus-visible:outline-none',
           isLogin ? 'mt-3' : 'mt-3.5',
           'max-sm:mt-5 max-sm:h-[60px] max-sm:rounded-[12px]',
         )}
       >
-        {isLogin ? 'Entrar' : 'Criar conta'}
+        {pending ? 'Aguarde…' : isLogin ? 'Entrar' : 'Criar conta'}
       </button>
     </form>
   );
@@ -331,7 +358,7 @@ function AuthMobile({ mode, redirectTo }: { mode: AuthMode; redirectTo?: string 
   const isLogin = mode === 'login';
 
   return (
-    <main className="flex-1 px-7 pt-[128px] pb-10 sm:hidden">
+    <main className="flex-1 px-7 pt-[128px] pb-10">
       <p className="text-center text-[32px] leading-10 font-bold tracking-[0.15em]">KURIO</p>
       <h1 className="mt-[84px] mb-[34px] text-center text-xl leading-7 font-bold">
         {isLogin ? 'Entrar' : 'Criar perfil de colecionador'}
@@ -356,13 +383,15 @@ function AuthMobile({ mode, redirectTo }: { mode: AuthMode; redirectTo?: string 
 export function AuthScreen({ mode, redirectTo }: { mode: AuthMode; redirectTo?: string }) {
   const isDesktop = useMediaQuery('(min-width: 640px)');
 
+  // Um único formulário na página: evita ids duplicados e rótulos ambíguos.
+  if (!isDesktop) return <AuthMobile mode={mode} redirectTo={redirectTo} />;
+
   return (
     <>
-      <div className="flex-1 max-sm:hidden" inert aria-hidden="true">
+      <div className="flex-1" inert aria-hidden="true">
         <HomePage />
       </div>
-      {isDesktop ? <AuthDialog mode={mode} redirectTo={redirectTo} /> : null}
-      <AuthMobile mode={mode} redirectTo={redirectTo} />
+      <AuthDialog mode={mode} redirectTo={redirectTo} />
     </>
   );
 }
