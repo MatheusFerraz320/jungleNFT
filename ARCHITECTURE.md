@@ -149,10 +149,37 @@ O bootstrap de mocks é importado dinamicamente e gera um chunk separado. React/
 - Tokens extraídos do Figma e centralizados em `design/tokens.json` e `globals.css`.
 - Roboto Mono Variable é servida localmente via Fontsource.
 - Os nove artworks únicos do catálogo foram exportados para `public/assets/nfts/`.
-- Apenas a rota inicial existe; as demais rotas serão criadas junto das features.
+- Rotas: `/`, `/nft/$nftId`, `/carrinho`, `/pagamento`, `/pedido/$orderId`, `/login`, `/cadastro`, `/perfil`, `/carteiras`.
 - Playwright fixado em 1.56.1 para alinhar o container oficial usado no CI.
 - Lighthouse audita apenas a home neste scaffold.
 - O binding Socket.IO é experimental; a integração está coberta por E2E real.
+
+### Fidelidade visual e desvios do Figma
+
+Metodologia: cada frame (`design/frames/*.png`) foi comparado lado a lado com a captura do app
+(Chromium, 1440 e 414 px). Posições, tamanhos e cores foram medidos por varredura de pixels.
+`text-rendering: geometricPrecision` replica o avanço fracionário de glifos do Figma.
+
+Desvios deliberados (todos por requisito funcional do enunciado):
+
+- **Filtros**: o Figma só mostra Coleções, Faixa de preço e Rede. Foram acrescentados Raridade e
+  "Somente disponíveis" (filtros combináveis exigidos), no mesmo estilo visual.
+- **Categorias/redes**: contrato e fixtures passaram para as 9 coleções e 3 redes do Figma.
+- **Ordenação mobile**: o frame mobile não tem seletor de ordenação; ele fica dentro do painel de
+  filtros (botão laranja da barra de busca).
+- **Preço**: exibido exatamente como a string decimal da API (`1.19 ETH`), sem arredondar.
+- **Preço anterior**: sem tachado (como no Figma); o rótulo "Preço anterior" é lido por leitores
+  de tela, para o estado não depender só de cor.
+- **Galeria mobile**: o frame não mostra miniaturas; elas existem só a partir de 640 px.
+- **Pagamento mobile**: o frame não contém o formulário do colecionador; ele aparece apenas no
+  desktop nesta etapa (a coleta mobile entra com a integração do perfil).
+- **Login/Cadastro**: modal sobre a Início no desktop (como no Figma) e página cheia no mobile.
+- **Rodapé**: o indicador de tempo real ficou `sr-only` (não existe no Figma).
+- **Itens fora do escopo** (Atividade, Ofertas, Suporte…) respondem com aviso, sem simular sucesso.
+
+Estado desta etapa: telas e interações **visuais** com lógica local simples
+(`useCart`, `useSession`, pedidos locais). Elas ficam atrás de hooks para serem substituídas por
+TanStack Query + contratos REST/MSW sem tocar na interface.
 
 ## 13. Próximos passos
 
