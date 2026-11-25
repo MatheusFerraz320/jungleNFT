@@ -1,10 +1,14 @@
 import { Link, useNavigate } from '@tanstack/react-router';
 import { X } from 'lucide-react';
-import { useMemo } from 'react';
-import { toast } from 'sonner';
 import { cn } from '@/shared/lib/cn';
-import { ethLabel, multiplyEth } from '@/shared/lib/decimal';
-import { getOrder } from '../store/local-orders';
+import { ethLabel } from '@/shared/lib/decimal';
+import { useEffect } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { getErrorMessage, normalizeApiError } from '@/shared/api/errors';
+import { queryKeys } from '@/shared/api/query-keys';
+import { Skeleton } from '@/shared/components/ui/skeleton';
+import { networkLabels } from '@/shared/lib/nft-labels';
+import { useOrder } from '../hooks/use-order';
 
 function ThankYouIcon() {
   return (
@@ -47,24 +51,90 @@ function ThankYouIcon() {
   );
 }
 
+function Notice({
+  title,
+  text,
+  action,
+  busy,
+}: {
+  title: string;
+  text: string;
+  action?: React.ReactNode;
+  busy?: boolean;
+}) {
+  return (
+    <main className="flex-1 px-6 pt-24 text-center" aria-busy={busy}>
+      <div role="status" className="mx-auto max-w-[420px]">
+        <h1 className="text-xl font-bold">{title}</h1>
+        <p className="text-muted-foreground mt-2 text-sm">{text}</p>
+      </div>
+      {busy ? <Skeleton className="skeleton-shimmer mx-auto mt-6 h-2 w-48 rounded-full" /> : null}
+      {action ? <div className="mt-6">{action}</div> : null}
+    </main>
+  );
+}
+
+const linkButton =
+  'bg-primary text-primary-foreground inline-flex h-10 items-center rounded px-6 text-[15px] font-bold';
+
 export function OrderConfirmationPage({ orderId }: { orderId: string }) {
   const navigate = useNavigate();
-  const order = useMemo(() => getOrder(orderId), [orderId]);
+  const queryClient = useQueryClient();
+  const query = useOrder(orderId);
+  const order = query.data;
+  const status = order?.status;
 
-  if (!order) {
+  // Pedido confirmado: o carrinho e o catálogo mudaram no servidor; re-sincroniza.
+  useEffect(() => {
+    if (status === 'confirmed') void queryClient.invalidateQueries({ queryKey: queryKeys.all });
+  }, [status, queryClient]);
+
+  if (query.isPending) {
+    return <Notice busy title="Carregando pedido…" text="Buscando o estado do seu pedido." />;
+  }
+
+  if (query.isError || !order) {
+    const notFound = normalizeApiError(query.error).status === 404;
     return (
-      <main className="flex-1 px-6 pt-24 text-center">
-        <h1 className="text-xl font-bold">Pedido não encontrado</h1>
-        <p className="text-muted-foreground mt-2 text-sm">
-          Não localizamos este pedido neste dispositivo.
-        </p>
-        <Link
-          to="/"
-          className="bg-primary text-primary-foreground mt-6 inline-flex h-10 items-center rounded px-6 text-[15px] font-bold"
-        >
-          Voltar ao mercado
-        </Link>
-      </main>
+      <Notice
+        title={notFound ? 'Pedido não encontrado' : 'Não foi possível carregar o pedido'}
+        text={notFound ? 'Este pedido não existe para a sua conta.' : getErrorMessage(query.error)}
+        action={
+          notFound ? (
+            <Link to="/" className={linkButton}>
+              Voltar ao mercado
+            </Link>
+          ) : (
+            <button type="button" onClick={() => void query.refetch()} className={linkButton}>
+              Tentar novamente
+            </button>
+          )
+        }
+      />
+    );
+  }
+
+  if (order.status === 'pending') {
+    return (
+      <Notice
+        busy
+        title="Aguardando confirmação do pagamento"
+        text="Seu pedido foi criado e está sendo processado. Você pode recarregar a página: ele será recuperado sem criar outra compra."
+      />
+    );
+  }
+
+  if (order.status === 'rejected') {
+    return (
+      <Notice
+        title="Pagamento recusado"
+        text={`${order.failureReason ?? 'A carteira recusou o pagamento.'} Seus itens continuam no carrinho.`}
+        action={
+          <Link to="/carrinho" className={linkButton}>
+            Voltar ao carrinho
+          </Link>
+        }
+      />
     );
   }
 
@@ -73,13 +143,18 @@ export function OrderConfirmationPage({ orderId }: { orderId: string }) {
     .format(createdAt)
     .replace('.', '');
   const date = `${createdAt.getDate()} ${month.charAt(0).toUpperCase()}${month.slice(1)}, ${createdAt.getFullYear()}`;
-  const shortHash = `${order.transactionHash.slice(0, 6)}…${order.transactionHash.slice(-4)}`;
+  const hash = order.transactionHash ?? '';
+  const shortHash = hash ? `${hash.slice(0, 6)}…${hash.slice(-4)}` : '—';
 
   const summary = [
     { label: 'ID da transação', value: shortHash, bold: true },
     { label: 'Data', value: date },
-    { label: 'Total', value: ethLabel(order.totalEth) },
-    { label: 'Carteira', value: order.walletLabel, bold: true },
+    { label: 'Total', value: ethLabel(order.totals.totalEth) },
+    {
+      label: 'Carteira',
+      value: `${order.walletAddress.slice(0, 6)}…${order.walletAddress.slice(-4)}`,
+      bold: true,
+    },
   ];
 
   return (
@@ -151,7 +226,7 @@ export function OrderConfirmationPage({ orderId }: { orderId: string }) {
               </tr>
             </thead>
             <tbody>
-              {order.lines.map((line) => (
+              {order.items.map((line) => (
                 <tr key={line.nftId} className="h-[82px]">
                   <td>
                     <div className="flex items-center gap-3">
@@ -174,7 +249,7 @@ export function OrderConfirmationPage({ orderId }: { orderId: string }) {
                     (x {line.quantity})
                   </td>
                   <td className="text-primary text-right text-lg font-bold">
-                    {ethLabel(multiplyEth(line.priceEth, line.quantity))}
+                    {ethLabel(line.lineTotalEth)}
                   </td>
                 </tr>
               ))}
@@ -184,29 +259,30 @@ export function OrderConfirmationPage({ orderId }: { orderId: string }) {
           <dl className="border-line mt-0 ml-auto w-full max-w-[322px] border-b pb-3 text-[15px] leading-5">
             <div className="flex items-baseline justify-between">
               <dt>Taxa de rede</dt>
-              <dd className="text-lg">{ethLabel(order.feeEth)}</dd>
+              <dd className="text-lg">{ethLabel(order.totals.networkFeeEth)}</dd>
             </div>
             <div className="mt-1 flex items-baseline justify-between">
               <dt className="font-bold">Total</dt>
-              <dd className="text-primary text-lg font-bold">{ethLabel(order.totalEth)}</dd>
+              <dd className="text-primary text-lg font-bold">{ethLabel(order.totals.totalEth)}</dd>
             </div>
           </dl>
 
           <p className="text-muted-foreground mx-auto mt-[17px] max-w-[420px] text-center text-sm leading-[22px]">
-            Transação confirmada na {order.network}. A propriedade foi transferida para sua carteira
-            conectada e registrada na rede.
+            Transação confirmada na {networkLabels[order.network]}. A propriedade foi transferida
+            para sua carteira conectada e registrada na rede.
           </p>
 
           <div className="pt-[28px] pb-[54px] text-center">
-            <button
-              type="button"
-              onClick={() =>
-                toast.info('Link de exploração simulado: nenhuma rede real é consultada.')
-              }
-              className="bg-primary text-primary-foreground focus-visible:ring-ring h-12 w-[186px] rounded text-base font-bold focus-visible:ring-2 focus-visible:outline-none"
+            <a
+              href={order.explorerUrl ?? '#'}
+              target="_blank"
+              rel="noreferrer"
+              title="Link de exploração simulado"
+              className="bg-primary text-primary-foreground focus-visible:ring-ring inline-flex h-12 w-[186px] items-center justify-center rounded text-base font-bold focus-visible:ring-2 focus-visible:outline-none"
             >
               Ver no Etherscan
-            </button>
+              <span className="sr-only"> (abre em nova aba; referência simulada)</span>
+            </a>
           </div>
         </div>
       </section>

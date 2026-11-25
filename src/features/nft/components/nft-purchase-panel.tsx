@@ -2,7 +2,7 @@ import { Heart, Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { useFavoriteControls } from '@/shared/hooks/favorites-context';
-import { addToCart } from '@/features/cart';
+import { useAddToCart } from '@/features/cart';
 import type { NftDetail } from '@/shared/contracts';
 import { ethLabel, multiplyEth } from '@/shared/lib/decimal';
 
@@ -14,6 +14,7 @@ export function NftPurchasePanel({ nft }: { nft: NftDetail }) {
   const { isFavorite, toggle } = useFavoriteControls();
   const favorite = isFavorite(nft.id);
   const navigate = useNavigate();
+  const addToCart = useAddToCart();
 
   const soldOut = nft.availableEditions === 0;
   const maxQuantity = Math.max(1, nft.availableEditions);
@@ -53,10 +54,12 @@ export function NftPurchasePanel({ nft }: { nft: NftDetail }) {
       <div className="flex gap-2">
         <button
           type="button"
-          disabled={soldOut}
+          disabled={soldOut || addToCart.isPending}
           onClick={() => {
-            addToCart(nft, quantity);
-            void navigate({ to: '/carrinho' });
+            addToCart.mutate(
+              { nftId: nft.id, quantity },
+              { onSuccess: () => void navigate({ to: '/carrinho' }) },
+            );
           }}
           className="bg-primary text-primary-foreground focus-visible:ring-ring -mt-0.5 h-10 w-[130px] rounded text-sm font-bold uppercase focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
         >

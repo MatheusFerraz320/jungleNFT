@@ -8,20 +8,25 @@ import { MobileTopBar } from '@/shared/components/layout/mobile-top-bar';
 import { NftRail } from '@/shared/components/nft/nft-rail';
 import { cn } from '@/shared/lib/cn';
 import { ethLabel, multiplyEth } from '@/shared/lib/decimal';
+import { getErrorMessage, normalizeApiError } from '@/shared/api/errors';
+import { ErrorState } from '@/shared/components/feedback/empty-error-states';
+import { Skeleton } from '@/shared/components/ui/skeleton';
+import { createQuote } from '../api/cart-api';
 import {
-  couponPercentage,
-  removeFromCart,
-  setCartQuantity,
-  setCoupon,
-  useCart,
+  useCartView,
+  useRemoveCartItem,
+  useUpdateCartItem,
   type CartLine,
   type CartView,
-} from '../store/cart-store';
+} from '../hooks/use-cart';
+import { setCoupon } from '../store/coupon-store';
 
 const pillClass =
   'bg-primary text-primary-foreground focus-visible:ring-ring grid h-[26px] w-5 place-items-center rounded-full border border-[#3a2218] focus-visible:ring-2 focus-visible:outline-none disabled:opacity-60 max-sm:size-6';
 
 function QuantityControl({ line }: { line: CartLine }) {
+  const update = useUpdateCartItem();
+
   return (
     <div
       className="flex items-center gap-2.5"
@@ -31,8 +36,8 @@ function QuantityControl({ line }: { line: CartLine }) {
       <button
         type="button"
         aria-label={`Diminuir quantidade de ${line.name}`}
-        disabled={line.quantity <= 1}
-        onClick={() => setCartQuantity(line.nftId, line.quantity - 1)}
+        disabled={line.quantity <= 1 || update.isPending}
+        onClick={() => update.mutate({ itemId: line.itemId, quantity: line.quantity - 1 })}
         className={pillClass}
       >
         <Minus aria-hidden="true" className="size-3.5" strokeWidth={3} />
@@ -43,8 +48,8 @@ function QuantityControl({ line }: { line: CartLine }) {
       <button
         type="button"
         aria-label={`Aumentar quantidade de ${line.name}`}
-        disabled={line.quantity >= line.maxQuantity}
-        onClick={() => setCartQuantity(line.nftId, line.quantity + 1)}
+        disabled={line.quantity >= line.maxQuantity || update.isPending}
+        onClick={() => update.mutate({ itemId: line.itemId, quantity: line.quantity + 1 })}
         className={pillClass}
       >
         <Plus aria-hidden="true" className="size-3.5" strokeWidth={3} />
@@ -54,11 +59,14 @@ function QuantityControl({ line }: { line: CartLine }) {
 }
 
 function RemoveButton({ line, className }: { line: CartLine; className?: string }) {
+  const remove = useRemoveCartItem();
+
   return (
     <button
       type="button"
       aria-label={`Remover ${line.name} do carrinho`}
-      onClick={() => removeFromCart(line.nftId)}
+      disabled={remove.isPending}
+      onClick={() => remove.mutate(line.itemId)}
       className={cn(
         'focus-visible:ring-ring hover:text-primary rounded-sm text-[#a48b6e] transition-colors focus-visible:ring-2 focus-visible:outline-none',
         className,
@@ -99,7 +107,11 @@ function CartTable({ lines }: { lines: CartLine[] }) {
       </div>
       <div role="rowgroup" className="mt-[13px] flex flex-col gap-3">
         {lines.map((line) => (
-          <div key={line.nftId} role="row" className={cn(tableCols, 'bg-card h-[70px] rounded-lg')}>
+          <div
+            key={line.itemId}
+            role="row"
+            className={cn(tableCols, 'bg-card h-[70px] rounded-lg')}
+          >
             <div role="cell" className="flex items-center gap-4">
               <img
                 src={line.imageUrl}
@@ -175,12 +187,13 @@ function CartCards({ lines }: { lines: CartLine[] }) {
 }
 
 function PromoForm({ mobile }: { mobile?: boolean }) {
-  const cart = useCart();
-  const [code, setCode] = useState(cart.couponCode ?? '');
+  const view = useCartView();
+  const [code, setCode] = useState(view.couponCode ?? '');
   const [error, setError] = useState<string | null>(null);
+  const [checking, setChecking] = useState(false);
   const inputId = mobile ? 'promo-code-mobile' : 'promo-code';
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const value = code.trim();
 
@@ -189,17 +202,25 @@ function PromoForm({ mobile }: { mobile?: boolean }) {
       setError(null);
       return;
     }
-    if (couponPercentage(value) === null) {
-      setError('Código promocional inválido ou expirado.');
-      return;
+    if (!view.cart) return;
+
+    setChecking(true);
+    try {
+      // A API valida o cupom (inválido/expirado); só então ele passa a valer na cotação.
+      await createQuote({ cartId: view.cart.id, network: 'ethereum', couponCode: value });
+      setCoupon(value.toUpperCase());
+      setError(null);
+      toast.success('Cupom aplicado.');
+    } catch (failure) {
+      const apiError = normalizeApiError(failure);
+      setError(apiError.fieldErrors?.[0]?.message ?? apiError.message);
+    } finally {
+      setChecking(false);
     }
-    setError(null);
-    setCoupon(value.toUpperCase());
-    toast.success('Cupom aplicado.');
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form onSubmit={(event) => void handleSubmit(event)} noValidate>
       <label
         htmlFor={inputId}
         className={cn('text-sm leading-[18px] font-bold', mobile && 'sr-only')}
@@ -228,6 +249,7 @@ function PromoForm({ mobile }: { mobile?: boolean }) {
         />
         <button
           type="submit"
+          disabled={checking}
           className={cn(
             'text-primary-foreground focus-visible:ring-ring shrink-0 font-bold focus-visible:ring-2 focus-visible:outline-none',
             mobile
@@ -297,6 +319,28 @@ function CheckoutButton({ className }: { className?: string }) {
   );
 }
 
+function CartSkeleton() {
+  return (
+    <div
+      role="status"
+      aria-label="Carregando carrinho"
+      aria-busy="true"
+      className="grid gap-8 max-sm:px-6 sm:mt-[9px] lg:grid-cols-[782px_332px] lg:gap-x-[86px]"
+    >
+      <div className="flex flex-col gap-3 pt-10">
+        {Array.from({ length: 3 }, (_, index) => (
+          <Skeleton key={index} className="skeleton-shimmer h-[70px] w-full rounded-lg" />
+        ))}
+      </div>
+      <div className="flex flex-col gap-3 pt-10">
+        <Skeleton className="skeleton-shimmer h-10 w-full" />
+        <Skeleton className="skeleton-shimmer h-32 w-full" />
+        <Skeleton className="skeleton-shimmer h-10 w-full" />
+      </div>
+    </div>
+  );
+}
+
 function EmptyCart() {
   return (
     <div className="mt-16 text-center max-sm:px-6">
@@ -316,7 +360,7 @@ function EmptyCart() {
 }
 
 export function CartPage() {
-  const cart = useCart();
+  const cart = useCartView();
   const alsoViewed = useNftList({ sort: 'newest', pageSize: 5, page: 2 });
 
   return (
@@ -339,7 +383,17 @@ export function CartPage() {
           <span aria-current="page">Carrinho</span>
         </nav>
 
-        {cart.lines.length === 0 ? (
+        {cart.isPending ? (
+          <CartSkeleton />
+        ) : cart.isError ? (
+          <div className="mt-10">
+            <ErrorState
+              title="Não foi possível carregar o carrinho"
+              description={getErrorMessage(cart.error)}
+              onRetry={() => void cart.refetch()}
+            />
+          </div>
+        ) : cart.lines.length === 0 ? (
           <EmptyCart />
         ) : (
           <div className="grid items-start sm:mt-[9px] lg:grid-cols-[782px_332px] lg:gap-x-[86px]">
