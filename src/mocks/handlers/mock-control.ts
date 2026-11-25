@@ -5,7 +5,9 @@ import { DomainError } from '@/mocks/db/domain-error';
 import { resetMockDatabase } from '@/mocks/db/reset';
 import { mockDatabase } from '@/mocks/db/store';
 import { isScenarioId } from '@/mocks/scenarios';
+import { RealtimeEventSchema } from '@/shared/contracts';
 import { addFault } from '../lib/faults';
+import { socketHub } from './socket-hub';
 
 const resetRequestSchema = z.object({
   scenario: z.string().default('default'),
@@ -67,6 +69,25 @@ export const mockControlHandlers = [
     mockDomain.expireSessions();
     return new HttpResponse(null, { status: 204 });
   }),
+
+  http.post('*/api/mocks/socket/disconnect', () => {
+    socketHub.disconnectAll();
+    return new HttpResponse(null, { status: 204 });
+  }),
+
+  http.post('*/api/mocks/socket/emit', async ({ request }) => {
+    const payload = RealtimeEventSchema.safeParse(await request.json());
+    if (!payload.success) return invalid('Evento de tempo real inválido.');
+
+    socketHub.broadcast(payload.data);
+    return new HttpResponse(null, { status: 204 });
+  }),
+
+  http.post('*/api/mocks/socket/stale/:nftId', ({ params }) =>
+    socketHub.staleNft(String(params.nftId))
+      ? new HttpResponse(null, { status: 204 })
+      : HttpResponse.json({ code: 'NOT_FOUND', message: 'NFT não encontrado.' }, { status: 404 }),
+  ),
 
   http.post('*/api/mocks/nfts/:id', async ({ request, params }) => {
     const payload = nftPatchSchema.safeParse(await request.json());

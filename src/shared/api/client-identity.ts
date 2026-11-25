@@ -20,6 +20,13 @@ function write(key: string, value: string | null) {
 }
 
 let memoryToken: string | null = null;
+const tokenListeners = new Set<() => void>();
+
+/** Permite que a camada de tempo real recrie a conexão quando a sessão muda. */
+export function subscribeToken(listener: () => void) {
+  tokenListeners.add(listener);
+  return () => tokenListeners.delete(listener);
+}
 
 export function getToken() {
   return memoryToken ?? read(TOKEN_KEY);
@@ -28,6 +35,7 @@ export function getToken() {
 export function setToken(token: string | null) {
   memoryToken = token;
   write(TOKEN_KEY, token);
+  tokenListeners.forEach((listener) => listener());
 }
 
 export function getGuestId() {

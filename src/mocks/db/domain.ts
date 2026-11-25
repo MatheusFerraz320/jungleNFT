@@ -317,6 +317,14 @@ export class MockDomain {
     return user;
   }
 
+  /** Usuário dono do token, ou `null` (sem lançar): usado para direcionar eventos de tempo real. */
+  sessionUserId(token: string | null | undefined) {
+    if (!token) return null;
+    const session = this.state.sessions[token];
+    if (!session || new Date(session.expiresAt).getTime() <= this.now()) return null;
+    return session.userId;
+  }
+
   session(token: string | null) {
     const user = this.requireUser(token);
     const session = this.state.sessions[token as string];
