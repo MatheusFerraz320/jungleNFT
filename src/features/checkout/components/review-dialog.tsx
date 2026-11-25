@@ -9,7 +9,7 @@ import { normalizeApiError } from '@/shared/api/errors';
 import { queryKeys } from '@/shared/api/query-keys';
 import { Skeleton } from '@/shared/components/ui/skeleton';
 import type { CreateOrderRequest, Network, Quote, Wallet } from '@/shared/contracts';
-import { ethLabel } from '@/shared/lib/decimal';
+import { ethLabel } from '@/shared/lib/eth-label';
 import { networkLabels } from '@/shared/lib/nft-labels';
 
 interface ReviewDialogProps {

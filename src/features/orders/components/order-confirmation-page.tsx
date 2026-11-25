@@ -1,7 +1,7 @@
 import { Link, useNavigate } from '@tanstack/react-router';
 import { X } from 'lucide-react';
 import { cn } from '@/shared/lib/cn';
-import { ethLabel } from '@/shared/lib/decimal';
+import { ethLabel } from '@/shared/lib/eth-label';
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { getErrorMessage, normalizeApiError } from '@/shared/api/errors';

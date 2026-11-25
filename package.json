@@ -91,5 +91,9 @@
     "workerDirectory": [
       "public"
     ]
-  }
+  },
+  "sideEffects": [
+    "**/*.css",
+    "src/main.tsx"
+  ]
 }
