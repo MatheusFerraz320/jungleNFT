@@ -6,6 +6,7 @@ import { useCartCount } from '@/features/cart';
 import { FavoritesProvider } from '@/features/favorites';
 import { AppFooter, AppHeader, MobileBottomNav } from '@/shared/components/layout/app-shell';
 import { AppProviders } from './providers';
+import { RealtimeSync } from './realtime-sync';
 
 function Shell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
@@ -17,6 +18,7 @@ function Shell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col">
       <SessionWatcher />
+      <RealtimeSync />
       {isReceipt ? null : <AppHeader cartCount={cartCount} sessionName={user?.name} />}
       {children}
       {isReceipt ? null : <AppFooter className={mobileFooter ? undefined : 'max-sm:hidden'} />}

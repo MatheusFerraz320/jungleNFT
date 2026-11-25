@@ -1,2 +1,8 @@
-export { RealtimeProvider, useRealtime, type RealtimeStatus } from './RealtimeProvider';
+export {
+  RealtimeProvider,
+  useRealtime,
+  useRealtimeEvents,
+  useRealtimeReconnect,
+  type RealtimeStatus,
+} from './RealtimeProvider';
 export { createAppSocket } from './socket';

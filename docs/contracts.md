@@ -141,4 +141,26 @@ type OrderUpdatedEvent = {
 };
 ```
 
+### Transporte e sessão
+
+Socket.IO (`socket.io-client`, transporte `websocket`) sobre o WebSocket interceptado pelo MSW via
+`@mswjs/socket.io-binding` — o cliente real é exercitado em desenvolvimento, demo e testes. O cliente envia
+`scene:subscribe { token }`; o servidor responde `scene:ready`.
+
+- `nft.updated`: enviado a todos (`meta.sessionId = null`).
+- `order.updated`: enviado só às conexões do dono, com `meta.sessionId` = token da sessão.
+- Eventos de domínio e REST compartilham a mesma fonte (`MockDomain`), então REST e socket nunca divergem.
+- O pedido `pending` é liquidado por timer (~1,5 s) que emite `order.updated`; a liquidação também é resolvida
+  sob demanda na leitura REST, o que permite recuperar o estado após queda de conexão ou refresh.
+
+**Limitações do ambiente de mocks:** o servidor vive no Service Worker/aba (sem multi-aba/multi-cliente reais);
+o binding Socket.IO é experimental e suporta apenas o transporte `websocket` (sem long-polling); não há ack/rooms
+nativos — o direcionamento por usuário é feito pelo hub (`socket-hub.ts`).
+
+### Regras do cliente
+
+Eventos são validados (Zod), descartados se a `sessionId` não for a atual, deduplicados por `eventId` e ignorados se
+a `version` não superar a já aplicada ao recurso (`createEventGuard`). A conexão é recriada a cada troca de sessão
+(listeners e socket antigos liberados); após reconexão, as consultas ativas são reconciliadas com a API REST.
+
 Regras: versão monotônica, deduplicação por `eventId`, descarte de eventos antigos, reconciliação REST após reconexão e isolamento por sessão.
