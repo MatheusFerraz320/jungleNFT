@@ -6,7 +6,7 @@ import { getNfts } from '../api/get-nfts';
 export function nftListQueryOptions(query: Partial<NftListQuery>) {
   return queryOptions({
     queryKey: queryKeys.nfts.list(JSON.stringify(query)),
-    queryFn: () => getNfts(query),
+    queryFn: ({ signal }) => getNfts(query, signal),
     placeholderData: keepPreviousData,
   });
 }

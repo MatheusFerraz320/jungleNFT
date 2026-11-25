@@ -5,7 +5,7 @@ import { getNft } from '../api/get-nft';
 export function nftDetailQueryOptions(id: string) {
   return queryOptions({
     queryKey: queryKeys.nfts.detail(id),
-    queryFn: () => getNft(id),
+    queryFn: ({ signal }) => getNft(id, signal),
   });
 }
 

@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { endSession, useSession } from '@/features/auth';
+import { useCurrentUser, useLogout } from '@/features/auth';
 import { Field, PasswordInput, TextInput } from '@/shared/components/form/form-fields';
 import { AccountLayout } from '@/shared/components/layout/account-layout';
 import { controlClass } from '@/shared/components/form/form-fields';
@@ -51,7 +51,8 @@ const profileSchema = z
 type ProfileForm = z.infer<typeof profileSchema>;
 
 export function ProfilePage() {
-  const session = useSession();
+  const session = useCurrentUser();
+  const logout = useLogout();
   const [avatar, setAvatar] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const {
@@ -77,7 +78,11 @@ export function ProfilePage() {
   }
 
   return (
-    <AccountLayout active="profile" title="Perfil do colecionador" onSignOut={endSession}>
+    <AccountLayout
+      active="profile"
+      title="Perfil do colecionador"
+      onSignOut={() => logout.mutate()}
+    >
       <form onSubmit={onSubmit} noValidate aria-labelledby="profile-title">
         <h1 id="profile-title" className="text-base leading-5 font-bold max-sm:hidden">
           Perfil do colecionador

@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { Heart } from 'lucide-react';
-import { useState } from 'react';
 import type { NftSummary } from '@/shared/contracts';
+import { useFavoriteControls } from '@/shared/hooks/favorites-context';
 import { cn } from '@/shared/lib/cn';
 import { ethLabel } from '@/shared/lib/decimal';
 import { rarityBadgeLabel } from '@/shared/lib/nft-labels';
@@ -14,7 +14,8 @@ interface NftCardProps {
 }
 
 export function NftCard({ nft, className, stagger }: NftCardProps) {
-  const [favorite, setFavorite] = useState(false);
+  const { isFavorite, toggle } = useFavoriteControls();
+  const favorite = isFavorite(nft.id);
   const soldOut = nft.availableEditions === 0;
   const rarityLabel = rarityBadgeLabel[nft.rarity];
 
@@ -64,7 +65,7 @@ export function NftCard({ nft, className, stagger }: NftCardProps) {
         type="button"
         aria-label={favorite ? `Remover ${nft.name} dos favoritos` : `Favoritar ${nft.name}`}
         aria-pressed={favorite}
-        onClick={() => setFavorite((value) => !value)}
+        onClick={() => toggle(nft.id)}
         className={cn(
           'border-border bg-background/80 hover:bg-secondary focus-visible:ring-ring absolute top-4 right-3 grid size-7 place-items-center rounded-full border backdrop-blur transition focus-visible:ring-2 focus-visible:outline-none max-sm:opacity-100 sm:top-3 sm:size-9 sm:opacity-0 sm:group-hover:opacity-100 sm:focus-visible:opacity-100',
           favorite ? 'text-primary opacity-100' : 'text-foreground',

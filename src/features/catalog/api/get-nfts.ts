@@ -20,8 +20,11 @@ function toParams(query: Partial<NftListQuery>) {
   return params;
 }
 
-export async function getNfts(query: Partial<NftListQuery> = {}): Promise<NftListResponse> {
-  const response = await http.get('/nfts', { params: toParams(query) });
+export async function getNfts(
+  query: Partial<NftListQuery> = {},
+  signal?: AbortSignal,
+): Promise<NftListResponse> {
+  const response = await http.get('/nfts', { params: toParams(query), signal });
 
   return NftListResponseSchema.parse(response.data);
 }

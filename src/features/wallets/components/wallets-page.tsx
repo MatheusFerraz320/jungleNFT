@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { endSession, useSession } from '@/features/auth';
+import { useCurrentUser, useLogout } from '@/features/auth';
 import { Field, SelectInput, TextInput, controlClass } from '@/shared/components/form/form-fields';
 import { networkOptions, walletTypeOptions } from '@/shared/components/form/options';
 import { AccountLayout } from '@/shared/components/layout/account-layout';
@@ -29,7 +29,8 @@ const walletSchema = z.object({
 type WalletForm = z.infer<typeof walletSchema>;
 
 export function WalletsPage() {
-  const session = useSession();
+  const session = useCurrentUser();
+  const logout = useLogout();
   const [sameAsPrimary, setSameAsPrimary] = useState(false);
   const {
     register,
@@ -43,7 +44,7 @@ export function WalletsPage() {
   const onSubmit = handleSubmit(() => toast.success('Carteira salva (simulação).'));
 
   return (
-    <AccountLayout active="wallets" title="Carteiras" onSignOut={endSession}>
+    <AccountLayout active="wallets" title="Carteiras" onSignOut={() => logout.mutate()}>
       <form onSubmit={onSubmit} noValidate aria-labelledby="wallet-title">
         <div className="flex items-start justify-between">
           <h1 id="wallet-title" className="text-base leading-5 font-bold">

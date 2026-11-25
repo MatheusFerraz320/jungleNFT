@@ -1,7 +1,7 @@
 import { Heart, Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { toast } from 'sonner';
+import { useFavoriteControls } from '@/shared/hooks/favorites-context';
 import { addToCart } from '@/features/cart';
 import type { NftDetail } from '@/shared/contracts';
 import { ethLabel, multiplyEth } from '@/shared/lib/decimal';
@@ -11,18 +11,13 @@ const pillClass =
 
 export function NftPurchasePanel({ nft }: { nft: NftDetail }) {
   const [quantity, setQuantity] = useState(1);
-  const [favorite, setFavorite] = useState(false);
+  const { isFavorite, toggle } = useFavoriteControls();
+  const favorite = isFavorite(nft.id);
   const navigate = useNavigate();
 
   const soldOut = nft.availableEditions === 0;
   const maxQuantity = Math.max(1, nft.availableEditions);
   const total = ethLabel(multiplyEth(nft.priceEth, quantity));
-
-  function toggleFavorite() {
-    const next = !favorite;
-    setFavorite(next);
-    if (next) toast.success('Adicionado aos favoritos (simulação).');
-  }
 
   return (
     <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
@@ -70,7 +65,7 @@ export function NftPurchasePanel({ nft }: { nft: NftDetail }) {
         <button
           type="button"
           aria-pressed={favorite}
-          onClick={toggleFavorite}
+          onClick={() => toggle(nft.id)}
           className="border-primary focus-visible:ring-ring -mt-0.5 inline-flex h-10 w-[130px] items-center justify-center gap-2 rounded border text-sm font-medium focus-visible:ring-2 focus-visible:outline-none"
         >
           <Heart

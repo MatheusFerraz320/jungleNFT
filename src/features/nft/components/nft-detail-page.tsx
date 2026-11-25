@@ -8,6 +8,7 @@ import { Button } from '@/shared/components/ui/button';
 import { Skeleton } from '@/shared/components/ui/skeleton';
 import type { NftDetail } from '@/shared/contracts';
 import { cn } from '@/shared/lib/cn';
+import { useFavoriteControls } from '@/shared/hooks/favorites-context';
 import { ethLabel } from '@/shared/lib/decimal';
 import { networkLabels } from '@/shared/lib/nft-labels';
 import { useNftDetail } from '../hooks/use-nft-detail';
@@ -321,7 +322,8 @@ function NftDetailError({ error, onRetry }: { error: unknown; onRetry: () => voi
 }
 
 function NftMobileHero({ nft }: { nft: NftDetail }) {
-  const [favorite, setFavorite] = useState(false);
+  const { isFavorite, toggle } = useFavoriteControls();
+  const favorite = isFavorite(nft.id);
   const circle =
     'border-line bg-card focus-visible:ring-ring absolute top-6 grid size-[34px] place-items-center rounded-full border focus-visible:ring-2 focus-visible:outline-none';
 
@@ -340,7 +342,7 @@ function NftMobileHero({ nft }: { nft: NftDetail }) {
           type="button"
           aria-label={favorite ? 'Remover dos favoritos' : 'Favoritar NFT'}
           aria-pressed={favorite}
-          onClick={() => setFavorite((value) => !value)}
+          onClick={() => toggle(nft.id)}
           className={cn(circle, 'right-7')}
         >
           <Heart aria-hidden="true" className={cn('size-4', favorite && 'fill-current')} />
