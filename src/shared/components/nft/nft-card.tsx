@@ -11,9 +11,11 @@ interface NftCardProps {
   className?: string;
   /** Posição visual usada no grid escalonado do mobile. */
   stagger?: boolean;
+  /** Variante das faixas ("Mais desta coleção"): nome e preço mais próximos, como no Figma. */
+  compact?: boolean;
 }
 
-export function NftCard({ nft, className, stagger }: NftCardProps) {
+export function NftCard({ nft, className, stagger, compact }: NftCardProps) {
   const { isFavorite, toggle } = useFavoriteControls();
   const favorite = isFavorite(nft.id);
   const soldOut = nft.availableEditions === 0;
@@ -49,8 +51,20 @@ export function NftCard({ nft, className, stagger }: NftCardProps) {
             </span>
           ) : null}
         </div>
-        <h3 className="mt-3 truncate text-base leading-4 max-sm:mt-4 max-sm:px-2">{nft.name}</h3>
-        <p className="text-primary mt-3 text-base leading-[18px] font-bold max-sm:px-2 sm:text-[18px]">
+        <h3
+          className={cn(
+            'mt-3 truncate text-base leading-4 max-sm:mt-4 max-sm:px-2',
+            compact && 'sm:mt-4',
+          )}
+        >
+          {nft.name}
+        </h3>
+        <p
+          className={cn(
+            'text-primary mt-3 text-base leading-[18px] font-bold max-sm:px-2 sm:text-[18px]',
+            compact && 'sm:mt-0.5 sm:text-base',
+          )}
+        >
           {ethLabel(nft.priceEth)}
           {nft.originalPriceEth ? (
             <span className="text-muted-foreground ml-3 font-normal max-sm:hidden">

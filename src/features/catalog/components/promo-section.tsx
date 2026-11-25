@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
+import { cn } from '@/shared/lib/cn';
 
 const promos = [
   {
@@ -7,6 +8,8 @@ const promos = [
     alt: 'Emerald Ape #042',
     title: 'Lançamentos gênesis\nde edição limitada',
     description: 'Colecione edições escassas diretamente dos criadores antes da revelação pública.',
+    textEdge: 'sm:right-[30px]',
+    buttonEdge: 'right-[30px]',
     search: { tab: 'new' as const },
   },
   {
@@ -15,6 +18,8 @@ const promos = [
     title: 'Arte digital selecionada\ne muito mais',
     description:
       'Explore novos artistas, coleções verificadas e obras digitais que definem a cultura da internet.',
+    textEdge: 'sm:right-[35px]',
+    buttonEdge: 'right-[35px]',
     search: { sort: 'price-desc' as const },
   },
 ];
@@ -42,7 +47,12 @@ export function PromoSection() {
               className="h-full w-full rounded-r-[24px] object-cover max-sm:aspect-square"
             />
             <div className="relative px-[30px] pt-[37px] text-right max-sm:py-6">
-              <div className="ml-auto sm:absolute sm:top-[37px] sm:right-[30px] sm:ml-0 sm:w-[262px]">
+              <div
+                className={cn(
+                  'ml-auto sm:absolute sm:top-[37px] sm:ml-0 sm:w-[262px]',
+                  promo.textEdge,
+                )}
+              >
                 <h2 className="text-[18px] leading-[25px] font-bold whitespace-pre-line">
                   {promo.title}
                 </h2>
@@ -54,7 +64,10 @@ export function PromoSection() {
                 to="/"
                 search={promo.search}
                 hash="catalogo"
-                className="bg-primary text-primary-foreground focus-visible:ring-ring absolute right-[30px] bottom-[46px] inline-flex h-10 w-[140px] items-center justify-center gap-1 rounded text-sm font-bold focus-visible:ring-2 focus-visible:outline-none max-sm:static max-sm:mt-5"
+                className={cn(
+                  'bg-primary text-primary-foreground focus-visible:ring-ring absolute bottom-[46px] inline-flex h-10 w-[140px] items-center justify-center gap-1 rounded text-sm font-bold focus-visible:ring-2 focus-visible:outline-none max-sm:static max-sm:mt-5',
+                  promo.buttonEdge,
+                )}
               >
                 Explorar
                 <ArrowRight aria-hidden="true" className="size-4" />

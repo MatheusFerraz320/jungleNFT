@@ -22,7 +22,7 @@ import {
 import { setCoupon } from '../store/coupon-store';
 
 const pillClass =
-  'bg-primary text-primary-foreground focus-visible:ring-ring grid h-[26px] w-5 place-items-center rounded-full border border-[#3a2218] focus-visible:ring-2 focus-visible:outline-none disabled:opacity-60 max-sm:size-6';
+  'bg-primary text-primary-foreground focus-visible:ring-ring grid h-[26px] w-5 place-items-center rounded-full border border-[#3a2218] focus-visible:ring-2 focus-visible:outline-none disabled:opacity-60 max-sm:size-6 max-sm:border-[#3a2218] max-sm:bg-[#2a1a14] max-sm:text-foreground';
 
 function QuantityControl({ line }: { line: CartLine }) {
   const update = useUpdateCartItem();
@@ -274,7 +274,7 @@ function SummaryRows({ cart, mobile }: { cart: CartView; mobile?: boolean }) {
   const value = cn('text-right', mobile ? 'text-base' : 'text-lg');
 
   return (
-    <dl className={cn('text-[15px] leading-5', mobile ? 'mt-3.5 text-base' : 'mt-[18px]')}>
+    <dl className={cn('text-[15px] leading-5', mobile ? 'mt-[7px] text-base' : 'mt-[18px]')}>
       <div className={cn(row, 'h-8')}>
         <dt>Subtotal</dt>
         <dd className={value}>{ethLabel(cart.subtotal)}</dd>
@@ -294,7 +294,7 @@ function SummaryRows({ cart, mobile }: { cart: CartView; mobile?: boolean }) {
           Taxa estimada
         </dd>
       </div>
-      <div className={cn(row, 'mt-[21px] h-6 max-sm:mt-3')}>
+      <div className={cn(row, 'mt-[21px] h-6 max-sm:mt-1')}>
         <dt className="font-bold">Total</dt>
         <dd className={cn(value, 'text-primary font-bold', mobile && 'text-[22px]')}>
           {ethLabel(cart.total)}
@@ -432,7 +432,7 @@ export function CartPage() {
             >
               <PromoForm mobile />
               <SummaryRows cart={cart} mobile />
-              <CheckoutButton className="mt-[18px] h-[60px] w-full rounded-full bg-[linear-gradient(135deg,#d28a4c,#b87a44)] text-base" />
+              <CheckoutButton className="mt-[27px] h-[60px] w-full rounded-full bg-[linear-gradient(135deg,#d28a4c,#b87a44)] text-base" />
             </aside>
           </div>
         )}

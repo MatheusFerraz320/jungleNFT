@@ -38,7 +38,7 @@ export function NftRail({ id, title, items, isPending, className }: NftRailProps
         <>
           <div className={gridClass}>
             {items.map((item) => (
-              <NftCard key={item.id} nft={item} />
+              <NftCard key={item.id} nft={item} compact />
             ))}
           </div>
           <div aria-hidden="true" className="mt-8 flex justify-center gap-2">
