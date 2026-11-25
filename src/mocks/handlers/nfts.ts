@@ -1,9 +1,10 @@
-import { http, HttpResponse } from 'msw';
+import { http } from 'msw';
 import { queryNfts } from '@/mocks/db/nft-queries';
 import { mockDatabase } from '@/mocks/db/store';
 import { buildNftDetail } from '@/mocks/fixtures/nfts';
 import { NftListQuerySchema } from '@/shared/contracts';
-import { isOfflineScenario, waitForScenario } from '../lib/scenario';
+import { DomainError } from '@/mocks/db/domain-error';
+import { param, respond } from '../lib/respond';
 
 function readListQuery(url: URL) {
   const availableOnly = url.searchParams.get('availableOnly');
@@ -27,44 +28,33 @@ function readListQuery(url: URL) {
 }
 
 export const nftHandlers = [
-  http.get('*/api/nfts', async ({ request }) => {
-    if (isOfflineScenario()) return HttpResponse.error();
-    await waitForScenario();
+  http.get('*/api/nfts', (info) =>
+    respond(info, ({ request }) => {
+      const parsed = NftListQuerySchema.safeParse(readListQuery(new URL(request.url)));
 
-    const parsed = NftListQuerySchema.safeParse(readListQuery(new URL(request.url)));
-
-    if (!parsed.success) {
-      return HttpResponse.json(
-        {
-          code: 'VALIDATION_ERROR',
-          message: 'Filtros de catálogo inválidos.',
-          fieldErrors: parsed.error.issues.map((issue) => ({
+      if (!parsed.success) {
+        throw new DomainError(
+          422,
+          'VALIDATION_ERROR',
+          'Filtros de catálogo inválidos.',
+          parsed.error.issues.map((issue) => ({
             field: issue.path.join('.') || 'query',
             message: issue.message,
           })),
-        },
-        { status: 422 },
-      );
-    }
+        );
+      }
 
-    const nfts = mockDatabase.scenario === 'empty' ? [] : mockDatabase.listNfts();
+      const nfts = mockDatabase.scenario === 'empty' ? [] : mockDatabase.listNfts();
+      return { body: queryNfts(nfts, parsed.data) };
+    }),
+  ),
 
-    return HttpResponse.json(queryNfts(nfts, parsed.data));
-  }),
+  http.get('*/api/nfts/:id', (info) =>
+    respond(info, ({ params }) => {
+      const nft = mockDatabase.getNft(param(params.id));
+      if (!nft) throw new DomainError(404, 'NOT_FOUND', 'NFT não encontrado.');
 
-  http.get('*/api/nfts/:id', async ({ params }) => {
-    if (isOfflineScenario()) return HttpResponse.error();
-    await waitForScenario();
-
-    const nft = mockDatabase.getNft(String(params.id));
-
-    if (!nft) {
-      return HttpResponse.json(
-        { code: 'NOT_FOUND', message: 'NFT não encontrado.' },
-        { status: 404 },
-      );
-    }
-
-    return HttpResponse.json(buildNftDetail(nft));
-  }),
+      return { body: buildNftDetail(nft) };
+    }),
+  ),
 ];

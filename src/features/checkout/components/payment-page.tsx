@@ -194,7 +194,11 @@ function OrderSummary({
           <dt>Taxa de rede</dt>
           <dd className="text-lg">{ethLabel(cart.fee)}</dd>
         </div>
-        <p className="text-primary mt-1 text-center text-[11px] leading-[14px]">Taxa estimada</p>
+        <div>
+          <dd className="text-primary mt-1 text-center text-[11px] leading-[14px]">
+            Taxa estimada
+          </dd>
+        </div>
         <div className={cn(row, 'border-line mt-3 justify-center gap-[165px] border-t pt-4')}>
           <dt className="font-bold">Total</dt>
           <dd className="text-primary text-lg font-bold">{ethLabel(cart.total)}</dd>
@@ -398,6 +402,7 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
   const [walletId, setWalletId] = useState(primary?.id ?? '');
   const [provider, setProvider] = useState('metamask');
   const [reviewOpen, setReviewOpen] = useState(false);
+  const [reviewedTotal, setReviewedTotal] = useState<string | undefined>();
   const connection = useWalletConnection();
   const selected = wallets.find((wallet) => wallet.id === walletId) ?? primary;
 
@@ -442,6 +447,7 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
         return;
       }
     }
+    setReviewedTotal(cart.quote?.totalEth);
     setReviewOpen(true);
   }
 
@@ -630,6 +636,7 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
           network={network}
           wallet={selected}
           collector={collector}
+          reviewedTotal={reviewedTotal}
         />
       ) : null}
     </>

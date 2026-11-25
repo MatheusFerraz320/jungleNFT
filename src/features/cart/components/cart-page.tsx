@@ -289,9 +289,11 @@ function SummaryRows({ cart, mobile }: { cart: CartView; mobile?: boolean }) {
         <dt>Taxa de rede</dt>
         <dd className={value}>{ethLabel(cart.fee)}</dd>
       </div>
-      <p className="text-primary mt-[7px] text-right text-[11px] leading-[14px] max-sm:mt-0 max-sm:text-xs">
-        Taxa estimada
-      </p>
+      <div>
+        <dd className="text-primary mt-[7px] text-right text-[11px] leading-[14px] max-sm:mt-0 max-sm:text-xs">
+          Taxa estimada
+        </dd>
+      </div>
       <div className={cn(row, 'mt-[21px] h-6 max-sm:mt-3')}>
         <dt className="font-bold">Total</dt>
         <dd className={cn(value, 'text-primary font-bold', mobile && 'text-[22px]')}>
@@ -367,6 +369,7 @@ export function CartPage() {
     <main className="flex-1 pb-10">
       <Container className="pt-8 max-sm:px-0 max-sm:pt-0">
         <MobileTopBar title="Carrinho de NFTs" />
+        <h1 className="sr-only max-sm:hidden">Carrinho de NFTs</h1>
 
         <nav
           aria-label="Trilha de navegação"
