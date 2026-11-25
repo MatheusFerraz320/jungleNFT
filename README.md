@@ -253,7 +253,7 @@ pnpm build           # typecheck + vite build
 vercel --prod        # ou conecte o repositório na Vercel (framework: Vite, output: dist)
 ```
 
-A URL pública deve ser registrada aqui após o deploy.
+**URL pública:** https://junglenft-psi.vercel.app (build com `VITE_MOCKS=enabled`; mocks, Socket.IO simulado e rotas diretas/refresh verificados).
 
 ## Limitações conhecidas
 
