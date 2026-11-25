@@ -31,3 +31,4 @@ design/*
 !design/figma-tokens.md
 !design/frames/
 !design/assets/
+.tanstack/
