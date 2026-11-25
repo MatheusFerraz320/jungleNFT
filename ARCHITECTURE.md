@@ -1,191 +1,205 @@
 # Arquitetura
 
-## 1. Estado atual
+## 1. Visão geral
 
-O projeto é um scaffold executável. Ele já comprova, de ponta a ponta:
+Marketplace de NFTs (React 19 + TypeScript) com descoberta, compra e conta do colecionador. Toda a
+"API" é simulada na camada de rede com **MSW** e reaproveitada em desenvolvimento, demonstração e
+testes; a aplicação só enxerga HTTP (Axios) e WebSocket (Socket.IO).
 
-1. React + TypeScript + Vite;
-2. TanStack Router com geração de rotas;
-3. TanStack Query consumindo Axios;
-4. MSW respondendo REST;
-5. `socket.io-client` conectando via WebSocket interceptado pelo MSW;
-6. Playwright em desktop e mobile;
-7. Lighthouse com mediana de três execuções por perfil.
+```text
+UI (features) ──► TanStack Query ──► Axios ──► MSW (Service Worker) ──► MockDomain ◄─┐
+       ▲                                                                              │
+       └──────── RealtimeSync ◄── socket.io-client ◄── MSW ws + socket-hub ◄──────────┘
+```
 
-As features de negócio serão adicionadas sem alterar essas fronteiras.
+Estado das entregas: catálogo, detalhe, favoritos, carrinho, cotação, pagamento, pedidos, conta,
+perfil e carteiras **integrados à API simulada**; tempo real (`nft.updated`, `order.updated`);
+**135 testes E2E** (desktop + mobile) e regressão visual; auditoria Lighthouse.
 
 ## 2. Camadas e responsabilidades
 
 ```text
-routes
-  └─ features
-       └─ shared
-mocks
-  └─ shared/contracts
+routes → features → shared          mocks → shared/contracts
 ```
 
-- **routes**: declaração de rota, search params, loaders e guards. Não contém regra de negócio.
-- **features**: API, hooks, schemas e componentes de um domínio. Cada feature expõe apenas o necessário por `index.ts`.
-- **shared**: contratos Zod, cliente Axios, erros, query keys, UI base, libs e realtime.
-- **mocks**: fixtures, store, handlers REST, binding Socket.IO e cenários. Não importa features, rotas ou composição da aplicação.
+- **routes**: declaração de rota, search params (Zod) e guards (`requireAuth`). Sem regra de negócio.
+- **features** (`catalog`, `nft`, `cart`, `checkout`, `orders`, `auth`, `favorites`, `profile`,
+  `wallets`): API, hooks de Query, schemas e componentes do domínio; expõem só o necessário por `index.ts`.
+- **shared**: contratos Zod, cliente HTTP, erros, query keys, UI base, libs e realtime. Não importa features
+  — a ponte para favoritos usa um contexto (`favorites-context`), implementado na aplicação.
+- **app**: composição (providers, router, `RealtimeSync`, layout). Única camada que enxerga todas as features.
+- **mocks**: fixtures, domínio, handlers REST, hub Socket.IO e cenários. Nunca importado por componentes,
+  hooks ou pelo cliente Axios — não há respostas fictícias nem caminhos de negócio alternativos na UI.
 
-O ESLint usa `no-restricted-imports` para enforcing dessas fronteiras.
+O ESLint (`no-restricted-imports`) impõe essas fronteiras.
 
 ## 3. Contratos e transporte
 
-`src/shared/contracts` é a fonte única de tipos e validação:
+`src/shared/contracts` é a fonte única de tipos e validação (Zod): requests, responses e eventos. Axios
+valida a resposta em runtime; o MSW e os formulários reutilizam os mesmos schemas. Documentação dos
+recursos e eventos em [`docs/contracts.md`](docs/contracts.md).
 
-- schemas Zod definem requests, responses e eventos;
-- tipos são inferidos com `z.infer`;
-- Axios recebe tipos genéricos e valida a resposta runtime;
-- MSW reutiliza os mesmos schemas nas fixtures e respostas;
-- formulários usarão os mesmos schemas com `react-hook-form`.
-
-Valores ETH são strings decimais canônicas. Quantidades são inteiros positivos. `decimal.js` faz cálculos locais com precisão 40; entretanto, **o total final sempre vem da cotação da API**.
+- ETH trafega como **string decimal canônica**; quantidades são inteiros positivos. `decimal.js` (precisão 40)
+  faz cálculos no servidor simulado; no cliente, **subtotal, desconto, taxa e total vêm da cotação da API**.
+- Erros seguem o envelope `ApiErrorResponse` (`code`, `message`, `fieldErrors`, `requestId`).
 
 ## 4. HTTP e erros
 
-`src/shared/api/http.ts` cria uma instância Axios com:
+`src/shared/api/http.ts` (Axios): `baseURL` validado, timeout de 15 s, JSON automático e, em cada
+requisição, `Authorization: Bearer <token>` e `X-Guest-Id`. As chamadas aguardam `apiReady` (o
+Service Worker do MSW) em vez de bloquear o primeiro render. Erros viram `ApiError`.
 
-- `baseURL` validado por Zod;
-- `withCredentials: true`;
-- timeout de 15 s;
-- `Content-Type` automático para JSON;
-- normalização de erros em `ApiError`.
+- `401 SESSION_EXPIRED | UNAUTHORIZED` dispara `junglenft:unauthorized` (fluxo de expiração).
+- `401 INVALID_CREDENTIALS` (login) **não** é expiração e aparece no formulário.
+- `fieldErrors` da API são projetados nos campos do formulário (`applyApiErrors`).
 
-`ApiError` contém `status`, `code`, `message`, `fieldErrors` e `requestId`. Respostas 401 disparam `junglenft:unauthorized` para a camada de sessão.
+## 5. TanStack Query — cache, retries e sincronização
 
-## 5. TanStack Query
+| Item                     | Política                                                                                                                                                                     |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `staleTime` / `gcTime`   | 30 s / 5 min (sessão 60 s; cotações 0 — sempre frescas)                                                                                                                      |
+| Retries (GET)            | até 2, só para rede, 5xx e 429, com backoff padrão; sessão e cotação sem retry                                                                                               |
+| Mutations                | sem retry automático, **exceto** criação de pedido em timeout/rede/504 (mesma `Idempotency-Key`)                                                                             |
+| Foco / reconexão         | `refetchOnWindowFocus: false`; `refetchOnReconnect: true`                                                                                                                    |
+| Respostas obsoletas      | `AbortSignal` do Query em catálogo, detalhe, favoritos, perfil, carteiras e cotação; troca de chave descarta resposta antiga                                                 |
+| Isolamento               | chaves privadas incluem o `userId` (`favorites`, `cart`, `orders`, `profile`, `wallets`)                                                                                     |
+| Invalidação              | mutations gravam a resposta no cache (carrinho) ou invalidam (carteiras, favoritos); eventos de tempo real aplicam/invalidam; pedido confirmado invalida carrinho e catálogo |
+| Background               | `placeholderData: keepPreviousData` nas listas; `aria-busy` durante refetch                                                                                                  |
+| **Atualização otimista** | favoritos: `onMutate` aplica, `onError` faz **rollback** + aviso, `onSettled` re-sincroniza                                                                                  |
 
-Política inicial em `src/app/query-client.ts`:
-
-- `staleTime`: 30 s;
-- `gcTime`: 5 min;
-- `refetchOnWindowFocus`: false;
-- `refetchOnReconnect`: true;
-- GET: até 2 retries para rede, 5xx e 429;
-- mutations: sem retry automático.
-
-As chaves ficam centralizadas em `query-keys.ts`. Recursos privados incluem `userId` no prefixo. Logout e troca de usuário deverão remover todas as queries privadas antes de autenticar outro usuário.
+Chaves centralizadas em `src/shared/api/query-keys.ts`.
 
 ## 6. Sessão e isolamento
 
-Embora os handlers ainda não existam, a política será:
-
-- sessão simulada via cookie HTTP-only conceitual; o cliente guarda apenas metadados públicos;
-- query `auth/session` recupera a sessão após refresh;
-- guards do TanStack Router redirecionam para `/login` preservando `redirect`;
-- expiração durante checkout preserva cotação e itens do visitante;
-- logout limpa cache privado, listeners e conexão Socket.IO;
-- eventos carregam `sessionId`; o cliente ignora eventos de outra sessão.
-
-Senhas nunca serão persistidas em claro. Nos mocks, será usado hash artificial não reversível.
+- Login/cadastro devolvem um token opaco (`Authorization: Bearer`); cookies `Set-Cookie` não se aplicam a respostas do
+  Service Worker. A sessão é recuperada após refresh por `GET /auth/session`; vale 8 h.
+- **Senhas**: no mock guardam-se apenas **SHA-256 salgado** (nunca em claro).
+- **Rotas privadas** (`/pagamento`, `/perfil`, `/carteiras`) usam `requireAuth` e redirecionam para
+  `/login?redirect=…`; após autenticar, o fluxo é retomado.
+- **Expiração** (durante navegação ou checkout): `SessionWatcher` limpa o token, descarta o cache privado e leva ao login
+  preservando a rota — o carrinho é do servidor, então o contexto é retomado.
+- **Troca de usuário / logout**: `replaceSession` grava a nova sessão (ou `null`) **notificando os componentes montados**
+  e remove somente as queries privadas (`queryClient.clear()` desanexaria observers e deixaria dados antigos na tela).
+  O socket é recriado por sessão e os listeners/subscriptions anteriores são liberados.
 
 ## 7. Carrinho
 
-Estado previsto:
+- O carrinho vive na API: **visitante** (`X-Guest-Id`) ou **usuário**. No login/cadastro o servidor **mescla** os itens do
+  visitante respeitando a disponibilidade; o carrinho persiste após refresh.
+- Quantidades respeitam `availableEditions` por NFT (`409 AVAILABILITY_EXCEEDED | EDITION_SOLD_OUT`).
+- O resumo vem de `POST /quotes` (cupom validado pela API: `COUPON_INVALID | COUPON_EXPIRED`, taxa por rede, total).
+- `nft.updated` com o carrinho aberto **informa** (toast) a mudança de preço/disponibilidade e **atualiza** carrinho e cotação.
+- Falhas preservam os itens; na confirmação do pedido a API remove **apenas** os itens/quantidades comprados.
 
-- visitante possui carrinho local identificado por `guestId`;
-- ao autenticar, o backend simulado faz merge dos itens do visitante;
-- o carrinho autenticado é persistido no store MSW/localStorage;
-- quantidades respeitam `availableEditions`;
-- subtotal, desconto, taxa e total vêm da cotação;
-- eventos `nft.updated` invalidam a cotação quando preço/disponibilidade muda;
-- falhas preservam os itens; confirmação remove apenas as quantidades compradas.
+## 8. Checkout e pedidos
 
-## 8. REST ↔ Socket.IO
+1. **Pagamento**: formulário do colecionador (react-hook-form + Zod), carteiras cadastradas, rede e simulação de
+   conexão/recusa/desconexão (`WalletConnect` simula recusa de forma determinística).
+2. **Revisão** (diálogo com foco controlado): refaz a cotação ao abrir (preço, disponibilidade, cupom, taxas). Se os valores
+   mudarem — inclusive por `nft.updated` com o diálogo aberto — aparece o aviso e o botão passa a **"Confirmar novos valores"**.
+3. **Idempotência**: cada cotação gera uma `Idempotency-Key`; cliques repetidos e reenvios após timeout/504 reutilizam a
+   chave e recuperam o **mesmo pedido**; chave igual com conteúdo diferente → `409 IDEMPOTENCY_CONFLICT`.
+4. **Estados**: `pending` → `confirmed` | `rejected` (terminais). A página `/pedido/:id` consulta enquanto `pending` e
+   recupera o estado após refresh/reconexão; a confirmação só aparece para pedido efetivamente `confirmed`.
+5. **Recibo**: snapshot imutável (itens, preços, totais); mudanças posteriores no catálogo não o alteram.
+
+## 9. REST ↔ Socket.IO
 
 ### Transporte
 
-- cliente: `socket.io-client` v4;
-- transporte forçado: `websocket`;
-- servidor simulado: `ws.link` do MSW + `@mswjs/socket.io-binding`;
-- path Socket.IO: `/socket.io/`.
+`socket.io-client` v4, transporte `websocket`, sobre o WebSocket interceptado pelo MSW (`ws.link` +
+`@mswjs/socket.io-binding`), path `/socket.io/`.
 
 ### Detalhes importantes
 
-1. O MSW remove o prefixo `/socket.io/` antes de fazer match. Por isso, o handler usa a raiz (`/\/$/`) e não `/socket.io/`.
-2. O Engine.IO captura o construtor global de WebSocket ao carregar o módulo. `socket.io-client` é importado dinamicamente **depois** de `worker.start()` para capturar o interceptor do MSW.
-3. No binding, `io.client.emit(...)` envia eventos do servidor simulado para o cliente conectado. `io.server.emit(...)` tentaria enviar para um servidor real inexistente.
-4. O binding não implementa rooms, namespaces ou broadcast completos. A solução manterá um registro de conexões por sessão para emitir eventos aos clientes corretos.
+1. O MSW remove o prefixo `/socket.io/` antes do match; o handler usa a raiz (`/\/$/`).
+2. O Engine.IO captura o `WebSocket` global ao carregar o módulo: `socket.io-client` é importado dinamicamente **depois** de
+   o MSW estar ativo (`apiReady`).
+3. `io.client.emit(...)` envia do servidor simulado ao cliente (`io.server.emit` tentaria alcançar um servidor real).
+4. O binding não tem rooms/broadcast: o **`socket-hub`** mantém as conexões, associa cada uma ao usuário (token enviado em
+   `scene:subscribe`) e direciona os eventos.
 
-### Reconciliação
+### Eventos e consistência
 
-- eventos têm `eventId`, `resourceType`, `resourceId`, `version`, `sessionId` e `occurredAt`;
-- versões menores ou iguais são descartadas;
-- duplicatas são ignoradas;
-- após `connect`, recursos ativos são reconsultados via REST;
-- pedidos confirmados/recusados são terminais;
-- listeners são removidos no cleanup do provider.
+`MockDomain` é a única fonte de verdade: as mesmas mudanças alimentam as respostas REST e os eventos. `nft.updated` vai a
+todos; `order.updated` só ao dono, com `meta.sessionId`. O pedido `pending` é liquidado por timer (~1,5 s) e também sob
+demanda na leitura REST (por isso a retomada funciona sem socket).
 
-## 9. Mocking e persistência
+### Regras do cliente
 
-`MockDatabase` mantém mapas em memória para NFTs, usuários e carteiras. O reset restaura fixtures clonadas. `persistence.ts` oferece leitura/escrita validada por Zod no localStorage.
+- Validação Zod; descarte de eventos com `sessionId` diferente da sessão atual;
+- `createEventGuard`: ignora duplicatas (`eventId`) e versões não superiores às já aplicadas (sem regredir nem reaplicar efeitos);
+- consultas em andamento são refeitas ao receber `nft.updated` (evita terminar com dado anterior ao evento);
+- após **reconexão**, `invalidateQueries({ refetchType: 'active' })` reconcilia os recursos ativos com a REST;
+- o provider recria a conexão a cada troca de sessão e remove todos os listeners no cleanup.
 
-O endpoint de controle `POST /api/mocks/reset`:
+### Limitações do ambiente de mocks
 
-- valida o cenário;
-- limpa o estado persistido;
-- restaura o seed;
-- define o cenário ativo.
+Servidor no Service Worker/aba (sem multi-cliente real); binding experimental (apenas `websocket`, sem ack/rooms); eventos
+perdidos durante uma queda são recuperados pela reconciliação REST, não por replay.
 
-Cenários estão centralizados em `src/mocks/scenarios/presets.ts`. Latência variável e respostas fora de ordem serão usadas apenas nos handlers correspondentes, com gerador pseudoaleatório semeado quando os testes de tempo forem implementados.
+## 10. Mocking, persistência e cenários
 
-## 10. Acessibilidade
+- `MockDomain` (`src/mocks/db/domain.ts`): auth, favoritos, carrinhos, cotações, pedidos, perfil e carteiras, testado sem rede.
+- Estado persistido em `localStorage` (`junglenft:mocks:domain`) — sobrevive a refresh; `POST /api/mocks/reset` restaura **integralmente**
+  um cenário conhecido.
+- **Cenários determinísticos** (latência, falhas, cupom, preço, esgotado, timeout, pagamento…) em
+  [`docs/scenarios.md`](docs/scenarios.md); latência variável com **PRNG semeado**.
+- **Controles**: reset, troca de cenário, **falhas injetáveis** (`/mocks/faults`), expiração de sessões, alteração de NFT e
+  controle do socket (derrubar, emitir duplicado/antigo/de outra sessão). Todos pela rede, como a aplicação os enxerga.
 
-- shadcn/ui adaptado via CSS variables;
-- skeletons com shimmer e `prefers-reduced-motion`;
-- labels, mensagens de erro e `aria-live` nos componentes de feedback;
-- foco visível global;
-- diálogos/drawers do Radix com gerenciamento de foco;
-- Playwright inclui axe na página inicial.
+## 11. Acessibilidade
 
-## 11. Performance
+- Foco visível global; navegação por teclado; diálogos Radix (busca, login, revisão) com foco preso, `Esc` e retorno do foco.
+- Formulários: `label`, `aria-invalid`, `aria-describedby` e mensagens com `role="alert"`; erros da API nos campos.
+- `aria-live`/toasts para mutations e eventos de tempo real; skeletons com `role="status"`, shimmer e `prefers-reduced-motion`.
+- Estados não dependem só de cor (rótulos "Preço anterior", "principal", aviso textual de valores alterados).
+- **axe** sem violações em início, detalhe, login, carrinho e perfil (desktop e mobile). Zoom/overflow: sem rolagem horizontal em 390/768/1440.
 
-O bootstrap de mocks é importado dinamicamente e gera um chunk separado. React/TanStack, UI e dados também são divididos com manual chunks. Imagens e fontes serão locais; dimensões explícitas evitam CLS. Lighthouse executa 3 vezes por página/perfil e registra mediana, LCP, CLS e TBT.
+## 12. Performance
 
-## 12. Limitações e decisões
+Ver [`docs/performance.md`](docs/performance.md): mediana de 3 execuções por página/perfil (desktop 99; mobile 80–82, abaixo da meta, com análise).
+Otimizações: render sem esperar o MSW, preload do LCP, code splitting por rota, skeletons com dimensão do conteúdo (CLS 0), WebP e fonte local.
 
-- Tokens extraídos do Figma e centralizados em `design/tokens.json` e `globals.css`.
-- Roboto Mono Variable é servida localmente via Fontsource.
-- Os nove artworks únicos do catálogo foram exportados para `public/assets/nfts/`.
-- Rotas: `/`, `/nft/$nftId`, `/carrinho`, `/pagamento`, `/pedido/$orderId`, `/login`, `/cadastro`, `/perfil`, `/carteiras`.
-- Playwright fixado em 1.56.1 para alinhar o container oficial usado no CI.
-- Lighthouse audita apenas a home neste scaffold.
-- O binding Socket.IO é experimental; a integração está coberta por E2E real.
+## 13. Testes
+
+- **Unitários (Vitest)**: domínio simulado, handlers HTTP via MSW, versões/guarda de eventos, decimais.
+- **E2E (Playwright)**: 135 testes em Chromium desktop (1440) e mobile (390) cobrindo os fluxos do enunciado; contexto novo por teste;
+  relógio controlado (`page.clock`), latência e eventos disparados pelos controles de mock; relatório HTML e traces de falha.
+- **Regressão visual**: início, detalhe, carrinho e pagamento, com baselines em `e2e/visual/visual.spec.ts-snapshots/`
+  (geradas com Playwright 1.56.1 em Linux; atualize com `pnpm test:e2e:update`).
+
+## 14. Decisões de UX e limitações
+
+- Tokens do Figma em `design/tokens.json` e `globals.css`; Roboto Mono Variable servida localmente.
+- Rotas: `/`, `/nft/$nftId`, `/carrinho`, `/pagamento`, `/pedido/$orderId`, `/login`, `/cadastro`, `/perfil`, `/carteiras`; 404 tratada.
+- Faltas no escopo: Atividade, Ofertas, Arquivos baixados e Suporte respondem com aviso e **não** simulam sucesso; login social idem.
+- O `chromium` do Playwright exige libs do sistema; no CI usa-se a imagem oficial `mcr.microsoft.com/playwright`.
 
 ### Fidelidade visual e desvios do Figma
 
-Metodologia: cada frame (`design/frames/*.png`) foi comparado lado a lado com a captura do app
-(Chromium, 1440 e 414 px). Posições, tamanhos e cores foram medidos por varredura de pixels.
-`text-rendering: geometricPrecision` replica o avanço fracionário de glifos do Figma.
+Metodologia: cada frame (`design/frames/*.png`) foi comparado lado a lado com a captura do app (Chromium, 1440 e 414 px);
+posições, tamanhos e cores foram medidos por varredura de pixels. `text-rendering: geometricPrecision` replica o avanço
+fracionário de glifos do Figma.
 
 Desvios deliberados (todos por requisito funcional do enunciado):
 
-- **Filtros**: o Figma só mostra Coleções, Faixa de preço e Rede. Foram acrescentados Raridade e
-  "Somente disponíveis" (filtros combináveis exigidos), no mesmo estilo visual.
-- **Categorias/redes**: contrato e fixtures passaram para as 9 coleções e 3 redes do Figma.
-- **Ordenação mobile**: o frame mobile não tem seletor de ordenação; ele fica dentro do painel de
-  filtros (botão laranja da barra de busca).
-- **Preço**: exibido exatamente como a string decimal da API (`1.19 ETH`), sem arredondar.
-- **Preço anterior**: sem tachado (como no Figma); o rótulo "Preço anterior" é lido por leitores
-  de tela, para o estado não depender só de cor.
-- **Galeria mobile**: o frame não mostra miniaturas; elas existem só a partir de 640 px.
-- **Pagamento mobile**: o frame não contém o formulário do colecionador; ele aparece apenas no
-  desktop nesta etapa (a coleta mobile entra com a integração do perfil).
+- **Filtros**: o Figma só mostra Coleções, Faixa de preço e Rede; foram acrescentados Raridade e "Somente disponíveis"
+  (filtros combináveis exigidos), no mesmo estilo visual.
+- **Categorias/redes**: contrato e fixtures seguem as 9 coleções e 3 redes do Figma.
+- **Ordenação mobile**: o frame mobile não tem ordenação; ela fica no painel de filtros (botão laranja da busca).
+- **Preço**: exibido como a string decimal da API (`1.19 ETH`), sem arredondar. **Preço anterior** sem tachado (como no
+  Figma), com rótulo para leitores de tela.
+- **Galeria mobile**: sem miniaturas no frame; elas existem a partir de 640 px.
+- **Pagamento mobile**: o frame não traz o formulário do colecionador; ele aparece apenas no desktop (no mobile os dados vêm do perfil).
+- **Carteira e rede**: o Figma lista provedores; aqui a lista é de **carteiras cadastradas** (exigido), e o provedor é escolhido em
+  "Tipo de carteira".
 - **Login/Cadastro**: modal sobre a Início no desktop (como no Figma) e página cheia no mobile.
-- **Rodapé**: o indicador de tempo real ficou `sr-only` (não existe no Figma).
-- **Itens fora do escopo** (Atividade, Ofertas, Suporte…) respondem com aviso, sem simular sucesso.
+- **Rodapé**: o indicador de tempo real é `sr-only` (não existe no Figma).
+- **Recibo**: o link "Ver no Etherscan" é uma referência simulada (abre o explorador, mas a transação é fictícia).
 
-Estado desta etapa: telas e interações **visuais** com lógica local simples
-(`useCart`, `useSession`, pedidos locais). Elas ficam atrás de hooks para serem substituídas por
-TanStack Query + contratos REST/MSW sem tocar na interface.
+## 15. Próximos passos
 
-## 13. Próximos passos
-
-1. Exportar tokens/assets do Figma.
-2. Implementar catálogo e detalhe com search params na URL.
-3. Implementar autenticação, perfil e carteiras.
-4. Implementar carrinho, cotação e checkout idempotente.
-5. Conectar eventos `nft.updated` e `order.updated`.
-6. Ampliar E2E, baselines e auditoria de detalhe.
+1. Mobile Lighthouse ≥ 90 (app shell estático/pré-renderização e menos JS inicial) — ver `docs/performance.md`.
+2. Formulário do colecionador no mobile (reaproveitando o perfil) e paginação cursor-based no catálogo.
+3. Persistência real de avatar (upload) e recuperação de senha, hoje fora do escopo.

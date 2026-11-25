@@ -1,8 +1,6 @@
 # JungleNFT
 
-Base do **Desafio Frontend — Marketplace de NFTs**. Este repositório contém o scaffold inicial com a stack obrigatória, contratos tipados, MSW, Socket.IO, Playwright, Lighthouse e documentação arquitetural.
-
-> Estado atual: estrutura pronta e validada. As telas de catálogo, carrinho, checkout e conta ainda serão implementadas sobre esta base.
+**Desafio Frontend — Marketplace de NFTs** (Kurio): descoberta, compra e conta do colecionador em desktop e mobile, com API, autenticação, carteiras e pagamentos **simulados** (MSW) e eventos em tempo real (Socket.IO). Arquitetura em [`ARCHITECTURE.md`](ARCHITECTURE.md), contratos em [`docs/contracts.md`](docs/contracts.md), cenários em [`docs/scenarios.md`](docs/scenarios.md) e performance em [`docs/performance.md`](docs/performance.md).
 
 ## Stack
 
@@ -85,16 +83,31 @@ Nunca versione `.env.local`.
 
 ## Mocks e cenários
 
-O MSW intercepta REST e WebSocket na camada de rede. O estado simulado vive em `src/mocks/db/store.ts` e é semeado com 24 NFTs, 2 usuários e 2 carteiras.
+O MSW intercepta REST e WebSocket na camada de rede (sem respostas fictícias em componentes, hooks ou Axios). O estado
+simulado (usuários, carteiras, favoritos, carrinhos, cotações, pedidos e catálogo) é consistente entre REST e eventos e
+**persiste em `localStorage`**, sobrevivendo a refresh. A camada é ativada por `VITE_MOCKS=enabled` e está presente no build
+de demonstração.
 
-Seleção rápida pelo console do navegador:
+### Selecionar um cenário
+
+Ordem de precedência: `localStorage['junglenft:scenario']` → `VITE_DEFAULT_SCENARIO` → `default`.
 
 ```js
-localStorage.setItem('junglenft:scenario', 'slow');
+// Console do navegador
+localStorage.setItem('junglenft:scenario', 'price-changed');
 location.reload();
 ```
 
-Reset completo:
+```js
+// Sem recarregar (mantém os dados)
+await fetch('/api/mocks/scenario', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ scenario: 'payment-rejected' }),
+});
+```
+
+### Resetar para um estado conhecido
 
 ```js
 await fetch('/api/mocks/reset', {
@@ -105,13 +118,28 @@ await fetch('/api/mocks/reset', {
 location.reload();
 ```
 
-Cenários já exercitados pelo scaffold:
+### Reproduzir os fluxos de falha
 
-- `default`: sucesso, sem latência.
-- `slow`: skeleton durante a resposta lenta.
-- `offline`: erro de rede em `/api/health`.
+| Fluxo                          | Como reproduzir                                                                           | Resultado esperado                                 |
+| ------------------------------ | ----------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| Rede lenta / skeletons         | cenário `slow`                                                                            | skeletons com shimmer e sem deslocamento de layout |
+| Respostas fora de ordem        | cenário `out-of-order` e trocar a ordenação rápido                                        | a lista final corresponde à última consulta        |
+| Sem conexão                    | cenário `offline`, depois `default` e "Tentar novamente"                                  | erro tratado e recuperação                         |
+| Erro 5xx                       | `POST /api/mocks/faults {method:"GET",path:"/nfts",status:503,times:3}` e mudar de página | erro + retry                                       |
+| Sessão expirada                | `POST /api/mocks/expire-sessions` e navegar a uma rota privada                            | login com retorno ao destino                       |
+| Acesso negado / não autorizado | cenário `unauthorized` / `session-expired`                                                | 403 / 401 tratados                                 |
+| Conflito de cadastro           | cenário `registration-conflict` (ou e-mail já usado)                                      | erro no campo e-mail                               |
+| Cupom inválido/expirado        | código `NADA` / `EXPIRED10` (válido: `JUNGLE10`)                                          | erro no campo do cupom                             |
+| Preço alterado no checkout     | cenário `price-changed` e enviar o pedido                                                 | aviso + "Confirmar novos valores"                  |
+| Edição esgotada                | cenário `sold-out` e enviar o pedido                                                      | pedido bloqueado, carrinho preservado              |
+| Timeout com recuperação        | cenário `order-timeout` e enviar o pedido                                                 | o mesmo pedido é recuperado (1 só)                 |
+| Pagamento recusado             | cenário `payment-rejected`                                                                | "Pagamento recusado"; itens mantidos               |
+| Falha de favorito              | `faults {method:"PUT",path:"/favorites"}` e favoritar                                     | rollback otimista + aviso                          |
+| Preço/disponibilidade ao vivo  | `POST /api/mocks/nfts/nft-001 {"priceEth":"2.00"}`                                        | aviso e resumo atualizados via socket              |
+| Queda do socket                | `POST /api/mocks/socket/disconnect` com pedido pendente                                   | reconecta e recupera sem nova compra               |
 
-Os demais cenários exigidos pelo desafio estão catalogados em [`docs/scenarios.md`](docs/scenarios.md) e serão conectados aos handlers conforme cada feature for implementada.
+Catálogo completo de cenários e controles em [`docs/scenarios.md`](docs/scenarios.md). Os controles são `POST /api/mocks/...`
+(`reset`, `scenario`, `faults`, `expire-sessions`, `nfts/:id`, `socket/disconnect`, `socket/emit`, `socket/stale/:nftId`).
 
 ## Tokens e assets do Figma
 
@@ -136,25 +164,29 @@ O token fica somente no `.env.local` e não entra no bundle do Vite.
 
 ## Credenciais fictícias
 
-Os fixtures públicos são:
+| Usuário                     | E-mail              | Senha       |
+| --------------------------- | ------------------- | ----------- |
+| Ana Souza (com 2 carteiras) | `ana@jungle.test`   | `Senha@123` |
+| Bruno Lima (sem carteiras)  | `bruno@jungle.test` | `Senha@123` |
 
-- `ana@jungle.test`
-- `bruno@jungle.test`
-
-Autenticação ainda não foi implementada. Nenhuma senha deve ser armazenada em claro; a estratégia de sessão está descrita em [`ARCHITECTURE.md`](ARCHITECTURE.md).
+Cupons: `JUNGLE10` (10%), `EXPIRED10` (expirado). Os dados são fictícios; senhas ficam apenas como **hash salgado** no mock
+(política de sessão em [`ARCHITECTURE.md`](ARCHITECTURE.md#6-sessão-e-isolamento)).
 
 ## Testes
 
 ### Playwright
 
-O config sobe o build de produção, inicia o preview e executa os mesmos specs em:
+O config sobe o build de produção, inicia o preview e executa **135 testes E2E** (fluxos, falhas, tempo real, acessibilidade e
+regressão visual) em:
 
 - desktop Chromium: 1440 × 900;
 - mobile Chromium: 390 × 844.
 
 ```bash
 pnpm exec playwright install --with-deps chromium
-pnpm test:e2e
+pnpm test:e2e            # relatório HTML em playwright-report/, traces das falhas em test-results/
+pnpm test:e2e:report     # abre o relatório
+pnpm test:e2e:update     # atualiza as baselines visuais (e2e/visual/*-snapshots)
 ```
 
 Se o ambiente local não permitir instalar dependências do sistema, use Docker:
@@ -177,16 +209,16 @@ pnpm build
 pnpm lighthouse
 ```
 
-Os relatórios HTML/JSON e a mediana ficam em `lighthouse/reports/`. Neste scaffold, a auditoria cobre a página inicial nos perfis desktop e mobile. A rota de detalhe será adicionada à matriz assim que existir.
+Audita **Início** e **Detalhe** em desktop e mobile (3 execuções cada, mediana), usando o build de produção e o cenário padrão
+dos mocks. Relatórios HTML/JSON, versões, ambiente e condições em `lighthouse/reports/`; análise em
+[`docs/performance.md`](docs/performance.md).
 
-Resultado inicial (3 execuções por perfil):
+| Perfil                     | Performance | Accessibility | Best Practices |       SEO |          LCP |   CLS |         TBT |
+| -------------------------- | ----------: | ------------: | -------------: | --------: | -----------: | ----: | ----------: |
+| Desktop (Início / Detalhe) |     99 / 99 |     100 / 100 |      100 / 100 | 100 / 100 | 771 / 904 ms | 0 / 0 |    0 / 0 ms |
+| Mobile (Início / Detalhe)  |     80 / 82 |     100 / 100 |      100 / 100 | 100 / 100 |  4,2 / 4,0 s | 0 / 0 | 125 / 48 ms |
 
-| Perfil  | Performance | Accessibility | Best Practices | SEO |     LCP |   CLS |   TBT |
-| ------- | ----------: | ------------: | -------------: | --: | ------: | ----: | ----: |
-| Desktop |          93 |           100 |            100 |  91 | 2600 ms | 0,001 | 21 ms |
-| Mobile  |          93 |           100 |            100 |  91 | 2598 ms | 0,000 | 19 ms |
-
-Resumo completo em [`lighthouse/reports/summary.json`](lighthouse/reports/summary.json).
+O mobile fica abaixo de 90 em Performance (SPA com render no cliente sob 4G lento + CPU 4×); causas e caminhos na análise.
 
 ## Estrutura
 
@@ -212,18 +244,21 @@ Regra de dependência: `routes → features → shared`; `mocks → shared/contr
 
 ## Deploy
 
-O `vercel.json` configura Vite, build com pnpm e rewrite SPA para acesso direto/refresh de rotas.
+O `vercel.json` configura Vite, build com pnpm e **rewrite SPA** (acesso direto e refresh de qualquer rota). Mantenha
+`VITE_MOCKS=enabled`: a versão pública usa os mocks e o Socket.IO simulado.
 
 ```bash
-pnpm build
-vercel --prod
+pnpm install --frozen-lockfile
+pnpm build           # typecheck + vite build
+vercel --prod        # ou conecte o repositório na Vercel (framework: Vite, output: dist)
 ```
 
-Mantenha `VITE_MOCKS=enabled` na versão pública de demonstração.
+A URL pública deve ser registrada aqui após o deploy.
 
-## Limitações atuais
+## Limitações conhecidas
 
-- O Figma foi extraído e os tokens/assets principais já estão aplicados.
-- A tela inicial é um placeholder que prova a integração REST + Socket.IO.
-- Handlers de autenticação, catálogo, carrinho, cotação e pedidos ainda serão implementados.
-- O binding Socket.IO do MSW não oferece rooms/broadcast completos; a estratégia atual mantém uma conexão por cliente e emite eventos diretamente para cada conexão mockada.
+- Mobile Lighthouse Performance 80–82 (< 90): ver [`docs/performance.md`](docs/performance.md).
+- O binding Socket.IO do MSW é experimental (apenas `websocket`, sem rooms); o direcionamento por usuário é feito por um hub próprio.
+- O formulário do colecionador existe apenas no desktop; no mobile os dados vêm do perfil.
+- Atividade, Ofertas, Arquivos baixados e Suporte estão fora do escopo (respondem com aviso, sem simular sucesso).
+- As baselines visuais foram geradas com Playwright 1.56.1 em Linux; outro SO/fontes pode exigir regenerá-las.
