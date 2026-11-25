@@ -41,7 +41,7 @@ pnpm dev
 
 A aplicação abre em `http://127.0.0.1:5173`.
 
-O bootstrap inicia o MSW antes do primeiro render. Com `VITE_MOCKS=enabled`, o build de demonstração também funciona sem backend.
+O app renderiza sem esperar o MSW; as chamadas Axios e o socket aguardam `apiReady` (Service Worker ativo). Com `VITE_MOCKS=enabled`, o build de demonstração também funciona sem backend.
 
 ## Variáveis de ambiente
 
@@ -176,7 +176,7 @@ Cupons: `JUNGLE10` (10%), `EXPIRED10` (expirado). Os dados são fictícios; senh
 
 ### Playwright
 
-O config sobe o build de produção, inicia o preview e executa **135 testes E2E** (fluxos, falhas, tempo real, acessibilidade e
+O config sobe o build de produção, inicia o preview e executa **140 testes E2E** (137 executados; 3 são específicos de um viewport e se pulam no outro) (fluxos, falhas, tempo real, acessibilidade e
 regressão visual) em:
 
 - desktop Chromium: 1440 × 900;
