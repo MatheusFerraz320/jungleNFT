@@ -267,7 +267,7 @@ function MobilePayment({
   pending: boolean;
 }) {
   return (
-    <div className="px-6 sm:hidden">
+    <div className="mt-5 px-6 sm:hidden">
       <div className="flex items-center justify-between">
         <h2 className="text-base leading-5 font-bold">Carteira conectada</h2>
         <Link to="/carteiras" className="text-primary text-sm font-medium">
@@ -401,6 +401,7 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
   const primary = wallets.find((wallet) => wallet.isPrimary) ?? wallets[0];
   const [walletId, setWalletId] = useState(primary?.id ?? '');
   const [provider, setProvider] = useState('metamask');
+  const [mobileFormOpen, setMobileFormOpen] = useState(false);
   const [reviewOpen, setReviewOpen] = useState(false);
   const [reviewedTotal, setReviewedTotal] = useState<string | undefined>();
   const connection = useWalletConnection();
@@ -410,12 +411,16 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
     register,
     handleSubmit,
     setValue,
+    setFocus,
     control,
     formState: { errors },
   } = useForm<CollectorForm>({
     resolver: zodResolver(collectorSchema),
     defaultValues: {
       displayName: user?.name ?? '',
+      username: user?.username ?? '',
+      profileName: user?.name ?? '',
+      ensName: user?.ensName ?? '',
       email: user?.email ?? '',
       network: primary?.network ?? 'ethereum',
       walletAddress: primary?.address ?? '',
@@ -451,7 +456,20 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
     setReviewOpen(true);
   }
 
-  const submitDesktop = handleSubmit((values) => openReview(values.walletType));
+  // Inválido: no mobile o formulário é recolhido; abre a seção e foca o primeiro campo com erro.
+  const submitForm = handleSubmit(
+    (values) => openReview(values.walletType),
+    (formErrors) => {
+      setMobileFormOpen(true);
+      const first = Object.keys(formErrors)[0] as keyof CollectorForm | undefined;
+      if (first) requestAnimationFrame(() => setFocus(first));
+    },
+  );
+
+  function chooseProvider(next: string) {
+    setProvider(next);
+    setValue('walletType', next);
+  }
 
   const collector = {
     name: displayName || user?.name || 'Colecionador',
@@ -474,14 +492,31 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
 
   return (
     <>
-      <div className="mt-[22px] hidden sm:grid lg:grid-cols-[763px_405px] lg:gap-x-8">
+      <div className="mt-[22px] sm:grid lg:grid-cols-[763px_405px] lg:gap-x-8">
+        <div className="px-6 sm:hidden">
+          <button
+            type="button"
+            aria-expanded={mobileFormOpen}
+            aria-controls="collector-form"
+            onClick={() => setMobileFormOpen((open) => !open)}
+            className="bg-card focus-visible:ring-ring flex h-[62px] w-full items-center justify-between rounded-[16px] px-4 text-left text-base font-bold focus-visible:ring-2 focus-visible:outline-none"
+          >
+            Dados do colecionador
+            <ChevronDown
+              aria-hidden="true"
+              className={cn('size-5 transition-transform', mobileFormOpen && 'rotate-180')}
+            />
+          </button>
+        </div>
         <form
-          onSubmit={(event) => void submitDesktop(event)}
+          id="collector-form"
+          onSubmit={(event) => void submitForm(event)}
           noValidate
           aria-label="Dados do colecionador"
+          className={cn('max-sm:px-6 max-sm:pt-4', !mobileFormOpen && 'max-sm:hidden')}
         >
-          <h1 className="text-[17px] leading-5 font-bold">Perfil do colecionador</h1>
-          <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-[18px]">
+          <h1 className="text-[17px] leading-5 font-bold max-sm:hidden">Perfil do colecionador</h1>
+          <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-[18px] sm:grid-cols-2">
             <Field
               label="Nome de exibição"
               required
@@ -527,7 +562,12 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
                 className="px-6"
               />
             </Field>
-            <Field label="Carteira secundária" htmlFor="secondaryWallet" hideLabel>
+            <Field
+              label="Carteira secundária"
+              htmlFor="secondaryWallet"
+              hideLabel
+              className="max-sm:hidden"
+            >
               <TextInput
                 id="secondaryWallet"
                 register={register('secondaryWallet')}
@@ -535,7 +575,13 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
                 className="px-6"
               />
             </Field>
-            <Field label="Tipo de carteira" required error={errors.walletType} htmlFor="walletType">
+            <Field
+              label="Tipo de carteira"
+              required
+              error={errors.walletType}
+              htmlFor="walletType"
+              className="max-sm:hidden"
+            >
               <SelectInput
                 id="walletType"
                 register={register('walletType')}
@@ -585,7 +631,7 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
             </Field>
           </div>
 
-          <label className="mt-[25px] flex w-fit cursor-pointer items-center gap-2 text-[15px]">
+          <label className="mt-[25px] flex w-fit cursor-pointer items-center gap-2 text-[15px] max-sm:hidden">
             <input type="checkbox" className="peer sr-only" {...register('useAnotherWallet')} />
             <span
               aria-hidden="true"
@@ -594,13 +640,13 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
             Usar outra carteira?
           </label>
 
-          <label htmlFor="note" className="mt-[22px] block text-[15px] leading-4">
+          <label htmlFor="note" className="mt-[22px] block text-[15px] leading-4 max-sm:hidden">
             Observação do colecionador (opcional)
           </label>
           <textarea
             id="note"
             rows={5}
-            className="border-line focus-visible:ring-ring mt-3 h-[150px] w-[350px] max-w-full resize-none rounded border bg-transparent p-3 text-sm focus-visible:ring-2 focus-visible:outline-none"
+            className="border-line focus-visible:ring-ring mt-3 h-[150px] w-[350px] max-w-full resize-none rounded border bg-transparent p-3 text-sm focus-visible:ring-2 focus-visible:outline-none max-sm:hidden"
             {...register('note')}
           />
         </form>
@@ -612,7 +658,7 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
           onSelectWallet={selectWallet}
           connection={connection.state}
           onDisconnect={connection.disconnect}
-          onSubmit={() => void submitDesktop()}
+          onSubmit={() => void submitForm()}
           pending={busy}
         />
       </div>
@@ -623,9 +669,9 @@ function CheckoutContent({ wallets }: CheckoutFormProps) {
         walletId={walletId}
         onSelectWallet={selectWallet}
         provider={provider}
-        onProvider={setProvider}
+        onProvider={chooseProvider}
         connection={connection.state}
-        onSubmit={() => void openReview(provider)}
+        onSubmit={() => void submitForm()}
         pending={busy}
       />
 

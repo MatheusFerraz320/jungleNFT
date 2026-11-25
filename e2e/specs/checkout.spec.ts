@@ -1,5 +1,6 @@
 import {
   fillCollector,
+  openCollectorSection,
   openReview,
   ordersOf,
   reachReview,
@@ -152,10 +153,11 @@ test.describe('compra e pedido', () => {
     loginAs,
     mobile,
   }) => {
-    test.skip(mobile, 'O frame mobile não contém o formulário do colecionador.');
     await loginAs(ANA);
     await addToCartFromDetail(app);
     await startCheckout(app);
+    await expect(app.getByRole('button', { name: 'Confirmar compra' })).toBeVisible();
+    if (mobile) await openCollectorSection(app);
 
     await app.locator('#displayName').fill('');
     await app.getByRole('button', { name: 'Confirmar compra' }).click();
@@ -163,5 +165,25 @@ test.describe('compra e pedido', () => {
     await expect(app.locator('#username-error')).toBeVisible();
     await expect(app.locator('#referralCode-error')).toBeVisible();
     await expect(app.locator('#displayName')).toHaveAttribute('aria-invalid', 'true');
+  });
+
+  test('no mobile, enviar com a seção recolhida a abre e foca o primeiro erro', async ({
+    app,
+    loginAs,
+    mobile,
+  }) => {
+    test.skip(!mobile, 'Seção recolhível existe apenas no mobile.');
+    await loginAs(ANA);
+    await addToCartFromDetail(app);
+    await startCheckout(app);
+
+    const toggle = app.getByRole('button', { name: 'Dados do colecionador' });
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(app.locator('#username')).toBeHidden();
+
+    await app.getByRole('button', { name: 'Confirmar compra' }).click();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(app.locator('#username-error')).toBeVisible();
+    await expect(app.locator('#username')).toBeFocused();
   });
 });

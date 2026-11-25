@@ -19,16 +19,22 @@ export async function startCheckout(page: Page) {
   await page.getByRole('button', { name: 'Conectar e finalizar' }).click();
 }
 
-/** Preenche o formulário do colecionador (existe apenas no desktop). */
+/** Preenche o formulário do colecionador (no mobile ele fica numa seção recolhível). */
 export async function fillCollector(page: Page) {
   // Aguarda o checkout carregar (carteiras + carrinho) antes de decidir pelo layout.
   await expect(page.getByRole('button', { name: 'Confirmar compra' })).toBeVisible();
-  if ((page.viewportSize()?.width ?? 1440) < 640) return;
+  if ((page.viewportSize()?.width ?? 1440) < 640) await openCollectorSection(page);
   await expect(page.locator('#username')).toBeVisible();
   await page.locator('#username').fill('ana_s');
   await page.locator('#profileName').fill('Ana Souza');
   await page.locator('#referralCode').fill('KURIO');
   await page.locator('#ensName').fill('ana');
+}
+
+/** Expande "Dados do colecionador" no mobile (idempotente). */
+export async function openCollectorSection(page: Page) {
+  const toggle = page.getByRole('button', { name: 'Dados do colecionador' });
+  if ((await toggle.getAttribute('aria-expanded')) !== 'true') await toggle.click();
 }
 
 export async function openReview(page: Page) {

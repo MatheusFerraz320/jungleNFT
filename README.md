@@ -259,6 +259,5 @@ A URL pública deve ser registrada aqui após o deploy.
 
 - Mobile Lighthouse Performance 80–82 (< 90): ver [`docs/performance.md`](docs/performance.md).
 - O binding Socket.IO do MSW é experimental (apenas `websocket`, sem rooms); o direcionamento por usuário é feito por um hub próprio.
-- O formulário do colecionador existe apenas no desktop; no mobile os dados vêm do perfil.
 - Atividade, Ofertas, Arquivos baixados e Suporte estão fora do escopo (respondem com aviso, sem simular sucesso).
 - As baselines visuais foram geradas com Playwright 1.56.1 em Linux; outro SO/fontes pode exigir regenerá-las.
