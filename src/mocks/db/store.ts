@@ -5,6 +5,12 @@ import { userFixtures } from '@/mocks/fixtures/users';
 import { walletFixtures } from '@/mocks/fixtures/wallets';
 import type { NftSummary, User, Wallet } from '@/shared/contracts';
 
+export interface MockDatabaseSnapshot {
+  nfts: NftSummary[];
+  users: User[];
+  wallets: Wallet[];
+}
+
 export class MockDatabase {
   private currentScenario: ScenarioId;
   private nfts = new Map<string, NftSummary>();
@@ -58,6 +64,39 @@ export class MockDatabase {
   listWallets(userId?: string) {
     const wallets = Array.from(this.wallets.values());
     return userId ? wallets.filter((wallet) => wallet.userId === userId) : wallets;
+  }
+
+  upsertUser(user: User) {
+    this.users.set(user.id, structuredClone(user));
+    return user;
+  }
+
+  findUserByEmail(email: string) {
+    const normalized = email.trim().toLowerCase();
+    return this.listUsers().find((user) => user.email.toLowerCase() === normalized);
+  }
+
+  getWallet(id: string) {
+    return this.wallets.get(id);
+  }
+
+  upsertWallet(wallet: Wallet) {
+    this.wallets.set(wallet.id, structuredClone(wallet));
+    return wallet;
+  }
+
+  snapshot(): MockDatabaseSnapshot {
+    return {
+      nfts: this.listNfts(),
+      users: this.listUsers(),
+      wallets: this.listWallets(),
+    };
+  }
+
+  restore(snapshot: MockDatabaseSnapshot) {
+    this.nfts = new Map(snapshot.nfts.map((nft) => [nft.id, nft]));
+    this.users = new Map(snapshot.users.map((user) => [user.id, user]));
+    this.wallets = new Map(snapshot.wallets.map((wallet) => [wallet.id, wallet]));
   }
 
   reset() {

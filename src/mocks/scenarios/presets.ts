@@ -114,8 +114,9 @@ export const scenarios: Record<ScenarioId, ScenarioDefinition> = {
   'order-timeout': {
     id: 'order-timeout',
     label: 'Timeout após criar pedido',
-    description: 'O pedido é criado, mas a resposta é perdida; a idempotência o recupera.',
-    latencyMs: 2_500,
+    description:
+      'O pedido é criado, mas a resposta é perdida (504); repetir com a mesma Idempotency-Key o recupera.',
+    latencyMs: 0,
     latencyVarianceMs: 0,
   },
   'payment-confirmed': {

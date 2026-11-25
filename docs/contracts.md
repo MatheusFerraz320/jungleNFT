@@ -5,7 +5,8 @@
 - Base: `/api`
 - Conteúdo: `application/json`
 - Erros: envelope `ApiErrorResponse`
-- Sessão: cookie simulado com `withCredentials`
+- Sessão: token opaco devolvido no login/cadastro e enviado em `Authorization: Bearer <token>` (cookies `Set-Cookie` não são aplicáveis a respostas do Service Worker)
+- Carrinho de visitante: header `X-Guest-Id`; enviado também como `guestId` no login/cadastro para mesclar ao carrinho da conta
 - ETH: string decimal não negativa
 - Quantidade: inteiro positivo
 - Idempotência de pedido: header `Idempotency-Key`
@@ -23,75 +24,79 @@ type ApiErrorResponse = {
 
 Códigos esperados: `VALIDATION_ERROR`, `UNAUTHORIZED`, `SESSION_EXPIRED`, `FORBIDDEN`, `NOT_FOUND`, `CONFLICT`, `RATE_LIMITED`, `INTERNAL_ERROR`, `TIMEOUT` e `NETWORK_ERROR`.
 
-## Implementado no scaffold
+## Recursos implementados (MSW)
 
-| Método | Rota               | Request                    | Response                                             |
-| ------ | ------------------ | -------------------------- | ---------------------------------------------------- |
-| GET    | `/api/health`      | —                          | `{ status: 'ok', timestamp, scenario, mocks: true }` |
-| POST   | `/api/mocks/reset` | `{ scenario: ScenarioId }` | `{ scenario: ScenarioId }`                           |
-
-## Planejado
+Todos retornam o envelope de erro padrão. `🔒` exige `Authorization`. Status: `401 UNAUTHORIZED` (sem token),
+`401 SESSION_EXPIRED`, `403 FORBIDDEN`, `404 NOT_FOUND`, `409` (conflito), `422 VALIDATION_ERROR` (com `fieldErrors`),
+`504 TIMEOUT` (falha transitória).
 
 ### Sessão e conta
 
-| Método | Rota                 | Operação     |
-| ------ | -------------------- | ------------ |
-| POST   | `/api/auth/register` | Cadastro     |
-| POST   | `/api/auth/login`    | Login        |
-| GET    | `/api/auth/session`  | Sessão atual |
-| POST   | `/api/auth/logout`   | Logout       |
+| Método | Rota                   | Request                               | Response                                       |
+| ------ | ---------------------- | ------------------------------------- | ---------------------------------------------- |
+| POST   | `/api/auth/register`   | `{ name, email, password, guestId? }` | `201 AuthResponse` · `409 EMAIL_TAKEN`         |
+| POST   | `/api/auth/login`      | `{ email, password, guestId? }`       | `200 AuthResponse` · `401 INVALID_CREDENTIALS` |
+| GET    | `/api/auth/session` 🔒 | —                                     | `{ user, expiresAt }`                          |
+| POST   | `/api/auth/logout`     | —                                     | `204`                                          |
+
+`AuthResponse = { user, expiresAt, token }`. Sessões duram 8 h; senhas guardadas apenas como SHA-256 salgado.
 
 ### NFTs
 
-| Método | Rota            | Operação                                           |
-| ------ | --------------- | -------------------------------------------------- |
-| GET    | `/api/nfts`     | Listagem com busca, filtros, ordenação e paginação |
-| GET    | `/api/nfts/:id` | Detalhe                                            |
+`GET /api/nfts` (busca, filtros, ordenação, paginação) e `GET /api/nfts/:id`.
 
-Query params: `q`, `categories`, `rarities`, `minPriceEth`, `maxPriceEth`, `network`, `availableOnly`, `sort`, `page`, `pageSize`.
+### Favoritos 🔒
 
-### Favoritos
+| Método | Rota                    | Response                            |
+| ------ | ----------------------- | ----------------------------------- |
+| GET    | `/api/favorites`        | `{ nftIds, version }`               |
+| PUT    | `/api/favorites/:nftId` | `{ nftIds, version }` (idempotente) |
+| DELETE | `/api/favorites/:nftId` | `{ nftIds, version }` (idempotente) |
 
-| Método | Rota                    | Operação |
-| ------ | ----------------------- | -------- |
-| GET    | `/api/favorites`        | Listagem |
-| PUT    | `/api/favorites/:nftId` | Inclusão |
-| DELETE | `/api/favorites/:nftId` | Remoção  |
+### Carrinho (visitante via `X-Guest-Id`, ou 🔒)
 
-### Carrinho
+| Método | Rota                      | Request               | Response                                                    |
+| ------ | ------------------------- | --------------------- | ----------------------------------------------------------- |
+| GET    | `/api/cart`               | —                     | `Cart` (preços e disponibilidade atuais)                    |
+| POST   | `/api/cart/items`         | `{ nftId, quantity }` | `201 Cart` · `409 AVAILABILITY_EXCEEDED / EDITION_SOLD_OUT` |
+| PATCH  | `/api/cart/items/:itemId` | `{ quantity }`        | `Cart`                                                      |
+| DELETE | `/api/cart/items/:itemId` | —                     | `Cart`                                                      |
 
-| Método | Rota                      | Operação                |
-| ------ | ------------------------- | ----------------------- |
-| GET    | `/api/cart`               | Consulta                |
-| POST   | `/api/cart/items`         | Inclusão                |
-| PATCH  | `/api/cart/items/:itemId` | Alteração de quantidade |
-| DELETE | `/api/cart/items/:itemId` | Remoção                 |
+### Cotação (referência para finalizar o pedido)
 
-### Cotação
+| Método | Rota              | Request                            | Response                                                                     |
+| ------ | ----------------- | ---------------------------------- | ---------------------------------------------------------------------------- |
+| POST   | `/api/quotes`     | `{ cartId, network, couponCode? }` | `201 Quote` · `422` cupom (`COUPON_INVALID/EXPIRED`)                         |
+| GET    | `/api/quotes/:id` | —                                  | `Quote` reavaliada (`valid`, `price_changed`, `edition_sold_out`, `expired`) |
 
-| Método | Rota          | Operação                                               |
-| ------ | ------------- | ------------------------------------------------------ |
-| POST   | `/api/quotes` | Valida carrinho, cupom, disponibilidade, taxas e total |
+Taxa de rede: Ethereum `0.016`, Polygon `0.002`, Solana `0.0005` ETH. Cotação expira em 5 min. Cupom: `JUNGLE10` (10%).
+Valores ETH trafegam como strings decimais (cálculo com `decimal.js`).
 
-### Pedidos
+### Pedidos 🔒
 
-| Método | Rota              | Operação            |
-| ------ | ----------------- | ------------------- |
-| POST   | `/api/orders`     | Criação idempotente |
-| GET    | `/api/orders/:id` | Estado e recibo     |
+| Método | Rota              | Request                                                           | Response                      |
+| ------ | ----------------- | ----------------------------------------------------------------- | ----------------------------- |
+| POST   | `/api/orders`     | `CreateOrderRequest` + header **`Idempotency-Key`** (obrigatório) | `201 Order` (`200` no replay) |
+| GET    | `/api/orders`     | —                                                                 | `{ orders }`                  |
+| GET    | `/api/orders/:id` | —                                                                 | `Order` (estado e recibo)     |
 
-A mesma chave com o mesmo conteúdo recupera o mesmo pedido. A mesma chave com conteúdo diferente retorna `409`.
+- Mesma chave + mesmo conteúdo → o **mesmo pedido**; mesma chave + conteúdo diferente → `409 IDEMPOTENCY_CONFLICT`.
+- A criação revalida preço, disponibilidade, cupom e taxa: `409 PRICE_CHANGED | EDITION_SOLD_OUT | QUOTE_EXPIRED` exigem nova cotação.
+- Pedido nasce `pending` e passa a `confirmed`/`rejected` (terminal). Ao confirmar: baixa de estoque e remoção **apenas** dos itens/quantidades comprados.
+- O recibo é um snapshot (itens, preços e totais) e não muda quando o catálogo muda.
 
-### Perfil e carteiras
+### Perfil e carteiras 🔒
 
-| Método | Rota                    | Operação           |
-| ------ | ----------------------- | ------------------ |
-| GET    | `/api/profile`          | Consulta           |
-| PATCH  | `/api/profile`          | Dados/avatar       |
-| POST   | `/api/profile/password` | Alteração de senha |
-| GET    | `/api/wallets`          | Consulta           |
-| POST   | `/api/wallets`          | Cadastro           |
-| PATCH  | `/api/wallets/:id`      | Atualização        |
+| Método | Rota                    | Request                                   | Response                       |
+| ------ | ----------------------- | ----------------------------------------- | ------------------------------ |
+| GET    | `/api/profile`          | —                                         | `{ user }`                     |
+| PATCH  | `/api/profile`          | `{ name, email, avatarUrl? }`             | `{ user }` · `409 EMAIL_TAKEN` |
+| POST   | `/api/profile/password` | `{ currentPassword, newPassword }`        | `204` · `422 WRONG_PASSWORD`   |
+| GET    | `/api/wallets`          | —                                         | `{ wallets }`                  |
+| POST   | `/api/wallets`          | `{ label, address, network, isPrimary? }` | `201 Wallet`                   |
+| PATCH  | `/api/wallets/:id`      | parcial de `CreateWalletRequest`          | `Wallet`                       |
+
+No máximo duas carteiras (principal e secundária); apenas uma principal; endereços únicos por usuário (`409 ADDRESS_TAKEN`).
 
 ## Eventos Socket.IO
 
