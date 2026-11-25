@@ -191,7 +191,7 @@ Desvios deliberados (todos por requisito funcional do enunciado):
 - **Preço**: exibido como a string decimal da API (`1.19 ETH`), sem arredondar. **Preço anterior** sem tachado (como no
   Figma), com rótulo para leitores de tela.
 - **Galeria mobile**: sem miniaturas no frame; elas existem a partir de 640 px.
-- **Pagamento mobile**: o frame não traz o formulário do colecionador; ele aparece apenas no desktop (no mobile os dados vêm do perfil).
+- **Pagamento mobile**: o frame não traz o formulário do colecionador; ele existe como seção recolhível "Dados do colecionador" acima da carteira (mesmo schema do desktop, pré-preenchida pelo perfil; ao enviar com erros a seção abre e foca o primeiro campo inválido). Campos sem efeito no mobile (tipo de carteira, secundária, observação) ficam ocultos — o provedor vem dos rádios.
 - **Carteira e rede**: o Figma lista provedores; aqui a lista é de **carteiras cadastradas** (exigido), e o provedor é escolhido em
   "Tipo de carteira".
 - **Login/Cadastro**: modal sobre a Início no desktop (como no Figma) e página cheia no mobile.
@@ -201,5 +201,5 @@ Desvios deliberados (todos por requisito funcional do enunciado):
 ## 15. Próximos passos
 
 1. Mobile Lighthouse ≥ 90 (app shell estático/pré-renderização e menos JS inicial) — ver `docs/performance.md`.
-2. Formulário do colecionador no mobile (reaproveitando o perfil) e paginação cursor-based no catálogo.
+2. Paginação cursor-based no catálogo.
 3. Persistência real de avatar (upload) e recuperação de senha, hoje fora do escopo.
