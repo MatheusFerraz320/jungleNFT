@@ -1,5 +1,6 @@
 import axios, { type AxiosError, type AxiosInstance } from 'axios';
 import { env } from '@/shared/config/env';
+import { apiReady } from './api-ready';
 import { getGuestId, getToken } from './client-identity';
 import { normalizeApiError } from './errors';
 
@@ -12,7 +13,8 @@ export const http: AxiosInstance = axios.create({
   },
 });
 
-http.interceptors.request.use((config) => {
+http.interceptors.request.use(async (config) => {
+  await apiReady;
   const token = getToken();
   if (token) config.headers.set('Authorization', `Bearer ${token}`);
   config.headers.set('X-Guest-Id', getGuestId());

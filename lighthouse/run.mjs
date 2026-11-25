@@ -1,15 +1,20 @@
 import { spawn } from 'node:child_process';
-import { mkdir, writeFile } from 'node:fs/promises';
+import os from 'node:os';
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from '@playwright/test';
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
+import desktopConfig from 'lighthouse/core/config/desktop-config.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const reportsDir = path.join(root, 'lighthouse', 'reports');
 const baseUrl = process.env.LIGHTHOUSE_BASE_URL ?? 'http://127.0.0.1:4173';
-const pages = [{ name: 'home', path: '/' }];
+const pages = [
+  { name: 'home', path: '/' },
+  { name: 'detail', path: '/nft/nft-001' },
+];
 const presets = ['desktop', 'mobile'];
 const runs = 3;
 
@@ -55,7 +60,10 @@ async function ensureServer() {
 await mkdir(reportsDir, { recursive: true });
 
 const server = await ensureServer();
+// Perfil temporário explícito: sem isso o chrome-launcher pode criar o diretório no cwd (WSL).
+const userDataDir = await mkdtemp(path.join(os.tmpdir(), 'lighthouse-profile-'));
 const chrome = await chromeLauncher.launch({
+  userDataDir,
   chromePath: process.env.CHROME_PATH ?? chromium.executablePath(),
   chromeFlags: ['--headless', '--no-sandbox', '--disable-dev-shm-usage'],
 });
@@ -70,6 +78,20 @@ const summary = {
     node: process.version,
     platform: process.platform,
     arch: process.arch,
+    os: `${os.type()} ${os.release()}`,
+    cpu: `${os.cpus()[0]?.model ?? 'desconhecida'} (${os.cpus().length} núcleos)`,
+    memoryGb: Number((os.totalmem() / 1024 ** 3).toFixed(1)),
+    chromium: null,
+    packageManager: process.env.npm_config_user_agent ?? null,
+  },
+  conditions: {
+    build: 'vite build (produção) servido por vite preview',
+    mocks: 'MSW habilitado, cenário `default` (sem latência artificial)',
+    throttling:
+      'Presets oficiais do Lighthouse: mobile = Moto G Power, 4G lento simulado e CPU 4x; desktop = sem throttling de rede/CPU',
+    cache: 'Cada medição usa o perfil limpo do Lighthouse (cache frio)',
+    pages:
+      'Imagens, fonte (Roboto Mono self-hosted) e funcionalidades completas, sem simplificações',
   },
   measurements: [],
 };
@@ -82,14 +104,20 @@ try {
 
       for (let run = 1; run <= runs; run += 1) {
         const outputPath = path.join(reportsDir, `${pageName}-${preset}-run-${run}.report`);
-        const result = await lighthouse(`${baseUrl}${page}`, {
-          port: chrome.port,
-          output: ['html', 'json'],
-          logLevel: 'error',
-          onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'],
-          settings: { preset },
-        });
+        const result = await lighthouse(
+          `${baseUrl}${page}`,
+          {
+            port: chrome.port,
+            output: ['html', 'json'],
+            logLevel: 'error',
+            onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'],
+            // `settings.preset` não é aceito pela API programática: o perfil desktop usa a config
+            // oficial; o mobile é o padrão do Lighthouse (Moto G Power, 4G lento, CPU 4x).
+          },
+          preset === 'desktop' ? desktopConfig : undefined,
+        );
 
+        summary.environment.chromium ??= result.lhr.environment.hostUserAgent;
         await writeFile(`${outputPath}.json`, JSON.stringify(result.lhr, null, 2));
         await writeFile(`${outputPath}.html`, result.report[0]);
 
@@ -141,5 +169,6 @@ try {
   );
 } finally {
   await chrome.kill();
+  await rm(userDataDir, { recursive: true, force: true });
   server?.kill('SIGTERM');
 }

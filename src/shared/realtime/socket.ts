@@ -1,4 +1,5 @@
 import type { Socket } from 'socket.io-client';
+import { apiReady } from '@/shared/api/api-ready';
 import { resolveSocketUrl } from '@/shared/config/env';
 
 /**
@@ -6,6 +7,7 @@ import { resolveSocketUrl } from '@/shared/config/env';
  * Import it dynamically, after MSW has installed its WebSocket interceptor.
  */
 export async function createAppSocket(): Promise<Socket> {
+  await apiReady;
   const { io } = await import('socket.io-client');
 
   return io(resolveSocketUrl(), {
