@@ -176,10 +176,10 @@ Cupons: `JUNGLE10` (10%), `EXPIRED10` (expirado). Os dados são fictícios; senh
 
 ### Playwright
 
-O config sobe o build de produção, inicia o preview e executa **140 testes E2E** (137 executados; 3 são específicos de um viewport e se pulam no outro) (fluxos, falhas, tempo real, acessibilidade e
+O config sobe o build de produção, inicia o preview e executa **144 testes E2E** (139 executados; 5 são específicos de um viewport e se pulam no outro) (fluxos, falhas, tempo real, acessibilidade e
 regressão visual) em:
 
-- desktop Chromium: 1440 × 900;
+- desktop Chromium: 1440 × 900 (mais a verificação de tablet em 768, em `responsive.spec.ts`);
 - mobile Chromium: 390 × 844.
 
 ```bash
