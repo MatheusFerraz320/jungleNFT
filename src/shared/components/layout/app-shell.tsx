@@ -87,7 +87,7 @@ export function SearchDialog({ trigger }: { trigger?: ReactNode }) {
   );
 }
 
-export function AppHeader() {
+export function AppHeader({ cartCount = 0 }: { cartCount?: number }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const showLine = pathname === '/';
 
@@ -138,21 +138,19 @@ export function AppHeader() {
 
           <div className="ml-auto flex items-start gap-[25px]">
             <SearchDialog />
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label="Abrir carrinho, 0 itens"
-              className="relative mt-0.5 h-[30px] w-[30px] rounded-sm p-0 hover:bg-transparent"
-              onClick={() => toast.info('O carrinho será implementado na próxima etapa.')}
+            <Link
+              to="/carrinho"
+              aria-label={`Abrir carrinho, ${cartCount} ${cartCount === 1 ? 'item' : 'itens'}`}
+              className="focus-visible:ring-ring relative mt-0.5 block h-[30px] w-[30px] rounded-sm focus-visible:ring-2 focus-visible:outline-none"
             >
               <FigmaCartIcon className="size-[30px]" />
               <span
                 aria-hidden="true"
                 className="bg-primary text-primary-foreground absolute top-[3px] left-4 grid size-4 place-items-center rounded-full text-[10px] leading-none font-medium"
               >
-                0
+                {cartCount}
               </span>
-            </Button>
+            </Link>
             <Button
               className="ml-[5px] h-[35px] w-[100px] gap-1 rounded-md px-0 text-base leading-[21px] font-medium"
               onClick={() => toast.info('O login será implementado na próxima etapa.')}
@@ -207,14 +205,13 @@ export function MobileBottomNav() {
           >
             <ScanLine aria-hidden="true" className="size-8" />
           </button>
-          <button
-            type="button"
+          <Link
+            to="/carrinho"
             aria-label="Carrinho"
             className={cn(itemClass, 'absolute top-[27px] right-[62px]')}
-            onClick={() => toast.info('O carrinho será implementado na próxima etapa.')}
           >
             <FigmaCartIcon className="size-6" />
-          </button>
+          </Link>
           <button
             type="button"
             aria-label="Perfil"

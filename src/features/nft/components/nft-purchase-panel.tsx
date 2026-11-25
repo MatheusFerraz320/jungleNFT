@@ -1,6 +1,8 @@
 import { Heart, Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 import { toast } from 'sonner';
+import { addToCart } from '@/features/cart';
 import type { NftDetail } from '@/shared/contracts';
 import { ethLabel, multiplyEth } from '@/shared/lib/decimal';
 
@@ -10,6 +12,7 @@ const pillClass =
 export function NftPurchasePanel({ nft }: { nft: NftDetail }) {
   const [quantity, setQuantity] = useState(1);
   const [favorite, setFavorite] = useState(false);
+  const navigate = useNavigate();
 
   const soldOut = nft.availableEditions === 0;
   const maxQuantity = Math.max(1, nft.availableEditions);
@@ -56,7 +59,10 @@ export function NftPurchasePanel({ nft }: { nft: NftDetail }) {
         <button
           type="button"
           disabled={soldOut}
-          onClick={() => toast.info('O checkout será implementado na próxima etapa.')}
+          onClick={() => {
+            addToCart(nft, quantity);
+            void navigate({ to: '/carrinho' });
+          }}
           className="bg-primary text-primary-foreground focus-visible:ring-ring -mt-0.5 h-10 w-[130px] rounded text-sm font-bold uppercase focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
         >
           {soldOut ? 'Esgotado' : 'Comprar'}
