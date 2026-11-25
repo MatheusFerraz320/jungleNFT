@@ -3,27 +3,25 @@ import { createRoot } from 'react-dom/client';
 import '@fontsource-variable/roboto-mono';
 import App from './App';
 import { markApiReady } from '@/shared/api/api-ready';
-import { env } from '@/shared/config/env';
 import './app/styles/globals.css';
 
+/**
+ * Camada de mocks: o chunk dinâmico é pré-carregado pelo HTML (ver `preloadMocksChunk` no
+ * vite.config) e importado aqui sem bloquear o render; HTTP e Socket.IO aguardam `apiReady`.
+ * Com `VITE_MOCKS=disabled` o import é eliminado do build.
+ */
 function startMocks() {
-  if (!env.mocksEnabled) {
+  if (import.meta.env.VITE_MOCKS === 'disabled') {
     markApiReady();
     return;
   }
 
-  // Não bloqueia o render nem disputa banda com o bundle crítico: o MSW é carregado quando o
-  // navegador está ocioso e as chamadas de rede aguardam `apiReady` (ver http.ts e socket.ts).
-  const load = () =>
-    void import('@/mocks/browser')
-      .then(({ startMocking }) => startMocking())
-      .catch((error: unknown) => {
-        console.error('Falha ao iniciar a camada de mocks.', error);
-      })
-      .finally(markApiReady);
-
-  if ('requestIdleCallback' in window) window.requestIdleCallback(load, { timeout: 1_000 });
-  else setTimeout(load, 200);
+  void import('@/mocks/browser')
+    .then(({ startMocking }) => startMocking())
+    .catch((error: unknown) => {
+      console.error('Falha ao iniciar a camada de mocks.', error);
+    })
+    .finally(markApiReady);
 }
 
 function bootstrap() {

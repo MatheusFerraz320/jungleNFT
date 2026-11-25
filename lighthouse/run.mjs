@@ -60,12 +60,18 @@ async function ensureServer() {
 await mkdir(reportsDir, { recursive: true });
 
 const server = await ensureServer();
-// Perfil temporário explícito: sem isso o chrome-launcher pode criar o diretório no cwd (WSL).
+// Perfil temporário explícito via flag. `userDataDir` do chrome-launcher é reescrito como caminho
+// Windows/UNC no WSL e acaba criando pastas dentro do projeto; por isso o desativamos (`false`).
 const userDataDir = await mkdtemp(path.join(os.tmpdir(), 'lighthouse-profile-'));
 const chrome = await chromeLauncher.launch({
-  userDataDir,
+  userDataDir: false,
   chromePath: process.env.CHROME_PATH ?? chromium.executablePath(),
-  chromeFlags: ['--headless', '--no-sandbox', '--disable-dev-shm-usage'],
+  chromeFlags: [
+    '--headless',
+    '--no-sandbox',
+    '--disable-dev-shm-usage',
+    `--user-data-dir=${userDataDir}`,
+  ],
 });
 
 const summary = {

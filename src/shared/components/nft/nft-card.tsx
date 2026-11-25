@@ -3,7 +3,7 @@ import { Heart } from 'lucide-react';
 import type { NftSummary } from '@/shared/contracts';
 import { useFavoriteControls } from '@/shared/hooks/favorites-context';
 import { cn } from '@/shared/lib/cn';
-import { ethLabel } from '@/shared/lib/decimal';
+import { ethLabel } from '@/shared/lib/eth-label';
 import { rarityBadgeLabel } from '@/shared/lib/nft-labels';
 
 interface NftCardProps {

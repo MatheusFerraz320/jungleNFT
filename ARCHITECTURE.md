@@ -158,7 +158,7 @@ perdidos durante uma queda são recuperados pela reconciliação REST, não por 
 
 ## 12. Performance
 
-Ver [`docs/performance.md`](docs/performance.md): mediana de 3 execuções por página/perfil (desktop 99; mobile 80–82, abaixo da meta, com análise).
+Ver [`docs/performance.md`](docs/performance.md): mediana de 3 execuções por página/perfil (desktop 99; mobile 80–81, abaixo da meta, com análise).
 Otimizações: render sem esperar o MSW, preload do LCP, code splitting por rota, skeletons com dimensão do conteúdo (CLS 0), WebP e fonte local.
 
 ## 13. Testes

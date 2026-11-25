@@ -28,7 +28,4 @@ export function formatEth(value: string | Decimal, maximumFractionDigits = 4) {
   }).format(decimal.toNumber());
 }
 
-/** Exibe o valor decimal exatamente como trafega na API, sem arredondar (ex.: "1.19 ETH"). */
-export function ethLabel(value: string | Decimal) {
-  return `${typeof value === 'string' ? value : value.toString()} ETH`;
-}
+export { ethLabel } from './eth-label';

@@ -213,10 +213,10 @@ Audita **Início** e **Detalhe** em desktop e mobile (3 execuções cada, median
 dos mocks. Relatórios HTML/JSON, versões, ambiente e condições em `lighthouse/reports/`; análise em
 [`docs/performance.md`](docs/performance.md).
 
-| Perfil                     | Performance | Accessibility | Best Practices |       SEO |          LCP |   CLS |         TBT |
-| -------------------------- | ----------: | ------------: | -------------: | --------: | -----------: | ----: | ----------: |
-| Desktop (Início / Detalhe) |     99 / 99 |     100 / 100 |      100 / 100 | 100 / 100 | 771 / 904 ms | 0 / 0 |    0 / 0 ms |
-| Mobile (Início / Detalhe)  |     80 / 82 |     100 / 100 |      100 / 100 | 100 / 100 |  4,2 / 4,0 s | 0 / 0 | 125 / 48 ms |
+| Perfil                     | Performance | Accessibility | Best Practices |       SEO |          LCP |   CLS |        TBT |
+| -------------------------- | ----------: | ------------: | -------------: | --------: | -----------: | ----: | ---------: |
+| Desktop (Início / Detalhe) |     99 / 99 |     100 / 100 |      100 / 100 | 100 / 100 | 741 / 811 ms | 0 / 0 |   0 / 0 ms |
+| Mobile (Início / Detalhe)  |     80 / 81 |     100 / 100 |      100 / 100 | 100 / 100 |  4,0 / 4,0 s | 0 / 0 | 75 / 62 ms |
 
 O mobile fica abaixo de 90 em Performance (SPA com render no cliente sob 4G lento + CPU 4×); causas e caminhos na análise.
 
