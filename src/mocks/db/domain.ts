@@ -856,6 +856,7 @@ export class MockDomain {
       const nft = this.requireNft(item.nftId);
       return {
         nftId: item.nftId,
+        tokenId: nft.tokenId,
         name: nft.name,
         collectionName: nft.collectionName,
         imageUrl: nft.imageUrl,

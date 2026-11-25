@@ -1,10 +1,15 @@
 export { CartPage } from './components/cart-page';
 export {
-  addToCart,
-  clearCart,
-  removeFromCart,
-  setCartQuantity,
-  setCoupon,
-  useCart,
-} from './store/cart-store';
-export type { CartLine, CartView } from './store/cart-store';
+  cartQueryOptions,
+  quoteQueryOptions,
+  useAddToCart,
+  useCartCount,
+  useCartQuery,
+  useCartView,
+  useRemoveCartItem,
+  useUpdateCartItem,
+  type CartLine,
+  type CartView,
+} from './hooks/use-cart';
+export { createQuote } from './api/cart-api';
+export { setCoupon, useCoupon } from './store/coupon-store';

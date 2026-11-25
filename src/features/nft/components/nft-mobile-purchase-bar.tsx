@@ -2,7 +2,7 @@ import { Minus, Plus, ShoppingCart } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { toast } from 'sonner';
-import { addToCart } from '@/features/cart';
+import { useAddToCart } from '@/features/cart';
 import type { NftDetail } from '@/shared/contracts';
 import { ethLabel, multiplyEth } from '@/shared/lib/decimal';
 
@@ -12,6 +12,7 @@ const pillClass =
 export function NftMobilePurchaseBar({ nft }: { nft: NftDetail }) {
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
+  const addToCart = useAddToCart();
   const maxQuantity = Math.max(1, nft.availableEditions);
   const soldOut = nft.availableEditions === 0;
   const total = ethLabel(multiplyEth(nft.priceEth, quantity));
@@ -52,10 +53,12 @@ export function NftMobilePurchaseBar({ nft }: { nft: NftDetail }) {
       <div className="mt-[22px] flex items-center gap-3">
         <button
           type="button"
-          disabled={soldOut}
+          disabled={soldOut || addToCart.isPending}
           onClick={() => {
-            addToCart(nft, quantity);
-            void navigate({ to: '/carrinho' });
+            addToCart.mutate(
+              { nftId: nft.id, quantity },
+              { onSuccess: () => void navigate({ to: '/carrinho' }) },
+            );
           }}
           className="text-primary-foreground focus-visible:ring-ring h-[60px] w-[196px] rounded-full bg-[linear-gradient(135deg,#d28a4c,#b87a44)] text-base font-bold focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
         >
@@ -65,8 +68,10 @@ export function NftMobilePurchaseBar({ nft }: { nft: NftDetail }) {
           type="button"
           aria-label="Adicionar ao carrinho"
           onClick={() => {
-            addToCart(nft, quantity);
-            toast.success('Adicionado ao carrinho.');
+            addToCart.mutate(
+              { nftId: nft.id, quantity },
+              { onSuccess: () => toast.success('Adicionado ao carrinho.') },
+            );
           }}
           className="text-muted-foreground focus-visible:ring-ring grid size-[60px] place-items-center rounded-full border border-[#3a2218] bg-[#2a1a14] focus-visible:ring-2 focus-visible:outline-none"
         >

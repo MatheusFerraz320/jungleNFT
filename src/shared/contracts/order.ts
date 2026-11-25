@@ -5,6 +5,7 @@ export const OrderStatusSchema = z.enum(['pending', 'confirmed', 'rejected']);
 
 export const OrderItemSnapshotSchema = z.object({
   nftId: z.string().min(1),
+  tokenId: z.string().min(1),
   name: z.string().min(1),
   collectionName: z.string().min(1),
   imageUrl: z.string().min(1),

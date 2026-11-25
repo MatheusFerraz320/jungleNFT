@@ -1,17 +1,24 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import { ChevronDown } from 'lucide-react';
 import { useId, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
-import { clearCart, useCart } from '@/features/cart';
-import { createOrderId, saveOrder } from '@/features/orders/store/local-orders';
+import { useCurrentUser } from '@/features/auth';
+import { useCartView, type CartView } from '@/features/cart';
+import { useWallets } from '@/features/wallets';
 import { Field, SelectInput, TextInput, controlClass } from '@/shared/components/form/form-fields';
 import { networkOptions, walletTypeOptions } from '@/shared/components/form/options';
 import { Container } from '@/shared/components/layout/container';
 import { MobileTopBar } from '@/shared/components/layout/mobile-top-bar';
+import { Skeleton } from '@/shared/components/ui/skeleton';
+import { NetworkSchema, type Network, type Wallet } from '@/shared/contracts';
 import { cn } from '@/shared/lib/cn';
 import { ethLabel, multiplyEth } from '@/shared/lib/decimal';
+import { networkLabels } from '@/shared/lib/nft-labels';
+import { useWalletConnection, type ConnectionState } from '../hooks/use-wallet-connection';
+import { ReviewDialog } from './review-dialog';
 
 const collectorSchema = z.object({
   displayName: z.string().trim().min(2, 'Informe o nome de exibição.'),
@@ -33,24 +40,105 @@ const collectorSchema = z.object({
 
 type CollectorForm = z.infer<typeof collectorSchema>;
 
-const walletOptions = [
-  { id: 'walletconnect', label: 'WalletConnect' },
-  { id: 'metamask', label: 'MetaMask' },
-  { id: 'coinbase', label: 'Coinbase Wallet' },
-] as const;
+const connectionText: Record<ConnectionState, string> = {
+  disconnected: 'Carteira desconectada',
+  connecting: 'Conectando carteira…',
+  connected: 'Carteira conectada',
+  rejected: 'Conexão recusada. Tente novamente ou escolha outra carteira.',
+};
+
+function toNetwork(value: string | undefined): Network {
+  const parsed = NetworkSchema.safeParse(value);
+  return parsed.success ? parsed.data : 'ethereum';
+}
+
+function shortAddress(address: string) {
+  return `${address.slice(0, 6)}…${address.slice(-4)}`;
+}
+
+function WalletRadios({
+  wallets,
+  selectedId,
+  onSelect,
+  name,
+  mobile,
+}: {
+  wallets: Wallet[];
+  selectedId: string;
+  onSelect: (wallet: Wallet) => void;
+  name: string;
+  mobile?: boolean;
+}) {
+  return (
+    <div role="radiogroup" aria-label="Carteiras cadastradas" className="flex flex-col gap-4">
+      {wallets.map((wallet) => {
+        const selected = wallet.id === selectedId;
+        return (
+          <label
+            key={wallet.id}
+            className={cn(
+              'focus-within:ring-ring flex cursor-pointer items-center gap-3 focus-within:ring-2',
+              mobile
+                ? 'bg-card min-h-[94px] items-start rounded-[16px] px-4 py-4'
+                : 'border-line min-h-[46px] rounded border px-4 py-2 text-sm',
+              selected && !mobile && 'border-primary',
+            )}
+          >
+            <input
+              type="radio"
+              name={name}
+              checked={selected}
+              onChange={() => onSelect(wallet)}
+              className="sr-only"
+            />
+            <span
+              aria-hidden="true"
+              className={cn(
+                'border-primary grid size-[18px] shrink-0 place-items-center rounded-full border-2',
+                mobile && 'mt-6',
+              )}
+            >
+              {selected ? <span className="bg-primary size-2 rounded-full" /> : null}
+            </span>
+            <span className={cn('leading-[22px]', mobile && 'text-sm')}>
+              <span className={cn('block', mobile ? 'text-base font-bold' : 'font-bold')}>
+                {wallet.label}
+                {wallet.isPrimary ? <span className="sr-only"> (principal)</span> : null}
+              </span>
+              <span className="text-muted-foreground block">
+                {shortAddress(wallet.address)} · {networkLabels[wallet.network]}
+              </span>
+            </span>
+          </label>
+        );
+      })}
+    </div>
+  );
+}
+
+interface SummaryProps {
+  cart: CartView;
+  wallets: Wallet[];
+  walletId: string;
+  onSelectWallet: (wallet: Wallet) => void;
+  connection: ConnectionState;
+  onDisconnect: () => void;
+  onSubmit: () => void;
+  pending: boolean;
+}
 
 function OrderSummary({
   cart,
+  wallets,
+  walletId,
+  onSelectWallet,
+  connection,
+  onDisconnect,
   onSubmit,
   pending,
-}: {
-  cart: ReturnType<typeof useCart>;
-  onSubmit: () => void;
-  pending: boolean;
-}) {
-  const [wallet, setWallet] = useState<string>('coinbase');
+}: SummaryProps) {
   const groupId = useId();
-  const row = 'flex items-baseline justify-between';
+  const row = 'flex items-center justify-between';
 
   return (
     <aside aria-labelledby="order-title" className="max-sm:hidden">
@@ -64,7 +152,7 @@ function OrderSummary({
 
       <ul className="mt-[11px] flex flex-col gap-3">
         {cart.lines.map((line) => (
-          <li key={line.nftId} className="bg-card flex h-[70px] items-center gap-2 pr-3 pl-1">
+          <li key={line.itemId} className="bg-card flex h-[70px] items-center gap-2 pr-3 pl-1">
             <img
               src={line.imageUrl}
               alt=""
@@ -93,7 +181,7 @@ function OrderSummary({
         </Link>
       </p>
 
-      <dl className="mt-3 text-[15px] leading-5">
+      <dl className="mt-3 text-[15px] leading-5" aria-busy={cart.isQuoting}>
         <div className={cn(row, 'h-8')}>
           <dt>Subtotal</dt>
           <dd className="text-lg">{ethLabel(cart.subtotal)}</dd>
@@ -114,49 +202,40 @@ function OrderSummary({
       </dl>
 
       <fieldset className="mt-3 border-0 p-0">
-        <legend className="mx-auto text-[17px] leading-5 font-bold">Carteira e rede</legend>
-        <div role="radiogroup" aria-labelledby={groupId} className="mt-3 flex flex-col gap-4">
-          <span id={groupId} className="sr-only">
-            Carteira e rede
-          </span>
-          {walletOptions.map((option) => {
-            const selected = wallet === option.id;
-            return (
-              <label
-                key={option.id}
-                className={cn(
-                  'border-line focus-within:ring-ring flex h-[46px] cursor-pointer items-center gap-3 rounded border px-4 text-sm focus-within:ring-2',
-                  selected && 'border-primary',
-                )}
-              >
-                <input
-                  type="radio"
-                  name="wallet"
-                  value={option.id}
-                  checked={selected}
-                  onChange={() => setWallet(option.id)}
-                  className="sr-only"
-                />
-                <span
-                  aria-hidden="true"
-                  className="border-primary grid size-4 place-items-center rounded-full border-2"
-                >
-                  {selected ? <span className="bg-primary size-2 rounded-full" /> : null}
-                </span>
-                {option.label}
-              </label>
-            );
-          })}
+        <legend id={groupId} className="mx-auto text-[17px] leading-5 font-bold">
+          Carteira e rede
+        </legend>
+        <div className="mt-3">
+          <WalletRadios
+            wallets={wallets}
+            selectedId={walletId}
+            onSelect={onSelectWallet}
+            name="wallet"
+          />
         </div>
+        <p
+          role="status"
+          className={cn(
+            'mt-3 flex items-center justify-between text-xs',
+            connection === 'rejected' ? 'text-destructive' : 'text-muted-foreground',
+          )}
+        >
+          <span>{connectionText[connection]}</span>
+          {connection === 'connected' ? (
+            <button type="button" onClick={onDisconnect} className="text-primary hover:underline">
+              Desconectar
+            </button>
+          ) : null}
+        </p>
       </fieldset>
 
       <button
         type="button"
         onClick={onSubmit}
         disabled={pending}
-        className="bg-primary text-primary-foreground focus-visible:ring-ring mt-6 h-10 w-full rounded text-[15px] font-bold focus-visible:ring-2 focus-visible:outline-none disabled:opacity-60"
+        className="bg-primary text-primary-foreground focus-visible:ring-ring mt-4 h-10 w-full rounded text-[15px] font-bold focus-visible:ring-2 focus-visible:outline-none disabled:opacity-60"
       >
-        Confirmar compra
+        {connection === 'connecting' ? 'Conectando…' : 'Confirmar compra'}
       </button>
     </aside>
   );
@@ -164,86 +243,56 @@ function OrderSummary({
 
 function MobilePayment({
   cart,
+  wallets,
+  walletId,
+  onSelectWallet,
+  provider,
+  onProvider,
+  connection,
   onSubmit,
   pending,
 }: {
-  cart: ReturnType<typeof useCart>;
+  cart: CartView;
+  wallets: Wallet[];
+  walletId: string;
+  onSelectWallet: (wallet: Wallet) => void;
+  provider: string;
+  onProvider: (provider: string) => void;
+  connection: ConnectionState;
   onSubmit: () => void;
   pending: boolean;
 }) {
-  const [saved, setSaved] = useState('reserva');
-  const [wallet, setWallet] = useState('coinbase');
-
-  const savedWallets = [
-    { id: 'reserva', title: 'Reserva', address: 'nova.kurio.eth', network: 'Rede Polygon' },
-    {
-      id: 'principal',
-      title: 'Principal',
-      address: '0xA91F…E82C',
-      network: 'Rede principal Ethereum',
-    },
-  ];
-
-  const radio = (selected: boolean) => (
-    <span
-      aria-hidden="true"
-      className="border-primary grid size-[18px] shrink-0 place-items-center rounded-full border-2"
-    >
-      {selected ? <span className="bg-primary size-2 rounded-full" /> : null}
-    </span>
-  );
-
   return (
     <div className="px-6 sm:hidden">
       <div className="flex items-center justify-between">
         <h2 className="text-base leading-5 font-bold">Carteira conectada</h2>
-        <button type="button" className="text-primary text-sm font-medium">
+        <Link to="/carteiras" className="text-primary text-sm font-medium">
           Trocar carteira
-        </button>
+        </Link>
       </div>
 
-      <div
-        role="radiogroup"
-        aria-label="Carteiras cadastradas"
-        className="mt-4 flex flex-col gap-4"
-      >
-        {savedWallets.map((item) => (
-          <label
-            key={item.id}
-            className="bg-card focus-within:ring-ring relative flex min-h-[94px] cursor-pointer items-start gap-4 rounded-[16px] px-4 py-4 focus-within:ring-2"
-          >
-            <input
-              type="radio"
-              name="saved-wallet"
-              checked={saved === item.id}
-              onChange={() => setSaved(item.id)}
-              className="sr-only"
-            />
-            <span className="mt-6">{radio(saved === item.id)}</span>
-            <span className="text-sm leading-[22px]">
-              <span className="block text-base font-bold">{item.title}</span>
-              <span className="text-muted-foreground block">{item.address}</span>
-              <span className="text-muted-foreground block">{item.network}</span>
-            </span>
-            <span aria-hidden="true" className="text-muted-foreground absolute top-6 right-4">
-              ⋮
-            </span>
-          </label>
-        ))}
+      <div className="mt-4">
+        <WalletRadios
+          wallets={wallets}
+          selectedId={walletId}
+          onSelect={onSelectWallet}
+          name="saved-wallet"
+          mobile
+        />
       </div>
 
       <h2 className="mt-5 text-base leading-5 font-bold">Carteira e rede</h2>
-      <div role="radiogroup" aria-label="Carteira e rede" className="mt-4 flex flex-col gap-4">
-        {walletOptions.map((option) => (
+      <div role="radiogroup" aria-label="Provedor de carteira" className="mt-4 flex flex-col gap-4">
+        {walletTypeOptions.map((option) => (
           <label
-            key={option.id}
+            key={option.value}
             className="bg-card focus-within:ring-ring flex h-[62px] cursor-pointer items-center gap-4 rounded-[16px] px-4 focus-within:ring-2"
           >
             <input
               type="radio"
-              name="mobile-wallet"
-              checked={wallet === option.id}
-              onChange={() => setWallet(option.id)}
+              name="provider"
+              checked={provider === option.value}
+              onChange={() => onProvider(option.value)}
               className="sr-only"
             />
             <span
@@ -253,10 +302,27 @@ function MobilePayment({
               {option.label[0]}
             </span>
             <span className="flex-1 text-sm">{option.label}</span>
-            {radio(wallet === option.id)}
+            <span
+              aria-hidden="true"
+              className="border-primary grid size-[18px] shrink-0 place-items-center rounded-full border-2"
+            >
+              {provider === option.value ? (
+                <span className="bg-primary size-2 rounded-full" />
+              ) : null}
+            </span>
           </label>
         ))}
       </div>
+
+      <p
+        role="status"
+        className={cn(
+          'mt-3 text-xs',
+          connection === 'rejected' ? 'text-destructive' : 'text-muted-foreground',
+        )}
+      >
+        {connectionText[connection]}
+      </p>
 
       <p className="mt-4 flex items-baseline justify-end gap-6 text-base">
         <span className="font-bold">Total:</span>
@@ -267,75 +333,311 @@ function MobilePayment({
         type="button"
         onClick={onSubmit}
         disabled={pending}
-        className="text-primary-foreground focus-visible:ring-ring mt-[96px] h-[60px] w-full rounded-full bg-[linear-gradient(135deg,#d28a4c,#b87a44)] text-base font-bold focus-visible:ring-2 focus-visible:outline-none disabled:opacity-60"
+        className="text-primary-foreground focus-visible:ring-ring mt-[72px] h-[60px] w-full rounded-full bg-[linear-gradient(135deg,#d28a4c,#b87a44)] text-base font-bold focus-visible:ring-2 focus-visible:outline-none disabled:opacity-60"
       >
-        Confirmar compra
+        {connection === 'connecting' ? 'Conectando…' : 'Confirmar compra'}
       </button>
     </div>
   );
 }
 
-export function PaymentPage() {
-  const cart = useCart();
-  const navigate = useNavigate();
-  const [pending, setPending] = useState(false);
+function PaymentSkeleton() {
+  return (
+    <div
+      role="status"
+      aria-label="Carregando pagamento"
+      aria-busy="true"
+      className="mt-6 grid gap-6 max-sm:px-6 lg:grid-cols-[763px_405px] lg:gap-x-8"
+    >
+      <div className="grid grid-cols-2 gap-x-6 gap-y-5">
+        {Array.from({ length: 10 }, (_, index) => (
+          <Skeleton key={index} className="skeleton-shimmer h-14 w-full" />
+        ))}
+      </div>
+      <div className="flex flex-col gap-3">
+        <Skeleton className="skeleton-shimmer h-[70px] w-full" />
+        <Skeleton className="skeleton-shimmer h-[70px] w-full" />
+        <Skeleton className="skeleton-shimmer h-40 w-full" />
+      </div>
+    </div>
+  );
+}
+
+function PaymentEmpty({
+  title,
+  text,
+  to,
+  cta,
+}: {
+  title: string;
+  text: string;
+  to: '/' | '/carteiras';
+  cta: string;
+}) {
+  return (
+    <div className="mt-16 text-center max-sm:px-6">
+      <h1 className="text-xl font-bold">{title}</h1>
+      <p className="text-muted-foreground mt-2 text-sm">{text}</p>
+      <Link
+        to={to}
+        className="bg-primary text-primary-foreground mt-6 inline-flex h-10 items-center rounded px-6 text-[15px] font-bold"
+      >
+        {cta}
+      </Link>
+    </div>
+  );
+}
+
+interface CheckoutFormProps {
+  wallets: Wallet[];
+}
+
+function CheckoutContent({ wallets }: CheckoutFormProps) {
+  const user = useCurrentUser();
+  const primary = wallets.find((wallet) => wallet.isPrimary) ?? wallets[0];
+  const [walletId, setWalletId] = useState(primary?.id ?? '');
+  const [provider, setProvider] = useState('metamask');
+  const [reviewOpen, setReviewOpen] = useState(false);
+  const connection = useWalletConnection();
+  const selected = wallets.find((wallet) => wallet.id === walletId) ?? primary;
+
   const {
     register,
     handleSubmit,
+    setValue,
+    control,
     formState: { errors },
-  } = useForm<CollectorForm>({ resolver: zodResolver(collectorSchema), mode: 'onSubmit' });
+  } = useForm<CollectorForm>({
+    resolver: zodResolver(collectorSchema),
+    defaultValues: {
+      displayName: user?.name ?? '',
+      email: user?.email ?? '',
+      network: primary?.network ?? 'ethereum',
+      walletAddress: primary?.address ?? '',
+      walletType: 'metamask',
+    },
+  });
 
-  function finish() {
-    if (cart.lines.length === 0) return;
-    setPending(true);
-    const id = createOrderId();
-    saveOrder({
-      id,
-      createdAt: new Date().toISOString(),
-      transactionHash: '0xA91F7c0d3b52E1f4a86B9d0C2e5f31a7D4b8E82C',
-      walletLabel: 'MetaMask',
-      network: 'Ethereum',
-      lines: cart.lines.map(({ nftId, name, tokenId, imageUrl, priceEth, quantity }) => ({
-        nftId,
-        name,
-        tokenId,
-        imageUrl,
-        priceEth,
-        quantity,
-      })),
-      subtotalEth: cart.subtotal.toString(),
-      discountEth: cart.discount.toString(),
-      feeEth: cart.fee.toString(),
-      totalEth: cart.total.toString(),
-    });
-    clearCart();
-    void navigate({ to: '/pedido/$orderId', params: { orderId: id } });
+  const [networkValue, displayName, email] = useWatch({
+    control,
+    name: ['network', 'displayName', 'email'],
+  });
+  const network = toNetwork(networkValue);
+  const cart = useCartView(network);
+
+  function selectWallet(wallet: Wallet) {
+    setWalletId(wallet.id);
+    setValue('walletAddress', wallet.address, { shouldValidate: true });
+    setValue('network', wallet.network);
+    connection.disconnect();
   }
 
-  const submitDesktop = handleSubmit(finish);
+  async function openReview(chosenProvider: string) {
+    if (!selected) return;
 
+    if (connection.state !== 'connected') {
+      const connected = await connection.connect(chosenProvider);
+      if (!connected) {
+        toast.error('A carteira recusou a conexão.');
+        return;
+      }
+    }
+    setReviewOpen(true);
+  }
+
+  const submitDesktop = handleSubmit((values) => openReview(values.walletType));
+
+  const collector = {
+    name: displayName || user?.name || 'Colecionador',
+    email: email || user?.email || '',
+  };
+
+  if (cart.isPending) return <PaymentSkeleton />;
   if (cart.lines.length === 0) {
     return (
-      <main className="flex-1 pb-10">
-        <Container className="pt-8 max-sm:px-0 max-sm:pt-0">
-          <MobileTopBar title="Pagamento com carteira" fallbackTo="/carrinho" />
-          <div className="mt-16 text-center">
-            <h1 className="text-xl font-bold">Nada para pagar ainda</h1>
-            <p className="text-muted-foreground mt-2 text-sm">
-              Adicione NFTs ao carrinho primeiro.
-            </p>
-            <Link
-              to="/"
-              hash="catalogo"
-              className="bg-primary text-primary-foreground mt-6 inline-flex h-10 items-center rounded px-6 text-[15px] font-bold"
-            >
-              Explorar NFTs
-            </Link>
-          </div>
-        </Container>
-      </main>
+      <PaymentEmpty
+        title="Nada para pagar ainda"
+        text="Adicione NFTs ao carrinho primeiro."
+        to="/"
+        cta="Explorar NFTs"
+      />
     );
   }
+
+  const busy = connection.state === 'connecting';
+
+  return (
+    <>
+      <div className="mt-[22px] hidden sm:grid lg:grid-cols-[763px_405px] lg:gap-x-8">
+        <form
+          onSubmit={(event) => void submitDesktop(event)}
+          noValidate
+          aria-label="Dados do colecionador"
+        >
+          <h1 className="text-[17px] leading-5 font-bold">Perfil do colecionador</h1>
+          <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-[18px]">
+            <Field
+              label="Nome de exibição"
+              required
+              error={errors.displayName}
+              htmlFor="displayName"
+            >
+              <TextInput
+                id="displayName"
+                register={register('displayName')}
+                error={errors.displayName}
+              />
+            </Field>
+            <Field label="Nome de usuário" required error={errors.username} htmlFor="username">
+              <TextInput id="username" register={register('username')} error={errors.username} />
+            </Field>
+            <Field label="Rede" required error={errors.network} htmlFor="network">
+              <SelectInput
+                id="network"
+                register={register('network')}
+                error={errors.network}
+                placeholder="Selecione uma rede"
+                options={networkOptions}
+              />
+            </Field>
+            <Field label="Nome do perfil" required error={errors.profileName} htmlFor="profileName">
+              <TextInput
+                id="profileName"
+                register={register('profileName')}
+                error={errors.profileName}
+              />
+            </Field>
+            <Field
+              label="Endereço da carteira"
+              required
+              error={errors.walletAddress}
+              htmlFor="walletAddress"
+            >
+              <TextInput
+                id="walletAddress"
+                register={register('walletAddress')}
+                error={errors.walletAddress}
+                placeholder="Endereço 0x da carteira"
+                className="px-6"
+              />
+            </Field>
+            <Field label="Carteira secundária" htmlFor="secondaryWallet" hideLabel>
+              <TextInput
+                id="secondaryWallet"
+                register={register('secondaryWallet')}
+                placeholder="ENS ou carteira secundária (opcional)"
+                className="px-6"
+              />
+            </Field>
+            <Field label="Tipo de carteira" required error={errors.walletType} htmlFor="walletType">
+              <SelectInput
+                id="walletType"
+                register={register('walletType')}
+                error={errors.walletType}
+                placeholder="Selecione uma carteira"
+                options={walletTypeOptions}
+              />
+            </Field>
+            <Field
+              label="Código de indicação"
+              required
+              error={errors.referralCode}
+              htmlFor="referralCode"
+            >
+              <TextInput
+                id="referralCode"
+                register={register('referralCode')}
+                error={errors.referralCode}
+              />
+            </Field>
+            <Field label="E-mail" required error={errors.email} htmlFor="email">
+              <TextInput
+                id="email"
+                type="email"
+                register={register('email')}
+                error={errors.email}
+              />
+            </Field>
+            <Field label="Nome ENS" required error={errors.ensName} htmlFor="ensName">
+              <div className="flex gap-2">
+                <TextInput
+                  id="ensName"
+                  register={register('ensName')}
+                  error={errors.ensName}
+                  className="min-w-0 flex-1"
+                />
+                <span
+                  className={cn(
+                    controlClass,
+                    'flex w-[78px] shrink-0 items-center justify-between',
+                  )}
+                >
+                  .eth
+                  <ChevronDown aria-hidden="true" className="size-4" />
+                </span>
+              </div>
+            </Field>
+          </div>
+
+          <label className="mt-[25px] flex w-fit cursor-pointer items-center gap-2 text-[15px]">
+            <input type="checkbox" className="peer sr-only" {...register('useAnotherWallet')} />
+            <span
+              aria-hidden="true"
+              className="border-primary peer-checked:bg-primary peer-focus-visible:ring-ring size-4 rounded-full border-2 peer-focus-visible:ring-2"
+            />
+            Usar outra carteira?
+          </label>
+
+          <label htmlFor="note" className="mt-[22px] block text-[15px] leading-4">
+            Observação do colecionador (opcional)
+          </label>
+          <textarea
+            id="note"
+            rows={5}
+            className="border-line focus-visible:ring-ring mt-3 h-[150px] w-[350px] max-w-full resize-none rounded border bg-transparent p-3 text-sm focus-visible:ring-2 focus-visible:outline-none"
+            {...register('note')}
+          />
+        </form>
+
+        <OrderSummary
+          cart={cart}
+          wallets={wallets}
+          walletId={walletId}
+          onSelectWallet={selectWallet}
+          connection={connection.state}
+          onDisconnect={connection.disconnect}
+          onSubmit={() => void submitDesktop()}
+          pending={busy}
+        />
+      </div>
+
+      <MobilePayment
+        cart={cart}
+        wallets={wallets}
+        walletId={walletId}
+        onSelectWallet={selectWallet}
+        provider={provider}
+        onProvider={setProvider}
+        connection={connection.state}
+        onSubmit={() => void openReview(provider)}
+        pending={busy}
+      />
+
+      {selected ? (
+        <ReviewDialog
+          open={reviewOpen}
+          onOpenChange={setReviewOpen}
+          network={network}
+          wallet={selected}
+          collector={collector}
+        />
+      ) : null}
+    </>
+  );
+}
+
+export function PaymentPage() {
+  const wallets = useWallets();
 
   return (
     <main className="flex-1 pb-10">
@@ -357,147 +659,18 @@ export function PaymentPage() {
           <span aria-current="page">Pagamento</span>
         </nav>
 
-        <div className="mt-[22px] hidden sm:grid lg:grid-cols-[763px_405px] lg:gap-x-8">
-          <form onSubmit={submitDesktop} noValidate aria-label="Dados do colecionador">
-            <h1 className="text-[17px] leading-5 font-bold">Perfil do colecionador</h1>
-            <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-[18px]">
-              <Field
-                label="Nome de exibição"
-                required
-                error={errors.displayName}
-                htmlFor="displayName"
-              >
-                <TextInput
-                  id="displayName"
-                  register={register('displayName')}
-                  error={errors.displayName}
-                />
-              </Field>
-              <Field label="Nome de usuário" required error={errors.username} htmlFor="username">
-                <TextInput id="username" register={register('username')} error={errors.username} />
-              </Field>
-              <Field label="Rede" required error={errors.network} htmlFor="network">
-                <SelectInput
-                  id="network"
-                  register={register('network')}
-                  error={errors.network}
-                  placeholder="Selecione uma rede"
-                  options={networkOptions}
-                />
-              </Field>
-              <Field
-                label="Nome do perfil"
-                required
-                error={errors.profileName}
-                htmlFor="profileName"
-              >
-                <TextInput
-                  id="profileName"
-                  register={register('profileName')}
-                  error={errors.profileName}
-                />
-              </Field>
-              <Field
-                label="Endereço da carteira"
-                required
-                error={errors.walletAddress}
-                htmlFor="walletAddress"
-              >
-                <TextInput
-                  id="walletAddress"
-                  register={register('walletAddress')}
-                  error={errors.walletAddress}
-                  placeholder="Endereço 0x da carteira"
-                  className="px-6"
-                />
-              </Field>
-              <Field label="Carteira secundária" htmlFor="secondaryWallet" hideLabel>
-                <TextInput
-                  id="secondaryWallet"
-                  register={register('secondaryWallet')}
-                  placeholder="ENS ou carteira secundária (opcional)"
-                  className="px-6"
-                />
-              </Field>
-              <Field
-                label="Tipo de carteira"
-                required
-                error={errors.walletType}
-                htmlFor="walletType"
-              >
-                <SelectInput
-                  id="walletType"
-                  register={register('walletType')}
-                  error={errors.walletType}
-                  placeholder="Selecione uma carteira"
-                  options={walletTypeOptions}
-                />
-              </Field>
-              <Field
-                label="Código de indicação"
-                required
-                error={errors.referralCode}
-                htmlFor="referralCode"
-              >
-                <TextInput
-                  id="referralCode"
-                  register={register('referralCode')}
-                  error={errors.referralCode}
-                />
-              </Field>
-              <Field label="E-mail" required error={errors.email} htmlFor="email">
-                <TextInput
-                  id="email"
-                  type="email"
-                  register={register('email')}
-                  error={errors.email}
-                />
-              </Field>
-              <Field label="Nome ENS" required error={errors.ensName} htmlFor="ensName">
-                <div className="flex gap-2">
-                  <TextInput
-                    id="ensName"
-                    register={register('ensName')}
-                    error={errors.ensName}
-                    className="min-w-0 flex-1"
-                  />
-                  <span
-                    className={cn(
-                      controlClass,
-                      'flex w-[78px] shrink-0 items-center justify-between',
-                    )}
-                  >
-                    .eth
-                    <ChevronDown aria-hidden="true" className="size-4" />
-                  </span>
-                </div>
-              </Field>
-            </div>
-
-            <label className="mt-[25px] flex w-fit cursor-pointer items-center gap-2 text-[15px]">
-              <input type="checkbox" className="peer sr-only" {...register('useAnotherWallet')} />
-              <span
-                aria-hidden="true"
-                className="border-primary peer-checked:bg-primary peer-focus-visible:ring-ring size-4 rounded-full border-2 peer-focus-visible:ring-2"
-              />
-              Usar outra carteira?
-            </label>
-
-            <label htmlFor="note" className="mt-[22px] block text-[15px] leading-4">
-              Observação do colecionador (opcional)
-            </label>
-            <textarea
-              id="note"
-              rows={5}
-              className="border-line focus-visible:ring-ring mt-3 h-[150px] w-[350px] max-w-full resize-none rounded border bg-transparent p-3 text-sm focus-visible:ring-2 focus-visible:outline-none"
-              {...register('note')}
-            />
-          </form>
-
-          <OrderSummary cart={cart} onSubmit={() => void submitDesktop()} pending={pending} />
-        </div>
-
-        <MobilePayment cart={cart} onSubmit={finish} pending={pending} />
+        {wallets.isPending ? (
+          <PaymentSkeleton />
+        ) : !wallets.data || wallets.data.length === 0 ? (
+          <PaymentEmpty
+            title="Cadastre uma carteira"
+            text="Você precisa de ao menos uma carteira cadastrada para concluir a compra."
+            to="/carteiras"
+            cta="Cadastrar carteira"
+          />
+        ) : (
+          <CheckoutContent wallets={wallets.data} />
+        )}
       </Container>
     </main>
   );

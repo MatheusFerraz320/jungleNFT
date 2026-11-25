@@ -2,14 +2,14 @@ import type { ReactNode } from 'react';
 import { useRouterState } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { SessionWatcher, useCurrentUser } from '@/features/auth';
-import { useCart } from '@/features/cart';
+import { useCartCount } from '@/features/cart';
 import { FavoritesProvider } from '@/features/favorites';
 import { AppFooter, AppHeader, MobileBottomNav } from '@/shared/components/layout/app-shell';
 import { AppProviders } from './providers';
 
 function Shell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const cartCount = useCart().count;
+  const cartCount = useCartCount();
   const user = useCurrentUser();
   const isReceipt = pathname.startsWith('/pedido');
   const mobileFooter = pathname === '/' || pathname.startsWith('/nft');
