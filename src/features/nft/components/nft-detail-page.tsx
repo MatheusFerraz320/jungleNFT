@@ -267,29 +267,53 @@ function NftDetailTabs({ nft }: { nft: NftDetail }) {
   );
 }
 
+/**
+ * Skeleton com as mesmas dimensões do conteúdo (por breakpoint) para evitar deslocamento de
+ * layout quando os dados chegam: a altura total reserva galeria, abas e "Mais desta coleção".
+ */
 function NftDetailSkeleton() {
+  const block = 'skeleton-shimmer';
+
   return (
     <div
       role="status"
       aria-label="Carregando NFT"
       aria-busy="true"
-      className="mt-6 grid gap-10 lg:grid-cols-2"
+      className="max-sm:min-h-[2560px] sm:max-lg:min-h-[2150px] lg:min-h-[1405px]"
     >
-      <div className="flex flex-col-reverse gap-4 sm:flex-row">
-        <div className="hidden gap-3 sm:flex sm:flex-col">
-          {Array.from({ length: 4 }, (_, index) => (
-            <Skeleton key={index} className="skeleton-shimmer size-20 rounded-md" />
-          ))}
+      <div className="mt-[11px] grid items-start gap-8 max-sm:hidden lg:grid-cols-[572px_minmax(0,1fr)] lg:gap-[33px]">
+        <div className="flex gap-7">
+          <div className="flex flex-col gap-4">
+            {Array.from({ length: 4 }, (_, index) => (
+              <Skeleton key={index} className={`${block} size-[100px] rounded-lg`} />
+            ))}
+          </div>
+          <Skeleton className={`${block} size-[444px] shrink-0`} />
         </div>
-        <Skeleton className="skeleton-shimmer aspect-square flex-1 rounded-[12px]" />
+        <div className="flex flex-col gap-4">
+          <Skeleton className={`${block} h-[34px] w-2/3`} />
+          <Skeleton className={`${block} h-7 w-1/3`} />
+          <Skeleton className={`${block} h-24 w-full`} />
+          <Skeleton className={`${block} h-8 w-2/3`} />
+          <Skeleton className={`${block} h-[46px] w-full`} />
+          <Skeleton className={`${block} h-28 w-full`} />
+        </div>
       </div>
 
-      <div className="space-y-4">
-        <Skeleton className="skeleton-shimmer h-9 w-2/3" />
-        <Skeleton className="skeleton-shimmer h-6 w-1/3" />
-        <Skeleton className="skeleton-shimmer h-28 w-full" />
-        <Skeleton className="skeleton-shimmer h-10 w-full" />
-        <Skeleton className="skeleton-shimmer h-10 w-2/3" />
+      <div className="sm:hidden">
+        <div className="h-[66px]" />
+        <Skeleton className={`${block} mx-7 h-[326px] rounded-t-[24px]`} />
+        <div className="bg-card min-h-[2248px] rounded-t-[32px] px-6 pt-8">
+          <Skeleton className={`${block} h-7 w-2/3`} />
+          <Skeleton className={`${block} mt-4 h-[75px] w-full`} />
+          <Skeleton className={`${block} mt-4 h-6 w-1/2`} />
+          <Skeleton className={`${block} mt-4 h-24 w-full`} />
+        </div>
+      </div>
+
+      <div className="mt-[94px] max-sm:hidden">
+        <Skeleton className={`${block} h-7 w-1/3`} />
+        <Skeleton className={`${block} mt-6 h-[360px] w-full`} />
       </div>
     </div>
   );

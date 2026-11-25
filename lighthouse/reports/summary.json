@@ -1,12 +1,24 @@
 {
-  "generatedAt": "2026-11-24T14:20:18.788Z",
+  "generatedAt": "2026-11-25T01:51:10.199Z",
   "baseUrl": "http://127.0.0.1:4173",
   "runsPerProfile": 3,
   "lighthouseVersion": "13.6.0",
   "environment": {
-    "node": "v22.20.0",
+    "node": "v24.20.0",
     "platform": "linux",
-    "arch": "x64"
+    "arch": "x64",
+    "os": "Linux 6.18.58.1-microsoft-standard-WSL2",
+    "cpu": "AMD Ryzen 5 5600 6-Core Processor (12 núcleos)",
+    "memoryGb": 9.7,
+    "chromium": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.0.0 Safari/537.36",
+    "packageManager": null
+  },
+  "conditions": {
+    "build": "vite build (produção) servido por vite preview",
+    "mocks": "MSW habilitado, cenário `default` (sem latência artificial)",
+    "throttling": "Presets oficiais do Lighthouse: mobile = Moto G Power, 4G lento simulado e CPU 4x; desktop = sem throttling de rede/CPU",
+    "cache": "Cada medição usa o perfil limpo do Lighthouse (cache frio)",
+    "pages": "Imagens, fonte (Roboto Mono self-hosted) e funcionalidades completas, sem simplificações"
   },
   "measurements": [
     {
@@ -14,21 +26,21 @@
       "pageName": "home",
       "preset": "desktop",
       "median": {
-        "performance": 93,
+        "performance": 99,
         "accessibility": 100,
         "bestPractices": 100,
-        "seo": 91
+        "seo": 100
       },
       "metrics": {
-        "lcpMs": 2600.1466250000003,
-        "cls": 0.0005702008805661794,
-        "tbtMs": 21
+        "lcpMs": 770.75805,
+        "cls": 0.0001631238503866342,
+        "tbtMs": 0
       },
       "rawScores": {
         "performance": [
-          91,
-          93,
-          93
+          99,
+          99,
+          99
         ],
         "accessibility": [
           100,
@@ -41,26 +53,81 @@
           100
         ],
         "seo": [
-          91,
-          91,
-          91
+          100,
+          100,
+          100
         ]
       },
       "rawMetrics": {
         "lcp": [
-          2808.998875,
-          2597.5355000000004,
-          2600.1466250000003
+          770.75805,
+          763.85175,
+          773.3028
         ],
         "cls": [
-          0.0005702008805661794,
-          0.0005702008805661794,
-          0.0005702008805661794
+          0.0001631238503866342,
+          0.0001631238503866342,
+          0.0001631238503866342
         ],
         "tbt": [
-          80,
-          21,
-          19.999999999999773
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "page": "/nft/nft-001",
+      "pageName": "detail",
+      "preset": "desktop",
+      "median": {
+        "performance": 99,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "lcpMs": 904.1204499999999,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      "rawScores": {
+        "performance": [
+          99,
+          99,
+          99
+        ],
+        "accessibility": [
+          100,
+          100,
+          100
+        ],
+        "best-practices": [
+          100,
+          100,
+          100
+        ],
+        "seo": [
+          100,
+          100,
+          100
+        ]
+      },
+      "rawMetrics": {
+        "lcp": [
+          904.1204499999999,
+          913.704,
+          890.5224999999998
+        ],
+        "cls": [
+          0,
+          0,
+          0
+        ],
+        "tbt": [
+          0,
+          0,
+          0
         ]
       }
     },
@@ -69,21 +136,21 @@
       "pageName": "home",
       "preset": "mobile",
       "median": {
-        "performance": 93,
+        "performance": 80,
         "accessibility": 100,
         "bestPractices": 100,
-        "seo": 91
+        "seo": 100
       },
       "metrics": {
-        "lcpMs": 2597.520125,
-        "cls": 0.000498925770495407,
-        "tbtMs": 19
+        "lcpMs": 4239.892600000001,
+        "cls": 0,
+        "tbtMs": 125
       },
       "rawScores": {
         "performance": [
-          91,
-          93,
-          93
+          80,
+          79,
+          81
         ],
         "accessibility": [
           100,
@@ -96,26 +163,81 @@
           100
         ],
         "seo": [
-          91,
-          91,
-          91
+          100,
+          100,
+          100
         ]
       },
       "rawMetrics": {
         "lcp": [
-          2522.1855000000005,
-          2601.5454999999997,
-          2597.520125
+          4253.3372,
+          4189.2826000000005,
+          4239.892600000001
         ],
         "cls": [
           0,
-          0.000498925770495407,
-          0.0005702008805661794
+          0,
+          0
         ],
         "tbt": [
-          23,
-          19,
-          18.999999999999773
+          125,
+          134.83967499999972,
+          116
+        ]
+      }
+    },
+    {
+      "page": "/nft/nft-001",
+      "pageName": "detail",
+      "preset": "mobile",
+      "median": {
+        "performance": 82,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "lcpMs": 3973.4102000000003,
+        "cls": 0,
+        "tbtMs": 48
+      },
+      "rawScores": {
+        "performance": [
+          82,
+          81,
+          82
+        ],
+        "accessibility": [
+          100,
+          100,
+          100
+        ],
+        "best-practices": [
+          100,
+          100,
+          100
+        ],
+        "seo": [
+          100,
+          100,
+          100
+        ]
+      },
+      "rawMetrics": {
+        "lcp": [
+          3973.4102000000003,
+          4182.59475,
+          3960.8233999999993
+        ],
+        "cls": [
+          0,
+          0,
+          0
+        ],
+        "tbt": [
+          48,
+          56,
+          38.5
         ]
       }
     }
