@@ -5,6 +5,9 @@ export const UserSchema = z.object({
   name: z.string().min(1),
   email: z.email(),
   avatarUrl: z.string().min(1),
+  username: z.string().max(40).optional(),
+  ensName: z.string().max(60).optional(),
+  walletNickname: z.string().max(40).optional(),
   createdAt: z.iso.datetime(),
   updatedAt: z.iso.datetime(),
 });

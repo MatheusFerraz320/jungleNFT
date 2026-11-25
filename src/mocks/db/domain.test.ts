@@ -145,6 +145,32 @@ describe('sessão e conta', () => {
   });
 });
 
+describe('campos complementares do Figma', () => {
+  it('persiste username/ENS/apelido no perfil e os metadados da carteira', async () => {
+    const token = await login(BRUNO);
+    const { user } = mockDomain.updateProfile(token, {
+      name: 'Bruno',
+      email: BRUNO.email,
+      username: 'bruno_l',
+      ensName: 'bruno',
+      walletNickname: 'Bru',
+    });
+    expect(user).toMatchObject({ username: 'bruno_l', ensName: 'bruno', walletNickname: 'Bru' });
+    expect(mockDomain.profile(token).user.username).toBe('bruno_l');
+
+    const wallet = mockDomain.createWallet(token, {
+      label: 'Principal',
+      address: ADDRESS,
+      network: 'ethereum',
+      displayName: 'Bruno',
+      walletType: 'metamask',
+      email: BRUNO.email,
+    });
+    expect(wallet).toMatchObject({ displayName: 'Bruno', walletType: 'metamask' });
+    expect(mockDomain.updateWallet(token, wallet.id, { ensName: 'bruno' }).ensName).toBe('bruno');
+  });
+});
+
 describe('isolamento entre usuários', () => {
   it('favoritos, carrinho e pedidos são privados por usuário', async () => {
     const ana = await login(ANA);
